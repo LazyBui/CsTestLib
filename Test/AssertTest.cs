@@ -372,17 +372,37 @@ namespace Test {
 		}
 
 		[TestMethod]
-		public void Count() {
-			Assert.Throws<ArgumentNullException>(() => Assert.Count(null as int[], 1, v => v == 0));
-			Assert.Throws<ArgumentNullException>(() => Assert.Count(new int[] { }, 1, null));
-			Assert.Throws<ArgumentException>(() => Assert.Count(new int[] { }, 1, v => v == 0));
+		public void Exactly() {
+			Assert.Throws<ArgumentNullException>(() => Assert.Exactly(null as int[], 1, v => v == 0));
+			Assert.Throws<ArgumentNullException>(() => Assert.Exactly(new int[] { }, 1, null));
+			Assert.Throws<ArgumentException>(() => Assert.Exactly(new int[] { }, 1, v => v == 0));
 
-			Assert.DoesNotThrow(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 3, v => v >= 3));
-			Assert.DoesNotThrow(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 5, v => v < 10));
-			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 4, v => v < 10));
-			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 6, v => v < 10));
-			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 5, v => v > 10));
-			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 5, v => v == 1));
+			Assert.DoesNotThrow(() => Assert.Exactly(new int[] { 1, 2, 3, 4, 5 }, 3, v => v >= 3));
+			Assert.DoesNotThrow(() => Assert.Exactly(new int[] { 1, 2, 3, 4, 5 }, 5, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.Exactly(new int[] { 1, 2, 3, 4, 5 }, 4, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.Exactly(new int[] { 1, 2, 3, 4, 5 }, 6, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.Exactly(new int[] { 1, 2, 3, 4, 5 }, 5, v => v > 10));
+			Assert.Throws<AssertionException>(() => Assert.Exactly(new int[] { 1, 2, 3, 4, 5 }, 5, v => v == 1));
+		}
+
+		[TestMethod]
+		public void CountSequence() {
+			Assert.Throws<ArgumentNullException>(() => Assert.Count(null as int[], 1));
+			Assert.Throws<ArgumentException>(() => Assert.Count(new int[] { }, 1));
+
+			Assert.DoesNotThrow(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 5));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 4));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 6));
+		}
+
+		[TestMethod]
+		public void CountElement() {
+			Assert.Throws<ArgumentNullException>(() => Assert.Count(null as int[], 1, 1));
+			Assert.Throws<ArgumentException>(() => Assert.Count(new int[] { }, 1, 1));
+
+			Assert.DoesNotThrow(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 1, 1));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 4, 3, 4, 5 }, 2, 3));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 4, 3, 4, 5 }, 3, 4));
 		}
 
 		[TestMethod]

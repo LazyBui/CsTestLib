@@ -237,7 +237,7 @@ namespace Test {
 		/// <summary>
 		/// Asserts that exactly a specified number of elements of a sequence with one or more elements matches the predicate.
 		/// </summary>
-		public static void Count<TValue>(IEnumerable<TValue> pSequence, int pCount, Func<TValue, bool> pPredicate, AssertionException pException = null) {
+		public static void Exactly<TValue>(IEnumerable<TValue> pSequence, int pCount, Func<TValue, bool> pPredicate, AssertionException pException = null) {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
 			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
 			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
@@ -245,13 +245,31 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Asserts that an no elements of a sequence with one or more elements matches the predicate.
+		/// Asserts that no elements of a sequence with one or more elements matches the predicate.
 		/// </summary>
 		public static void None<TValue>(IEnumerable<TValue> pSequence, Func<TValue, bool> pPredicate, AssertionException pException = null) {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
 			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
 			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
 			if (pSequence.Any(pPredicate)) throw pException ?? new AssertionException("Expected no elements to match predicate");
+		}
+
+		/// <summary>
+		/// Asserts that a sequence has a specified number of elements.
+		/// </summary>
+		public static void Count<TValue>(IEnumerable<TValue> pSequence, int pCount, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count() != pCount) throw pException ?? new AssertionException("Expected {0} elements in sequence", pCount);
+		}
+
+		/// <summary>
+		/// Asserts that a sequence has a specified number of a specific element.
+		/// </summary>
+		public static void Count<TValue>(IEnumerable<TValue> pSequence, int pCount, TValue pValue, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count(e => IsEqual(e, pValue)) != pCount) throw pException ?? new AssertionException("Expected {0} elements in sequence", pCount);
 		}
 
 		/// <summary>
@@ -272,45 +290,13 @@ namespace Test {
 			if (pSequence.Contains(pValue)) throw pException ?? new AssertionException("Expected value is present");
 		}
 
-		private static Type sCollectionType = typeof(ICollection);
-		private static Type sCollectionGenericType = typeof(ICollection<>);
-		private static bool IsCollectionType(Type pType) { return sCollectionType.IsAssignableFrom(pType) || sCollectionGenericType.IsAssignableFrom(pType); }
-
 		/// <summary>
 		/// Asserts that two specified objects are equal.
 		/// null and null are considered equal.
 		/// The types must also be consistent in order to compare equal (so you cannot compare sbyte with int, for example).
 		/// </summary>
 		public static void Equal(object pLeft, object pRight, AssertionException pException = null) {
-			if (pLeft == null && pRight == null) return;
-			if (pLeft == null || pRight == null) throw pException ?? new AssertionException("Expected equal values");
-			if (object.ReferenceEquals(pLeft, pRight)) return;
-			Type left = pLeft.GetType();
-			Type right = pRight.GetType();
-			bool isCollectionType = IsCollectionType(left);
-			// If only one is a collection, it's obvious that they're unequal
-			if (isCollectionType != IsCollectionType(right)) throw pException ?? new AssertionException("Expected equal values");
-
-			if (isCollectionType) {
-				if (left != right) throw pException ?? new AssertionException("Expected equal values");
-
-				var leftCollection = (pLeft as ICollection);
-				var rightCollection = (pRight as ICollection);
-				if (leftCollection.Count != rightCollection.Count) throw pException ?? new AssertionException("Expected equal values");
-
-				var leftIter = leftCollection.GetEnumerator();
-				var rightIter = rightCollection.GetEnumerator();
-				while (leftIter.MoveNext() && rightIter.MoveNext()) {
-					Equal(leftIter.Current, rightIter.Current);
-				}
-			}
-			else {
-				var equalityChecker = pLeft as IComparable;
-				if (equalityChecker != null) {
-					if (equalityChecker.CompareTo(pRight) != 0) throw pException ?? new AssertionException("Expected equal values");
-				}
-				else if (!pLeft.Equals(pRight)) throw pException ?? new AssertionException("Expected equal values");
-			}
+			if (!IsEqual(pLeft, pRight)) throw pException ?? new AssertionException("Expected equal values");
 		}
 
 		/// <summary>
@@ -319,44 +305,49 @@ namespace Test {
 		/// The types must also be consistent in order to compare equal (so this assertion would be relatively useless if you were comparing sbyte with int, for example).
 		/// </summary>
 		public static void NotEqual(object pLeft, object pRight, AssertionException pException = null) {
-			if (pLeft == null && pRight == null) throw pException ?? new AssertionException("Expected unequal values");
-			if (pLeft == null || pRight == null) return;
-			if (object.ReferenceEquals(pLeft, pRight)) throw pException ?? new AssertionException("Expected unequal values");
+			if (IsEqual(pLeft, pRight)) throw pException ?? new AssertionException("Expected unequal values");
+		}
+
+		private static Type sCollectionType = typeof(ICollection);
+		private static Type sCollectionGenericType = typeof(ICollection<>);
+		private static bool IsCollectionType(Type pType) { return sCollectionType.IsAssignableFrom(pType) || sCollectionGenericType.IsAssignableFrom(pType); }
+		private static bool IsEqual(object pLeft, object pRight) {
+			if (pLeft == null && pRight == null) return true;
+			if (pLeft == null || pRight == null) return false;
+			if (object.ReferenceEquals(pLeft, pRight)) return true;
 
 			Type left = pLeft.GetType();
 			Type right = pRight.GetType();
 			bool isCollectionType = IsCollectionType(left);
 			// If only one is a collection, it's obvious that they're unequal
-			if (isCollectionType != IsCollectionType(right)) return;
+			if (isCollectionType != IsCollectionType(right)) return false;
 
 			if (isCollectionType) {
-				if (left != right) return;
+				// This is potentially tenuous, since it means List<int> { 1, 2, 3 } and int[] { 1, 2, 3 } are unequal
+				// I would personally say that's an expected outcome
+				if (left != right) return false;
 
 				var leftCollection = (pLeft as ICollection);
 				var rightCollection = (pRight as ICollection);
-				if (leftCollection.Count != rightCollection.Count) return;
+				if (leftCollection.Count != rightCollection.Count) return false;
 
 				var leftIter = leftCollection.GetEnumerator();
 				var rightIter = rightCollection.GetEnumerator();
-				bool foundUnequal = false;
 				while (leftIter.MoveNext() && rightIter.MoveNext()) {
-					try {
-						Equal(leftIter.Current, rightIter.Current);
-					}
-					catch (AssertionException) {
-						foundUnequal = true;
-						break;
+					if (!IsEqual(leftIter.Current, rightIter.Current)) {
+						return false;
 					}
 				}
-				if (!foundUnequal) throw pException ?? new AssertionException("Expected unequal values");
 			}
 			else {
 				var equalityChecker = pLeft as IComparable;
 				if (equalityChecker != null) {
-					if (equalityChecker.CompareTo(pRight) == 0) throw pException ?? new AssertionException("Expected unequal values");
+					if (equalityChecker.CompareTo(pRight) != 0) return false;
 				}
-				else if (pLeft.Equals(pRight)) throw pException ?? new AssertionException("Expected unequal values");
+				else if (!pLeft.Equals(pRight)) return false;
 			}
+
+			return true;
 		}
 	}
 }
