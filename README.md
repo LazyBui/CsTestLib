@@ -3,7 +3,11 @@ CsTestProj
 
 A vanilla C# test suite project that includes an Assert class that provides assertions very similar to popular testing frameworks.
 
-Usage is pretty much what you'd expect.
+Usage
+==========
+
+It's pretty much what you'd expect for a project.
+
 1. Drop CsTestProj folder into solution folder (I would just prefer to call it "Test" though).
 2. Add existing project through Visual Studio.
 3. Add project reference(s) to your code project(s) in the Test project.
