@@ -22,7 +22,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Asserts that a string produces the specified count of matches the regex pattern.
+		/// Asserts that a string produces the specified count of matches to the regex pattern.
 		/// </summary>
 		public static void MatchCount(Regex pRegex, string pInput, int pCount, AssertionException pException = null) {
 			if (pRegex == null) throw new ArgumentNullException("pRegex");
@@ -32,7 +32,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Asserts that a string produces the specified count of matches the regex pattern.
+		/// Asserts that a string produces the specified count of matches to the regex pattern.
 		/// </summary>
 		public static void MatchCount(string pRegexPattern, string pInput, int pCount, AssertionException pException = null) {
 			if (pRegexPattern == null) throw new ArgumentNullException("pRegexPattern");
