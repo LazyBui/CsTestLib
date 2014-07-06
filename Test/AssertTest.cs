@@ -101,16 +101,38 @@ namespace Test {
 
 		[TestMethod]
 		public void IsType() {
-			Assert.Throws<AssertionException>(() => Assert.IsType<int>("hello"));
 			Assert.Throws<ArgumentNullException>(() => Assert.IsType<string>(null));
+			Assert.Throws<AssertionException>(() => Assert.IsType<int>("hello"));
+			Assert.Throws<AssertionException>(() => Assert.IsType<int?>(1));
+			Assert.Throws<AssertionException>(() => Assert.IsType<int>(1L));
 			Assert.DoesNotThrow(() => Assert.IsType<int>(1));
 		}
 
 		[TestMethod]
 		public void IsNotType() {
-			Assert.Throws<ArgumentNullException>(() => Assert.IsType<string>(null));
+			Assert.Throws<ArgumentNullException>(() => Assert.IsNotType<string>(null));
 			Assert.Throws<AssertionException>(() => Assert.IsNotType<int>(1));
+			Assert.DoesNotThrow(() => Assert.IsNotType<int?>(1));
+			Assert.DoesNotThrow(() => Assert.IsNotType<int>(1L));
 			Assert.DoesNotThrow(() => Assert.IsNotType<int>("hello"));
+		}
+
+		[TestMethod]
+		public void IsAssignableFromType() {
+			Assert.Throws<ArgumentNullException>(() => Assert.IsAssignableFromType<string>(null));
+			Assert.Throws<AssertionException>(() => Assert.IsAssignableFromType<int>("hello"));
+			Assert.Throws<AssertionException>(() => Assert.IsAssignableFromType<int>(1L));
+			Assert.DoesNotThrow(() => Assert.IsAssignableFromType<int>(new int?(1)));
+			Assert.DoesNotThrow(() => Assert.IsAssignableFromType<int>(1));
+		}
+
+		[TestMethod]
+		public void IsNotAssignableFromType() {
+			Assert.Throws<ArgumentNullException>(() => Assert.IsNotAssignableFromType<string>(null));
+			Assert.Throws<AssertionException>(() => Assert.IsNotAssignableFromType<int>(1));
+			Assert.DoesNotThrow(() => Assert.IsNotAssignableFromType<long>(1));
+			Assert.Throws<AssertionException>(() => Assert.IsNotAssignableFromType<int>(new int?(1)));
+			Assert.DoesNotThrow(() => Assert.IsNotAssignableFromType<int>("hello"));
 		}
 
 		[TestMethod]

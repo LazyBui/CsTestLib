@@ -87,6 +87,22 @@ namespace Test {
 		}
 
 		/// <summary>
+		/// Asserts that the type of a specified object is assignable from the specified type.
+		/// </summary>
+		public static void IsAssignableFromType<TType>(object pObj, AssertionException pException = null) {
+			if (pObj == null) throw new ArgumentNullException("pObj");
+			if (!pObj.GetType().IsAssignableFrom(typeof(TType))) throw pException ?? new AssertionException("Type is not assignable from the specificed type");
+		}
+
+		/// <summary>
+		/// Asserts that the type of a specified object is not assignable from the specified type.
+		/// </summary>
+		public static void IsNotAssignableFromType<TType>(object pObj, AssertionException pException = null) {
+			if (pObj == null) throw new ArgumentNullException("pObj");
+			if (pObj.GetType().IsAssignableFrom(typeof(TType))) throw pException ?? new AssertionException("Type is assignable from the specified type");
+		}
+
+		/// <summary>
 		/// Asserts that the specified value compares either greater or equal to a specified lower bound.
 		/// </summary>
 		public static void GreaterThanEqual<TValue>(TValue pLowerBound, TValue pValue, AssertionException pException = null) where TValue : IComparable<TValue> {
