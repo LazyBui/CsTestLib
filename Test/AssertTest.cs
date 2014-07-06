@@ -10,24 +10,12 @@ namespace Test {
 		public void True() {
 			Assert.DoesNotThrow(() => Assert.True(true));
 			Assert.Throws<AssertionException>(() => Assert.True(false));
-
-			Assert.Throws<ArgumentNullException>(() => Assert.True(null));
-			Assert.Throws<ArgumentException>(() => Assert.True(new bool[] { }));
-			Assert.DoesNotThrow(() => Assert.True(new[] { true, true }));
-			Assert.Throws<AssertionException>(() => Assert.True(new[] { true, false }));
-			Assert.Throws<AssertionException>(() => Assert.True(new[] { false, false }));
 		}
 
 		[TestMethod]
 		public void False() {
 			Assert.DoesNotThrow(() => Assert.False(false));
 			Assert.Throws<AssertionException>(() => Assert.False(true));
-
-			Assert.Throws<ArgumentNullException>(() => Assert.False(null));
-			Assert.Throws<ArgumentException>(() => Assert.False(new bool[] { }));
-			Assert.DoesNotThrow(() => Assert.False(new[] { false, false }));
-			Assert.Throws<AssertionException>(() => Assert.False(new[] { true, false }));
-			Assert.Throws<AssertionException>(() => Assert.False(new[] { true, true }));
 		}
 
 		[TestMethod]

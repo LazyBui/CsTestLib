@@ -16,28 +16,10 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Asserts that a series of conditions are all true.
-		/// </summary>
-		public static void True(IEnumerable<bool> pSequence, AssertionException pException = null) {
-			if (pSequence == null) throw new ArgumentNullException("pSequence");
-			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
-			if (pSequence.Any(c => !c)) throw pException ?? new AssertionException("At least one condition was false");
-		}
-
-		/// <summary>
 		/// Asserts that a condition is false.
 		/// </summary>
 		public static void False(bool pCondition, AssertionException pException = null) {
 			if (pCondition) throw pException ?? new AssertionException("Condition was true");
-		}
-
-		/// <summary>
-		/// Asserts that a series of conditions are all false.
-		/// </summary>
-		public static void False(IEnumerable<bool> pSequence, AssertionException pException = null) {
-			if (pSequence == null) throw new ArgumentNullException("pSequence");
-			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
-			if (pSequence.Any(c => c)) throw pException ?? new AssertionException("At least one condition was true");
 		}
 
 		/// <summary>
