@@ -58,6 +58,7 @@
     <Compile Include="Framework\EqualityComparerStateless.cs" />
     <Compile Include="Framework\AssertionException.cs" />
     <Compile Include="Framework\Assert.cs" />
+    <Compile Include="Framework\StringAssertions.cs" />
     <Compile Include="Framework\TypeAndInstanceAssertions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AssertTest.cs" />
