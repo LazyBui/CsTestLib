@@ -51,6 +51,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EqualityComparerStateful.cs" />
+    <Compile Include="EqualityComparerStateless.cs" />
     <Compile Include="AssertionException.cs" />
     <Compile Include="Assert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

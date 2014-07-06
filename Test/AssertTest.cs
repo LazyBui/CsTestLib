@@ -6,6 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Test {
 	[TestClass]
 	public class AssertTest {
+		private class UniqueTestClass {
+			public int Property { get; set; }
+		}
+
 		[TestMethod]
 		public void True() {
 			Assert.DoesNotThrow(() => Assert.True(true));
@@ -438,9 +442,77 @@ namespace Test {
 		[TestMethod]
 		public void DoesNotContain() {
 			Assert.Throws<ArgumentNullException>(() => Assert.DoesNotContain<int>(null, 1));
-			Assert.Throws<ArgumentException>(() => Assert.Contains<int>(new int[] { }, 1));
+			Assert.Throws<ArgumentException>(() => Assert.DoesNotContain<int>(new int[] { }, 1));
 			Assert.DoesNotThrow(() => Assert.DoesNotContain(new int[] { 2 }, 1));
 			Assert.Throws<AssertionException>(() => Assert.DoesNotContain(new int[] { 2 }, 2));
+		}
+
+		[TestMethod]
+		public void Unique() {
+			Assert.Throws<ArgumentNullException>(() => Assert.Unique(null as int[]));
+			Assert.Throws<ArgumentNullException>(() => Assert.Unique(new int[] { 2, 3 }, null as Func<int, int>));
+			Assert.Throws<ArgumentNullException>(() => Assert.Unique(new int[] { 2, 3 }, null as Func<int, int, bool>));
+			Assert.Throws<ArgumentException>(() => Assert.Unique(new int[] { }));
+			Assert.Throws<ArgumentException>(() => Assert.Unique(new int[] { 1 }));
+
+			Assert.DoesNotThrow(() => Assert.Unique(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+			Assert.Throws<AssertionException>(() => Assert.Unique(new int[] { 2, 2, 3, 4, 5, 6, 7, 8, 9 }));
+
+			var doesNotThrow = new UniqueTestClass[] {
+				new UniqueTestClass() { Property = 1 },
+				new UniqueTestClass() { Property = 2 },
+				new UniqueTestClass() { Property = 3 },
+				new UniqueTestClass() { Property = 4 },
+				new UniqueTestClass() { Property = 5 },
+			};
+
+			var throws = new UniqueTestClass[] {
+				new UniqueTestClass() { Property = 2 },
+				new UniqueTestClass() { Property = 2 },
+				new UniqueTestClass() { Property = 3 },
+				new UniqueTestClass() { Property = 4 },
+				new UniqueTestClass() { Property = 5 },
+			};
+
+			Assert.DoesNotThrow(() => Assert.Unique(doesNotThrow, (v1, v2) => v1.Property == v2.Property));
+			Assert.Throws<AssertionException>(() => Assert.Unique(throws, (v1, v2) => v1.Property == v2.Property));
+
+			Assert.DoesNotThrow(() => Assert.Unique(doesNotThrow, v => v.Property));
+			Assert.Throws<AssertionException>(() => Assert.Unique(throws, v => v.Property));
+		}
+
+		[TestMethod]
+		public void NotUnique() {
+			Assert.Throws<ArgumentNullException>(() => Assert.NotUnique(null as int[]));
+			Assert.Throws<ArgumentNullException>(() => Assert.NotUnique(new int[] { 2, 3 }, null as Func<int, int>));
+			Assert.Throws<ArgumentNullException>(() => Assert.NotUnique(new int[] { 2, 3 }, null as Func<int, int, bool>));
+			Assert.Throws<ArgumentException>(() => Assert.NotUnique(new int[] { }));
+			Assert.Throws<ArgumentException>(() => Assert.NotUnique(new int[] { 1 }));
+
+			Assert.Throws<AssertionException>(() => Assert.NotUnique(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+			Assert.DoesNotThrow(() => Assert.NotUnique(new int[] { 2, 2, 3, 4, 5, 6, 7, 8, 9 }));
+
+			var throws = new UniqueTestClass[] {
+				new UniqueTestClass() { Property = 1 },
+				new UniqueTestClass() { Property = 2 },
+				new UniqueTestClass() { Property = 3 },
+				new UniqueTestClass() { Property = 4 },
+				new UniqueTestClass() { Property = 5 },
+			};
+
+			var doesNotThrow = new UniqueTestClass[] {
+				new UniqueTestClass() { Property = 2 },
+				new UniqueTestClass() { Property = 2 },
+				new UniqueTestClass() { Property = 3 },
+				new UniqueTestClass() { Property = 4 },
+				new UniqueTestClass() { Property = 5 },
+			};
+
+			Assert.DoesNotThrow(() => Assert.NotUnique(doesNotThrow, (v1, v2) => v1.Property == v2.Property));
+			Assert.Throws<AssertionException>(() => Assert.NotUnique(throws, (v1, v2) => v1.Property == v2.Property));
+
+			Assert.DoesNotThrow(() => Assert.NotUnique(doesNotThrow, v => v.Property));
+			Assert.Throws<AssertionException>(() => Assert.NotUnique(throws, v => v.Property));
 		}
 
 		[TestMethod]

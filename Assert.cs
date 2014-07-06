@@ -293,6 +293,70 @@ namespace Test {
 		}
 
 		/// <summary>
+		/// Asserts that an entire sequence with two or more elements has no duplicates that match the predicate.
+		/// </summary>
+		public static void Unique<TValue>(IEnumerable<TValue> pSequence, Func<TValue, TValue, bool> pPredicate, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count() == 1) throw new ArgumentException("Sequence cannot be assessed for duplicates if there is only a single element");
+			if (pSequence.Distinct(new EqualityComparerStateful<TValue>(pPredicate)).Count() != pSequence.Count()) throw pException ?? new AssertionException("Expected all elements to be unique based on the predicate");
+		}
+
+		/// <summary>
+		/// Asserts that an entire sequence with two or more elements has no duplicates that match the predicate.
+		/// </summary>
+		public static void Unique<TValue, TCompare>(IEnumerable<TValue> pSequence, Func<TValue, TCompare> pPredicate, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count() == 1) throw new ArgumentException("Sequence cannot be assessed for duplicates if there is only a single element");
+			if (pSequence.Distinct(new EqualityComparerStateless<TValue, TCompare>(pPredicate)).Count() != pSequence.Count()) throw pException ?? new AssertionException("Expected all elements to be unique based on the predicate");
+		}
+
+		/// <summary>
+		/// Asserts that an entire sequence with two or more elements has no duplicates.
+		/// </summary>
+		public static void Unique<TValue>(IEnumerable<TValue> pSequence, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count() == 1) throw new ArgumentException("Sequence cannot be assessed for duplicates if there is only a single element");
+			if (pSequence.Distinct().Count() != pSequence.Count()) throw pException ?? new AssertionException("Expected all elements to be unique");
+		}
+
+		/// <summary>
+		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair that matches the predicate.
+		/// </summary>
+		public static void NotUnique<TValue>(IEnumerable<TValue> pSequence, Func<TValue, TValue, bool> pPredicate, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count() == 1) throw new ArgumentException("Sequence cannot be assessed for duplicates if there is only a single element");
+			if (pSequence.Distinct(new EqualityComparerStateful<TValue>(pPredicate)).Count() == pSequence.Count()) throw pException ?? new AssertionException("Expected at least one duplicate pair of elements based on the predicate");
+		}
+
+		/// <summary>
+		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair that matches the predicate.
+		/// </summary>
+		public static void NotUnique<TValue, TCompare>(IEnumerable<TValue> pSequence, Func<TValue, TCompare> pPredicate, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count() == 1) throw new ArgumentException("Sequence cannot be assessed for duplicates if there is only a single element");
+			if (pSequence.Distinct(new EqualityComparerStateless<TValue, TCompare>(pPredicate)).Count() == pSequence.Count()) throw pException ?? new AssertionException("Expected at least one duplicate pair of elements based on the predicate");
+		}
+
+		/// <summary>
+		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair.
+		/// </summary>
+		public static void NotUnique<TValue>(IEnumerable<TValue> pSequence, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count() == 1) throw new ArgumentException("Sequence cannot be assessed for duplicates if there is only a single element");
+			if (pSequence.Distinct().Count() == pSequence.Count()) throw pException ?? new AssertionException("Expected at least one duplicate pair of elements");
+		}
+
+		/// <summary>
 		/// Asserts that two specified objects are equal.
 		/// null and null are considered equal.
 		/// The types must also be consistent in order to compare equal (so you cannot compare sbyte with int, for example).
