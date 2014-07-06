@@ -189,5 +189,33 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.NotUnique(doesNotThrow, v => v.Property));
 			Assert.Throws<AssertionException>(() => Assert.NotUnique(throws, v => v.Property));
 		}
+
+		[TestMethod]
+		public void StartsWith() {
+			Assert.Throws<ArgumentNullException>(() => Assert.StartsWith(null, new int[0]));
+			Assert.Throws<ArgumentNullException>(() => Assert.StartsWith(new int[0], null));
+			Assert.Throws<ArgumentException>(() => Assert.StartsWith(new int[0], new int[1]));
+			Assert.Throws<ArgumentException>(() => Assert.StartsWith(new int[1], new int[0]));
+			Assert.Throws<ArgumentException>(() => Assert.StartsWith(new int[1], new int[2]));
+
+			Assert.DoesNotThrow(() => Assert.StartsWith("hello", "hel"));
+			Assert.DoesNotThrow(() => Assert.StartsWith(new[] { 1, 2, 3, 4 }, new[] { 1, 2 }));
+			Assert.Throws<AssertionException>(() => Assert.StartsWith("hello", "jel"));
+			Assert.Throws<AssertionException>(() => Assert.StartsWith(new[] { 1, 2, 3, 4 }, new[] { 2, 3 }));
+		}
+
+		[TestMethod]
+		public void EndsWith() {
+			Assert.Throws<ArgumentNullException>(() => Assert.EndsWith(null, new int[0]));
+			Assert.Throws<ArgumentNullException>(() => Assert.EndsWith(new int[0], null));
+			Assert.Throws<ArgumentException>(() => Assert.EndsWith(new int[0], new int[1]));
+			Assert.Throws<ArgumentException>(() => Assert.EndsWith(new int[1], new int[0]));
+			Assert.Throws<ArgumentException>(() => Assert.EndsWith(new int[1], new int[2]));
+
+			Assert.DoesNotThrow(() => Assert.EndsWith("hello", "llo"));
+			Assert.DoesNotThrow(() => Assert.EndsWith(new[] { 1, 2, 3, 4 }, new[] { 3, 4 }));
+			Assert.Throws<AssertionException>(() => Assert.EndsWith("hello", "kko"));
+			Assert.Throws<AssertionException>(() => Assert.EndsWith(new[] { 1, 2, 3, 4 }, new[] { 2, 3 }));
+		}
 	}
 }

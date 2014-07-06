@@ -172,5 +172,46 @@ namespace Test {
 			if (pSequence.Count() == 1) throw new ArgumentException("Sequence cannot be assessed for duplicates if there is only a single element");
 			if (pSequence.Distinct().Count() == pSequence.Count()) throw pException ?? new AssertionException("Expected at least one duplicate pair of elements");
 		}
+
+		/// <summary>
+		/// Ensures that a sequence starts with a particular set of values.
+		/// </summary>
+		public static void StartsWith<TValue>(IEnumerable<TValue> pSequence, IEnumerable<TValue> pStart, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pStart == null) throw new ArgumentNullException("pStart");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (!pStart.Any()) throw new ArgumentException("Expected elements", "pStart");
+			if (pStart.Count() > pSequence.Count()) throw new ArgumentException("pStart is larger than pSequence", "pStart");
+
+			var seqIter = pSequence.GetEnumerator();
+			var startIter = pStart.GetEnumerator();
+			while (seqIter.MoveNext() && startIter.MoveNext()) {
+				if (!IsEqual(seqIter.Current, startIter.Current)) {
+					throw pException ?? new AssertionException("Expected pSequence to begin with the elements of pStart");
+				}
+			}
+		}
+
+		/// <summary>
+		/// Ensures that a sequence ends with a particular set of values.
+		/// </summary>
+		public static void EndsWith<TValue>(IEnumerable<TValue> pSequence, IEnumerable<TValue> pEnd, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pEnd == null) throw new ArgumentNullException("pEnd");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (!pEnd.Any()) throw new ArgumentException("Expected elements", "pEnd");
+			if (pEnd.Count() > pSequence.Count()) throw new ArgumentException("pEnd is larger than pSequence", "pEnd");
+
+			pSequence = pSequence.Reverse();
+			pEnd = pEnd.Reverse();
+
+			var seqIter = pSequence.GetEnumerator();
+			var endIter = pEnd.GetEnumerator();
+			while (seqIter.MoveNext() && endIter.MoveNext()) {
+				if (!IsEqual(seqIter.Current, endIter.Current)) {
+					throw pException ?? new AssertionException("Expected pSequence to end with the elements of pEnd");
+				}
+			}
+		}
 	}
 }
