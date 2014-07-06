@@ -37,9 +37,28 @@ namespace Test {
 		}
 
 		[TestMethod]
+		public void NullAll() {
+			Assert.Throws<ArgumentNullException>(() => Assert.NullAll(null as IEnumerable<object>));
+			Assert.Throws<ArgumentException>(() => Assert.NullAll(new object[] { }));
+			Assert.DoesNotThrow(() => Assert.NullAll(new object[] { null, null, null }));
+			Assert.Throws<AssertionException>(() => Assert.NullAll(new object[] { null, new object(), null }));
+			Assert.Throws<AssertionException>(() => Assert.NullAll(new object[] { new object(), new object(), new object() }));
+		}
+
+
+		[TestMethod]
 		public void NotNull() {
 			Assert.DoesNotThrow(() => Assert.NotNull(new object()));
 			Assert.Throws<AssertionException>(() => Assert.NotNull(null));
+		}
+
+		[TestMethod]
+		public void NotNullAll() {
+			Assert.Throws<ArgumentNullException>(() => Assert.NotNullAll(null as IEnumerable<object>));
+			Assert.Throws<ArgumentException>(() => Assert.NotNullAll(new object[] { }));
+			Assert.Throws<AssertionException>(() => Assert.NotNullAll(new object[] { null, null, null }));
+			Assert.Throws<AssertionException>(() => Assert.NotNullAll(new object[] { null, new object(), null }));
+			Assert.DoesNotThrow(() => Assert.NotNullAll(new object[] { new object(), new object(), new object() }));
 		}
 
 		[TestMethod]

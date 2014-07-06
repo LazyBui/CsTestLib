@@ -48,10 +48,28 @@ namespace Test {
 		}
 
 		/// <summary>
+		/// Asserts that a collection of objects are all null.
+		/// </summary>
+		public static void NullAll(IEnumerable<object> pSequence, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Any(o => o != null)) throw pException ?? new AssertionException("Object was not null");
+		}
+
+		/// <summary>
 		/// Asserts that an object is not null.
 		/// </summary>
 		public static void NotNull(object pObject, AssertionException pException = null) {
 			if (pObject == null) throw pException ?? new AssertionException("Object was null");
+		}
+
+		/// <summary>
+		/// Asserts that a collection of objects are all not null.
+		/// </summary>
+		public static void NotNullAll(IEnumerable<object> pSequence, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Any(o => o == null)) throw pException ?? new AssertionException("Object was null");
 		}
 
 		/// <summary>
