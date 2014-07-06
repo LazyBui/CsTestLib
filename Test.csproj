@@ -61,7 +61,12 @@
     <Compile Include="Framework\StringAssertions.cs" />
     <Compile Include="Framework\TypeAndInstanceAssertions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\AssertTest.cs" />
+    <Compile Include="Tests\Test Framework\AssertTest.cs" />
+    <Compile Include="Tests\Test Framework\TypeAndInstanceAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\LogicalComparisonAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\StringAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\CollectionAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\BasicAssertionsTest.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
