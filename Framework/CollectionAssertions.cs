@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,6 +57,7 @@ namespace Test {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
 			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
 			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pCount < 0) throw new ArgumentException("Negative pCount values are not valid");
 			if (pSequence.Count(pPredicate) != pCount) throw pException ?? new AssertionException("Expected {0} elements to match predicate", pCount);
 		}
 
@@ -77,6 +77,7 @@ namespace Test {
 		public static void Count<TValue>(IEnumerable<TValue> pSequence, int pCount, AssertionException pException = null) {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
 			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pCount < 0) throw new ArgumentException("Negative pCount values are not valid");
 			if (pSequence.Count() != pCount) throw pException ?? new AssertionException("Expected {0} elements in sequence", pCount);
 		}
 
@@ -86,6 +87,7 @@ namespace Test {
 		public static void Count<TValue>(IEnumerable<TValue> pSequence, int pCount, TValue pValue, AssertionException pException = null) {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
 			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pCount < 0) throw new ArgumentException("Negative pCount values are not valid");
 			if (pSequence.Count(e => IsEqual(e, pValue)) != pCount) throw pException ?? new AssertionException("Expected {0} elements in sequence", pCount);
 		}
 
