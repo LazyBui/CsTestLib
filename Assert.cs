@@ -48,15 +48,6 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Asserts that a collection of objects are all null.
-		/// </summary>
-		public static void NullAll(IEnumerable<object> pSequence, AssertionException pException = null) {
-			if (pSequence == null) throw new ArgumentNullException("pSequence");
-			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
-			if (pSequence.Any(o => o != null)) throw pException ?? new AssertionException("Object was not null");
-		}
-
-		/// <summary>
 		/// Asserts that an object is not null.
 		/// </summary>
 		public static void NotNull(object pObject, AssertionException pException = null) {
@@ -64,18 +55,11 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Asserts that a collection of objects are all not null.
-		/// </summary>
-		public static void NotNullAll(IEnumerable<object> pSequence, AssertionException pException = null) {
-			if (pSequence == null) throw new ArgumentNullException("pSequence");
-			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
-			if (pSequence.Any(o => o == null)) throw pException ?? new AssertionException("Object was null");
-		}
-
-		/// <summary>
 		/// Asserts that a specific exception is thrown by the action.
 		/// </summary>
 		public static void Throws<TException>(Action pAction, AssertionException pException = null) where TException : Exception {
+			if (pAction == null) throw new ArgumentNullException("pAction");
+
 			bool thrown = false;
 			try {
 				pAction();
@@ -94,6 +78,8 @@ namespace Test {
 		/// Asserts that an action does not throw at all.
 		/// </summary>
 		public static void DoesNotThrow(Action pAction, AssertionException pException = null) {
+			if (pAction == null) throw new ArgumentNullException("pAction");
+
 			try {
 				pAction();
 			}

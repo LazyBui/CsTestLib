@@ -37,32 +37,19 @@ namespace Test {
 		}
 
 		[TestMethod]
-		public void NullAll() {
-			Assert.Throws<ArgumentNullException>(() => Assert.NullAll(null as IEnumerable<object>));
-			Assert.Throws<ArgumentException>(() => Assert.NullAll(new object[] { }));
-			Assert.DoesNotThrow(() => Assert.NullAll(new object[] { null, null, null }));
-			Assert.Throws<AssertionException>(() => Assert.NullAll(new object[] { null, new object(), null }));
-			Assert.Throws<AssertionException>(() => Assert.NullAll(new object[] { new object(), new object(), new object() }));
-		}
-
-
-		[TestMethod]
 		public void NotNull() {
 			Assert.DoesNotThrow(() => Assert.NotNull(new object()));
 			Assert.Throws<AssertionException>(() => Assert.NotNull(null));
 		}
 
 		[TestMethod]
-		public void NotNullAll() {
-			Assert.Throws<ArgumentNullException>(() => Assert.NotNullAll(null as IEnumerable<object>));
-			Assert.Throws<ArgumentException>(() => Assert.NotNullAll(new object[] { }));
-			Assert.Throws<AssertionException>(() => Assert.NotNullAll(new object[] { null, null, null }));
-			Assert.Throws<AssertionException>(() => Assert.NotNullAll(new object[] { null, new object(), null }));
-			Assert.DoesNotThrow(() => Assert.NotNullAll(new object[] { new object(), new object(), new object() }));
-		}
-
-		[TestMethod]
 		public void Throws() {
+			try {
+				Assert.Throws<AssertionException>(null);
+				throw new AssertionException("Throw did not throw when it should"); 
+			}
+			catch (ArgumentNullException) { }
+
 			try {
 				Assert.Throws<ArgumentException>(() => { throw new ArgumentException("Testing"); });
 			}
@@ -101,6 +88,12 @@ namespace Test {
 
 		[TestMethod]
 		public void DoesNotThrow() {
+			try {
+				Assert.DoesNotThrow(null);
+				throw new AssertionException("DoesNotThrow did not throw when it should");
+			}
+			catch (ArgumentNullException) { }
+
 			bool thrown = false;
 			try {
 				Assert.DoesNotThrow(() => { throw new ArgumentException("Testing"); });
