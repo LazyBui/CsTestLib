@@ -56,7 +56,7 @@
     <Compile Include="Framework\AssertionException.cs" />
     <Compile Include="Framework\Assert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\AssertTest.cs" />
+    <Compile Include="Tests\AssertTest.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
