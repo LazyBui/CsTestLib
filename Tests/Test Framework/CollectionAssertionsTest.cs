@@ -217,5 +217,73 @@ namespace Test {
 			Assert.Throws<AssertionException>(() => Assert.EndsWith("hello", "kko"));
 			Assert.Throws<AssertionException>(() => Assert.EndsWith(new[] { 1, 2, 3, 4 }, new[] { 2, 3 }));
 		}
+
+		[TestMethod]
+		public void IsSubsetOf() {
+			Assert.Throws<ArgumentNullException>(() => Assert.IsSubsetOf(null, new int[0]));
+			Assert.Throws<ArgumentNullException>(() => Assert.IsSubsetOf(new int[0], null));
+			Assert.Throws<ArgumentException>(() => Assert.IsSubsetOf(new int[0], new int[1]));
+			Assert.Throws<ArgumentException>(() => Assert.IsSubsetOf(new int[1], new int[0]));
+			Assert.Throws<ArgumentException>(() => Assert.IsSubsetOf(new int[1], new int[2]));
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf(new[] { 1 }, new[] { 1 }));
+
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf("Musky", "usk"));
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf("Musky", "Musky"));
+			Assert.Throws<AssertionException>(() => Assert.IsSubsetOf("Musky", "Husky"));
+			Assert.Throws<AssertionException>(() => Assert.IsSubsetOf("Musky", "elk"));
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3 }));
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 }));
+			Assert.Throws<AssertionException>(() => Assert.IsSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 6 }));
+		}
+
+		[TestMethod]
+		public void IsNotSubsetOf() {
+			Assert.Throws<ArgumentNullException>(() => Assert.IsNotSubsetOf(null, new int[0]));
+			Assert.Throws<ArgumentNullException>(() => Assert.IsNotSubsetOf(new int[0], null));
+			Assert.Throws<ArgumentException>(() => Assert.IsNotSubsetOf(new int[0], new int[1]));
+			Assert.Throws<ArgumentException>(() => Assert.IsNotSubsetOf(new int[1], new int[0]));
+			Assert.Throws<ArgumentException>(() => Assert.IsNotSubsetOf(new int[1], new int[2]));
+			Assert.DoesNotThrow(() => Assert.IsNotSubsetOf(new[] { 1 }, new[] { 0 }));
+
+			Assert.Throws<AssertionException>(() => Assert.IsNotSubsetOf("Musky", "usk"));
+			Assert.Throws<AssertionException>(() => Assert.IsNotSubsetOf("Musky", "Musky"));
+			Assert.DoesNotThrow(() => Assert.IsNotSubsetOf("Musky", "Husky"));
+			Assert.DoesNotThrow(() => Assert.IsNotSubsetOf("Musky", "elk"));
+			Assert.Throws<AssertionException>(() => Assert.IsNotSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3 }));
+			Assert.Throws<AssertionException>(() => Assert.IsNotSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 }));
+			Assert.DoesNotThrow(() => Assert.IsNotSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 6 }));
+		}
+
+		[TestMethod]
+		public void IsStrictSubsetOf() {
+			Assert.Throws<ArgumentNullException>(() => Assert.IsStrictSubsetOf(null, new int[0]));
+			Assert.Throws<ArgumentNullException>(() => Assert.IsStrictSubsetOf(new int[0], null));
+			Assert.Throws<ArgumentException>(() => Assert.IsStrictSubsetOf(new int[0], new int[1]));
+			Assert.Throws<ArgumentException>(() => Assert.IsStrictSubsetOf(new int[1], new int[0]));
+			Assert.Throws<ArgumentException>(() => Assert.IsStrictSubsetOf(new int[1], new int[2]));
+			Assert.Throws<ArgumentException>(() => Assert.IsStrictSubsetOf(new[] { 1 }, new[] { 1 }));
+
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf("Musky", "usk"));
+			Assert.Throws<AssertionException>(() => Assert.IsSubsetOf("Musky", "elk"));
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3 }));
+			Assert.DoesNotThrow(() => Assert.IsSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 }));
+			Assert.Throws<AssertionException>(() => Assert.IsSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 6 }));
+		}
+
+		[TestMethod]
+		public void IsNotStrictSubsetOf() {
+			Assert.Throws<ArgumentNullException>(() => Assert.IsNotStrictSubsetOf(null, new int[0]));
+			Assert.Throws<ArgumentNullException>(() => Assert.IsNotStrictSubsetOf(new int[0], null));
+			Assert.Throws<ArgumentException>(() => Assert.IsNotStrictSubsetOf(new int[0], new int[1]));
+			Assert.Throws<ArgumentException>(() => Assert.IsNotStrictSubsetOf(new int[1], new int[0]));
+			Assert.Throws<ArgumentException>(() => Assert.IsNotStrictSubsetOf(new int[1], new int[2]));
+			Assert.Throws<ArgumentException>(() => Assert.IsNotStrictSubsetOf(new[] { 1 }, new[] { 1 }));
+
+			Assert.Throws<AssertionException>(() => Assert.IsNotSubsetOf("Musky", "usk"));
+			Assert.DoesNotThrow(() => Assert.IsNotSubsetOf("Musky", "elk"));
+			Assert.Throws<AssertionException>(() => Assert.IsNotSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3 }));
+			Assert.Throws<AssertionException>(() => Assert.IsNotSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 }));
+			Assert.DoesNotThrow(() => Assert.IsNotSubsetOf(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 6 }));
+		}
 	}
 }

@@ -213,5 +213,65 @@ namespace Test {
 				}
 			}
 		}
+
+		/// <summary>
+		/// Ensures that a sequence contains a particular set of values.
+		/// </summary>
+		public static void IsSubsetOf<TValue>(IEnumerable<TValue> pSequence, IEnumerable<TValue> pValues, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pValues == null) throw new ArgumentNullException("pValues");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (!pValues.Any()) throw new ArgumentException("Expected elements", "pValues");
+			if (pValues.Count() > pSequence.Count()) throw new ArgumentException("pValues is larger than pSequence and therefore cannot be a subset", "pValues");
+
+			if (pValues.Intersect(pSequence).Count() != pValues.Count()) {
+				throw pException ?? new AssertionException("Expected all of pValues to be found within pSequence");
+			}
+		}
+
+		/// <summary>
+		/// Ensures that a sequence does not contain a specific full set of values.
+		/// </summary>
+		public static void IsNotSubsetOf<TValue>(IEnumerable<TValue> pSequence, IEnumerable<TValue> pValues, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pValues == null) throw new ArgumentNullException("pValues");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (!pValues.Any()) throw new ArgumentException("Expected elements", "pValues");
+			if (pValues.Count() > pSequence.Count()) throw new ArgumentException("pValues is larger than pSequence and therefore cannot be a subset", "pValues");
+
+			if (pValues.Intersect(pSequence).Count() == pValues.Count()) {
+				throw pException ?? new AssertionException("pValues was a subset of pSequence");
+			}
+		}
+
+		/// <summary>
+		/// Ensures that a sequence strictly contains a particular set of values.
+		/// </summary>
+		public static void IsStrictSubsetOf<TValue>(IEnumerable<TValue> pSequence, IEnumerable<TValue> pValues, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pValues == null) throw new ArgumentNullException("pValues");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (!pValues.Any()) throw new ArgumentException("Expected elements", "pValues");
+			if (pValues.Count() >= pSequence.Count()) throw new ArgumentException("pValues is larger than or equal to pSequence and therefore cannot be a strict subset", "pValues");
+
+			if (pValues.Intersect(pSequence).Count() != pValues.Count()) {
+				throw pException ?? new AssertionException("Expected all of pValues to be found within pSequence");
+			}
+		}
+
+		/// <summary>
+		/// Ensures that a sequence does not strictly contain a specific full set of values.
+		/// </summary>
+		public static void IsNotStrictSubsetOf<TValue>(IEnumerable<TValue> pSequence, IEnumerable<TValue> pValues, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pValues == null) throw new ArgumentNullException("pValues");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (!pValues.Any()) throw new ArgumentException("Expected elements", "pValues");
+			if (pValues.Count() >= pSequence.Count()) throw new ArgumentException("pValues is larger than or equal to pSequence and therefore cannot be a strict subset", "pValues");
+
+			if (pValues.Intersect(pSequence).Count() == pValues.Count()) {
+				throw pException ?? new AssertionException("pValues was a strict subset of pSequence");
+			}
+		}
 	}
 }
