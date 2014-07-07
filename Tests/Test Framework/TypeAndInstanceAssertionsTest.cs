@@ -23,6 +23,7 @@ namespace Test {
 				Assert.Same(o, o);
 			});
 			Assert.Throws<AssertionException>(() => Assert.Same(new object(), null));
+			Assert.Throws<AssertionException>(() => Assert.Same(null, new object()));
 			Assert.Throws<AssertionException>(() => Assert.Same(new object(), new object()));
 		}
 
@@ -34,6 +35,7 @@ namespace Test {
 				Assert.NotSame(o, o);
 			});
 			Assert.DoesNotThrow(() => Assert.NotSame(new object(), null));
+			Assert.DoesNotThrow(() => Assert.NotSame(null, new object()));
 			Assert.DoesNotThrow(() => Assert.NotSame(new object(), new object()));
 		}
 
