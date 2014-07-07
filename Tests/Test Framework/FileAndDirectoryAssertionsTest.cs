@@ -24,70 +24,70 @@ namespace Test {
 
 		[TestMethod]
 		public void FileExists() {
-			Assert.Throws<ArgumentNullException>(() => Assert.FileExists(null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.FileExists(null as FileInfo));
-			Assert.Throws<AssertionException>(() => Assert.FileExists(NonExistingFile));
-			Assert.Throws<AssertionException>(() => Assert.FileExists(NonExistingFileInfo));
-			Assert.Throws<AssertionException>(() => Assert.FileExists(new FileInfo(NonExistingFile)));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FileExists(null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FileExists(null as FileInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FileExists(NonExistingFile));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FileExists(NonExistingFileInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FileExists(new FileInfo(NonExistingFile)));
 			Assert.DoesNotThrow(() => Assert.FileExists(ExistingFile));
 			Assert.DoesNotThrow(() => Assert.FileExists(ExistingFileInfo));
 		}
 
 		[TestMethod]
 		public void FileNotExists() {
-			Assert.Throws<ArgumentNullException>(() => Assert.FileNotExists(null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.FileNotExists(null as FileInfo));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FileNotExists(null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FileNotExists(null as FileInfo));
 			Assert.DoesNotThrow(() => Assert.FileNotExists(NonExistingFile));
 			Assert.DoesNotThrow(() => Assert.FileNotExists(NonExistingFileInfo));
 			Assert.DoesNotThrow(() => Assert.FileNotExists(new FileInfo(NonExistingFile)));
-			Assert.Throws<AssertionException>(() => Assert.FileNotExists(ExistingFile));
-			Assert.Throws<AssertionException>(() => Assert.FileNotExists(ExistingFileInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FileNotExists(ExistingFile));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FileNotExists(ExistingFileInfo));
 		}
 
 		[TestMethod]
 		public void DirectoryExists() {
-			Assert.Throws<ArgumentNullException>(() => Assert.DirectoryExists(null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.DirectoryExists(null as DirectoryInfo));
-			Assert.Throws<AssertionException>(() => Assert.DirectoryExists(NonExistingDirectory));
-			Assert.Throws<AssertionException>(() => Assert.DirectoryExists(NonExistingDirectoryInfo));
-			Assert.Throws<AssertionException>(() => Assert.DirectoryExists(new DirectoryInfo(NonExistingDirectory)));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.DirectoryExists(null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.DirectoryExists(null as DirectoryInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.DirectoryExists(NonExistingDirectory));
+			Assert.ThrowsExact<AssertionException>(() => Assert.DirectoryExists(NonExistingDirectoryInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.DirectoryExists(new DirectoryInfo(NonExistingDirectory)));
 			Assert.DoesNotThrow(() => Assert.DirectoryExists(ExistingDirectory));
 			Assert.DoesNotThrow(() => Assert.DirectoryExists(ExistingDirectoryInfo));
 		}
 
 		[TestMethod]
 		public void DirectoryNotExists() {
-			Assert.Throws<ArgumentNullException>(() => Assert.DirectoryNotExists(null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.DirectoryNotExists(null as DirectoryInfo));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.DirectoryNotExists(null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.DirectoryNotExists(null as DirectoryInfo));
 			Assert.DoesNotThrow(() => Assert.DirectoryNotExists(NonExistingDirectory));
 			Assert.DoesNotThrow(() => Assert.DirectoryNotExists(NonExistingDirectoryInfo));
 			Assert.DoesNotThrow(() => Assert.DirectoryNotExists(new DirectoryInfo(NonExistingDirectory)));
-			Assert.Throws<AssertionException>(() => Assert.DirectoryNotExists(ExistingDirectory));
-			Assert.Throws<AssertionException>(() => Assert.DirectoryNotExists(ExistingDirectoryInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.DirectoryNotExists(ExistingDirectory));
+			Assert.ThrowsExact<AssertionException>(() => Assert.DirectoryNotExists(ExistingDirectoryInfo));
 		}
 
 		[TestMethod]
 		public void FilesEqual() {
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(null as string, EqualCompareFile2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(null as string, EqualCompareFileInfo2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(null as FileInfo, EqualCompareFile2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(null as FileInfo, EqualCompareFileInfo2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFile1, null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFile1, null as FileInfo));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFileInfo1, null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFileInfo1, null as FileInfo));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(null as string, EqualCompareFile2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(null as string, EqualCompareFileInfo2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(null as FileInfo, EqualCompareFile2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(null as FileInfo, EqualCompareFileInfo2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFile1, null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFile1, null as FileInfo));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFileInfo1, null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesEqual(EqualCompareFileInfo1, null as FileInfo));
 
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(string.Empty, EqualCompareFile2));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(EqualCompareFile1, string.Empty));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(string.Empty, EqualCompareFile2));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(EqualCompareFile1, string.Empty));
 
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(NonExistingFile, ExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(NonExistingFileInfo, ExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(NonExistingFile, ExistingFileInfo));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(NonExistingFileInfo, ExistingFileInfo));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(ExistingFile, NonExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(ExistingFile, NonExistingFileInfo));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(ExistingFileInfo, NonExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesEqual(ExistingFileInfo, NonExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(NonExistingFile, ExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(NonExistingFileInfo, ExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(NonExistingFile, ExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(NonExistingFileInfo, ExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(ExistingFile, NonExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(ExistingFile, NonExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(ExistingFileInfo, NonExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesEqual(ExistingFileInfo, NonExistingFileInfo));
 
 			Assert.DoesNotThrow(() => Assert.FilesEqual(EqualCompareFile1, EqualCompareFile1));
 			Assert.DoesNotThrow(() => Assert.FilesEqual(EqualCompareFile1, EqualCompareFileInfo1));
@@ -99,49 +99,49 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.FilesEqual(EqualCompareFile1, EqualCompareFileInfo2));
 			Assert.DoesNotThrow(() => Assert.FilesEqual(EqualCompareFileInfo1, EqualCompareFile2));
 
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileLength));
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileLengthInfo));
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileLength));
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileLengthInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileLength));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileLengthInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileLength));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileLengthInfo));
 
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileData));
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileDataInfo));
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileData));
-			Assert.Throws<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileDataInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileData));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFile1, NotEqualCompareFileDataInfo));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileData));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesEqual(EqualCompareFileInfo1, NotEqualCompareFileDataInfo));
 		}
 
 		[TestMethod]
 		public void FilesNotEqual() {
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(null as string, EqualCompareFile2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(null as string, EqualCompareFileInfo2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(null as FileInfo, EqualCompareFile2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(null as FileInfo, EqualCompareFileInfo2));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFile1, null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFile1, null as FileInfo));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, null as string));
-			Assert.Throws<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, null as FileInfo));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(null as string, EqualCompareFile2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(null as string, EqualCompareFileInfo2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(null as FileInfo, EqualCompareFile2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(null as FileInfo, EqualCompareFileInfo2));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFile1, null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFile1, null as FileInfo));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, null as string));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, null as FileInfo));
 
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(string.Empty, EqualCompareFile2));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(EqualCompareFile1, string.Empty));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(string.Empty, EqualCompareFile2));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(EqualCompareFile1, string.Empty));
 
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFile, ExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFileInfo, ExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFile, ExistingFileInfo));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFileInfo, ExistingFileInfo));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(ExistingFile, NonExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(ExistingFile, NonExistingFileInfo));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(ExistingFileInfo, NonExistingFile));
-			Assert.Throws<ArgumentException>(() => Assert.FilesNotEqual(ExistingFileInfo, NonExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFile, ExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFileInfo, ExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFile, ExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(NonExistingFileInfo, ExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(ExistingFile, NonExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(ExistingFile, NonExistingFileInfo));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(ExistingFileInfo, NonExistingFile));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.FilesNotEqual(ExistingFileInfo, NonExistingFileInfo));
 
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFile1));
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFileInfo1));
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFile1));
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFileInfo1));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFile1));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFileInfo1));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFile1));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFileInfo1));
 
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFile2));
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFileInfo2));
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFileInfo2));
-			Assert.Throws<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFile2));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFile2));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFileInfo2));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFile1, EqualCompareFileInfo2));
+			Assert.ThrowsExact<AssertionException>(() => Assert.FilesNotEqual(EqualCompareFileInfo1, EqualCompareFile2));
 
 			Assert.DoesNotThrow(() => Assert.FilesNotEqual(EqualCompareFile1, NotEqualCompareFileLength));
 			Assert.DoesNotThrow(() => Assert.FilesNotEqual(EqualCompareFile1, NotEqualCompareFileLengthInfo));
