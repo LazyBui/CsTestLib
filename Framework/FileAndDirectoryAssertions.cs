@@ -188,6 +188,11 @@ namespace Test {
 				return;
 			}
 
+			if (string.Compare(pFile1.FullName, pFile2.FullName, StringComparison.InvariantCultureIgnoreCase) == 0) {
+				// If they're the same file, we can safely not do anything else
+				throw pException ?? new AssertionException("pFile1 and pFile2 are equal");
+			}
+
 			using (FileStream fs1 = pFile1.OpenRead(), fs2 = pFile2.OpenRead()) {
 				const int readSize = 65536;
 				byte[] buffer1 = new byte[readSize];
