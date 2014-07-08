@@ -3,6 +3,13 @@
 namespace Test {
 	internal partial class Assert {
 		/// <summary>
+		/// Asserts that the test has failed.
+		/// </summary>
+		public static void Fail(AssertionException pException = null) {
+			throw pException ?? new AssertionException("Test has failed");
+		}
+
+		/// <summary>
 		/// Asserts that a condition is true.
 		/// </summary>
 		public static void True(bool pCondition, AssertionException pException = null) {

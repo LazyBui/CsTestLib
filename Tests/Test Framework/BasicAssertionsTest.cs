@@ -7,6 +7,11 @@ namespace Test {
 		private class DerivedExceptionTest : ExceptionTest { }
 
 		[TestMethod]
+		public void Fail() {
+			Assert.ThrowsExact<AssertionException>(() => Assert.Fail());
+		}
+
+		[TestMethod]
 		public void True() {
 			Assert.DoesNotThrow(() => Assert.True(true));
 			Assert.ThrowsExact<AssertionException>(() => Assert.True(false));
