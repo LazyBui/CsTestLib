@@ -122,5 +122,13 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(double.NegativeInfinity));
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotFloatValue(1.34d));
 		}
+
+		[TestMethod]
+		public void IsWithinDelta() {
+			Assert.DoesNotThrow(() => Assert.IsWithinDelta(0.0001f, 0.0002f, 0.0001f));
+			Assert.DoesNotThrow(() => Assert.IsWithinDelta(0.0001d, 0.0002d, 0.0001d));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsWithinDelta(0.0001f, 0.0002f, 0.00002f));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsWithinDelta(0.0001d, 0.0002d, 0.00002d));
+		}
 	}
 }

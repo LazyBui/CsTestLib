@@ -141,5 +141,19 @@ namespace Test {
 		public static void IsNotFloatValue(double pValue, AssertionException pException = null) {
 			if (!double.IsInfinity(pValue) && !double.IsNaN(pValue)) throw pException ?? new AssertionException("pValue was a floating point value");
 		}
+
+		/// <summary>
+		/// Asserts that a floating-point value is within an delta of another floating point value.
+		/// </summary>
+		public static void IsWithinDelta(float pValue1, float pValue2, float pDelta, AssertionException pException = null) {
+			if (Math.Abs(pValue1 - pValue2) > pDelta) throw pException ?? new AssertionException("pValue was a floating point value");
+		}
+
+		/// <summary>
+		/// Asserts that a floating-point value is within an delta of another floating point value.
+		/// </summary>
+		public static void IsWithinDelta(double pValue1, double pValue2, double pDelta, AssertionException pException = null) {
+			if (Math.Abs(pValue1 - pValue2) > pDelta) throw pException ?? new AssertionException("pValue was a floating point value");
+		}
 	}
 }
