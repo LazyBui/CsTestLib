@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -114,6 +115,9 @@ namespace Test {
 
 		[TestMethod]
 		public void Equal() {
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Equal(null as object, null as object, null as IEqualityComparer<object>));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Equal(null as object, null as object, null as IEqualityComparer));
+
 			Assert.DoesNotThrow(() => Assert.Equal(1, 1));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Equal(1, 0));
 			Assert.DoesNotThrow(() => Assert.Equal(null, null));
@@ -143,10 +147,18 @@ namespace Test {
 				new[] { 2, 1 },
 			};
 			Assert.DoesNotThrow(() => Assert.Equal(arr1, arr2));
+
+			Assert.DoesNotThrow(() => Assert.Equal("abc", "ABC", StringComparer.InvariantCultureIgnoreCase));
+			Assert.DoesNotThrow(() => Assert.Equal("abc" as object, "ABC" as object, StringComparer.InvariantCultureIgnoreCase));
+			Assert.ThrowsExact<AssertionException>(() => Assert.Equal("abc", "BBB", StringComparer.InvariantCultureIgnoreCase));
+			Assert.ThrowsExact<AssertionException>(() => Assert.Equal("abc" as object, "BBB" as object, StringComparer.InvariantCultureIgnoreCase));
 		}
 
 		[TestMethod]
 		public void NotEqual() {
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.NotEqual(null as object, null as object, null as IEqualityComparer<object>));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.NotEqual(null as object, null as object, null as IEqualityComparer));
+
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotEqual(1, 1));
 			Assert.DoesNotThrow(() => Assert.NotEqual(1, 0));
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotEqual(null, null));
@@ -176,6 +188,11 @@ namespace Test {
 				new[] { 2, 1 },
 			};
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotEqual(arr1, arr2));
+
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotEqual("abc", "ABC", StringComparer.InvariantCultureIgnoreCase));
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotEqual("abc" as object, "ABC" as object, StringComparer.InvariantCultureIgnoreCase));
+			Assert.DoesNotThrow(() => Assert.NotEqual("abc", "BBB", StringComparer.InvariantCultureIgnoreCase));
+			Assert.DoesNotThrow(() => Assert.NotEqual("abc" as object, "BBB" as object, StringComparer.InvariantCultureIgnoreCase));
 		}
 	}
 }

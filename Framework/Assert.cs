@@ -12,6 +12,14 @@ namespace Test {
 		private static Type sCollectionType = typeof(ICollection);
 		private static Type sCollectionGenericType = typeof(ICollection<>);
 		private static bool IsCollectionType(Type pType) { return sCollectionType.IsAssignableFrom(pType) || sCollectionGenericType.IsAssignableFrom(pType); }
+		private static bool IsEqual<TValue>(TValue pLeft, TValue pRight, IEqualityComparer<TValue> pComparer) {
+			if (pComparer != null) return pComparer.Equals(pLeft, pRight);
+			return IsEqual(pLeft, pRight);
+		}
+		private static bool IsEqual(object pLeft, object pRight, IEqualityComparer pComparer) {
+			if (pComparer != null) return pComparer.Equals(pLeft, pRight);
+			return IsEqual(pLeft, pRight);
+		}
 		private static bool IsEqual(object pLeft, object pRight) {
 			if (pLeft == null && pRight == null) return true;
 			if (pLeft == null || pRight == null) return false;

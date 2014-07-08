@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Test {
 	internal partial class Assert {
@@ -77,12 +79,44 @@ namespace Test {
 		}
 
 		/// <summary>
+		/// Asserts that two specified objects are equal given a specific comparer.
+		/// </summary>
+		public static void Equal<TValue>(TValue pLeft, TValue pRight, IEqualityComparer<TValue> pComparer, AssertionException pException = null) {
+			if (pComparer == null) throw new ArgumentNullException("pComparer");
+			if (!IsEqual(pLeft, pRight, pComparer)) throw pException ?? new AssertionException("Expected equal values");
+		}
+
+		/// <summary>
+		/// Asserts that two specified objects are equal given a specific comparer.
+		/// </summary>
+		public static void Equal(object pLeft, object pRight, IEqualityComparer pComparer, AssertionException pException = null) {
+			if (pComparer == null) throw new ArgumentNullException("pComparer");
+			if (!IsEqual(pLeft, pRight, pComparer)) throw pException ?? new AssertionException("Expected equal values");
+		}
+
+		/// <summary>
 		/// Asserts that two specified objects are equal.
 		/// null and null are considered equal.
 		/// The types must also be consistent in order to compare equal (so you cannot compare sbyte with int, for example).
 		/// </summary>
 		public static void Equal(object pLeft, object pRight, AssertionException pException = null) {
 			if (!IsEqual(pLeft, pRight)) throw pException ?? new AssertionException("Expected equal values");
+		}
+
+		/// <summary>
+		/// Asserts that two specified objects are not equal given a specific comparer.
+		/// </summary>
+		public static void NotEqual<TValue>(TValue pLeft, TValue pRight, IEqualityComparer<TValue> pComparer, AssertionException pException = null) {
+			if (pComparer == null) throw new ArgumentNullException("pComparer");
+			if (IsEqual(pLeft, pRight, pComparer)) throw pException ?? new AssertionException("Expected unequal values");
+		}
+
+		/// <summary>
+		/// Asserts that two specified objects are not equal given a specific comparer.
+		/// </summary>
+		public static void NotEqual(object pLeft, object pRight, IEqualityComparer pComparer, AssertionException pException = null) {
+			if (pComparer == null) throw new ArgumentNullException("pComparer");
+			if (IsEqual(pLeft, pRight, pComparer)) throw pException ?? new AssertionException("Expected unequal values");
 		}
 
 		/// <summary>
