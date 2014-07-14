@@ -8,6 +8,7 @@ namespace Test {
 
 		[TestMethod]
 		public void Fail() {
+			Assert.ThrowsExact<AssertionException>(Assert.Failure);
 			Assert.ThrowsExact<AssertionException>(() => Assert.Fail());
 		}
 
