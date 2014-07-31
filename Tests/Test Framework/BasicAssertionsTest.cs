@@ -16,12 +16,18 @@ namespace Test {
 		public void True() {
 			Assert.DoesNotThrow(() => Assert.True(true));
 			Assert.ThrowsExact<AssertionException>(() => Assert.True(false));
+			Assert.Throws<ArgumentNullException>(() => Assert.True(null));
+			Assert.DoesNotThrow(() => Assert.True(() => true));
+			Assert.ThrowsExact<AssertionException>(() => Assert.True(() => false));
 		}
 
 		[TestMethod]
 		public void False() {
 			Assert.DoesNotThrow(() => Assert.False(false));
 			Assert.ThrowsExact<AssertionException>(() => Assert.False(true));
+			Assert.Throws<ArgumentNullException>(() => Assert.False(null));
+			Assert.DoesNotThrow(() => Assert.False(() => false));
+			Assert.ThrowsExact<AssertionException>(() => Assert.False(() => true));
 		}
 
 		[TestMethod]

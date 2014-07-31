@@ -19,10 +19,26 @@ namespace Test {
 		}
 
 		/// <summary>
+		/// Asserts that a condition is true.
+		/// </summary>
+		public static void True(Func<bool> pCondition, AssertionException pException = null) {
+			if (pCondition == null) throw new ArgumentNullException("pCondition");
+			if (!pCondition()) throw pException ?? new AssertionException("Condition was false");
+		}
+
+		/// <summary>
 		/// Asserts that a condition is false.
 		/// </summary>
 		public static void False(bool pCondition, AssertionException pException = null) {
 			if (pCondition) throw pException ?? new AssertionException("Condition was true");
+		}
+
+		/// <summary>
+		/// Asserts that a condition is false.
+		/// </summary>
+		public static void False(Func<bool> pCondition, AssertionException pException = null) {
+			if (pCondition == null) throw new ArgumentNullException("pCondition");
+			if (pCondition()) throw pException ?? new AssertionException("Condition was true");
 		}
 
 		/// <summary>
