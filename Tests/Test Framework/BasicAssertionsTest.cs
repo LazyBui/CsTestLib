@@ -3,8 +3,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test {
 	public partial class AssertTest {
-		private class ExceptionTest : Exception { }
-		private class DerivedExceptionTest : ExceptionTest { }
+		private class ExceptionTest : Exception {
+			public ExceptionTest() : base() { }
+			public ExceptionTest(Exception pInnerException) : base(string.Empty, pInnerException) { }
+		}
+		private class DerivedExceptionTest : ExceptionTest {
+			public DerivedExceptionTest() : base() { }
+			public DerivedExceptionTest(Exception pInnerException) : base(pInnerException) { }
+		}
 
 		[TestMethod]
 		public void Fail() {
@@ -85,6 +91,84 @@ namespace Test {
 
 			try {
 				Assert.ThrowsExact<ArgumentNullException>(() => { throw new InvalidOperationException("Testing"); });
+			}
+			catch (AssertionException e) {
+				if (e.InnerException.GetType() != typeof(InvalidOperationException)) {
+					// This should not occur
+					throw;
+				}
+			}
+			catch (Exception) {
+				// This should not occur
+				throw;
+			}
+		}
+
+		[TestMethod]
+		public void ThrowsInnerException() {
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerException<AssertionException>(null));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerException(typeof(AssertionException), null));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerException(null, () => { }));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.ThrowsInnerException(typeof(AssertTest), () => { }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerException(typeof(Exception), () => { throw new Exception(string.Empty, new Exception()); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerException(typeof(DerivedExceptionTest), () => { throw new Exception(string.Empty, new DerivedExceptionTest()); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerException(typeof(ExceptionTest), () => { throw new Exception(string.Empty, new DerivedExceptionTest()); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException(typeof(DerivedExceptionTest), () => { throw new Exception(string.Empty, new ExceptionTest()); }));
+
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerException<ArgumentException>(() => { throw new ArgumentException("Testing", new ArgumentException()); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException<ArgumentException>(() => { }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException<NotSupportedException>(() => { throw new ArgumentNullException(); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException<NotSupportedException>(() => { throw new ArgumentNullException("Testing", new ArgumentNullException("Testing")); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException<ArgumentException>(() => { throw new ArgumentNullException("Testing", new Exception()); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerException<ArgumentException>(() => { throw new Exception("Testing", new ArgumentNullException("Testing")); }));
+
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException(typeof(NotSupportedException), () => { throw new ArgumentNullException(); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException(typeof(ArgumentException), () => { throw new ArgumentNullException(); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerException(typeof(NotSupportedException), () => { throw new ArgumentNullException("Testing", new ArgumentNullException()); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerException(typeof(ArgumentException), () => { throw new ArgumentNullException("Testing", new ArgumentNullException()); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerException(typeof(ArgumentException), () => { throw new ArgumentException("Testing", new ArgumentException("Testing")); }));
+
+			try {
+				Assert.ThrowsInnerException<ArgumentNullException>(() => { throw new InvalidOperationException("Testing"); });
+			}
+			catch (AssertionException e) {
+				if (e.InnerException.GetType() != typeof(InvalidOperationException)) {
+					// This should not occur
+					throw;
+				}
+			}
+			catch (Exception) {
+				// This should not occur
+				throw;
+			}
+		}
+
+		[TestMethod]
+		public void ThrowsInnerExceptionExact() {
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerExceptionExact<AssertionException>(null));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerExceptionExact(typeof(AssertionException), null));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerExceptionExact(null, () => { }));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.ThrowsInnerExceptionExact(typeof(AssertTest), () => { }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerExceptionExact(typeof(Exception), () => { throw new DerivedExceptionTest(new Exception()); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerExceptionExact(typeof(DerivedExceptionTest), () => { throw new Exception(string.Empty, new DerivedExceptionTest()); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact(typeof(ExceptionTest), () => { throw new Exception(string.Empty, new DerivedExceptionTest()); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact(typeof(DerivedExceptionTest), () => { throw new Exception(string.Empty, new ExceptionTest()); }));
+
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerExceptionExact<ArgumentException>(() => { throw new Exception("Testing", new ArgumentException("Testing")); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact<ArgumentException>(() => { }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact<NotSupportedException>(() => { throw new ArgumentNullException(); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact<NotSupportedException>(() => { throw new ArgumentNullException("Testing", new ArgumentNullException("Testing")); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact<ArgumentException>(() => { throw new ArgumentNullException("Testing", new Exception()); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact<ArgumentException>(() => { throw new Exception("Testing", new ArgumentNullException("Testing")); }));
+
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact(typeof(NotSupportedException), () => { throw new ArgumentNullException(); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact(typeof(ArgumentException), () => { throw new ArgumentNullException(); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact(typeof(NotSupportedException), () => { throw new ArgumentNullException("Testing", new ArgumentNullException()); }));
+			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsInnerExceptionExact(typeof(ArgumentException), () => { throw new ArgumentNullException("Testing", new ArgumentNullException()); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsInnerExceptionExact(typeof(ArgumentException), () => { throw new ArgumentException("Testing", new ArgumentException("Testing")); }));
+
+			try {
+				Assert.ThrowsInnerExceptionExact<ArgumentNullException>(() => { throw new InvalidOperationException("Testing"); });
 			}
 			catch (AssertionException e) {
 				if (e.InnerException.GetType() != typeof(InvalidOperationException)) {
