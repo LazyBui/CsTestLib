@@ -9,6 +9,11 @@ namespace Test {
 	internal sealed partial class Assert {
 		private Assert() { }
 
+		private static void VerifyNotNullOrEmpty(string pString, string pArgName) {
+			if (pString == null) throw new ArgumentNullException(pArgName);
+			if (pString.Length == 0) throw new ArgumentException("String is blank", pArgName);
+		}
+
 		private static Type sCollectionType = typeof(ICollection);
 		private static Type sCollectionGenericType = typeof(ICollection<>);
 		private static bool IsCollectionType(Type pType) { return sCollectionType.IsAssignableFrom(pType) || sCollectionGenericType.IsAssignableFrom(pType); }

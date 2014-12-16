@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Test {
 	public partial class AssertTest {
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void GreaterThan() {
 			int minValue = 1;
 			int value = 2;
@@ -17,6 +18,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void GreaterThanEqual() {
 			int minValue = 1;
 			int value = 2;
@@ -28,6 +30,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void LessThan() {
 			int minValue = 1;
 			int value = 2;
@@ -39,6 +42,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void LessThanEqual() {
 			int minValue = 1;
 			int value = 2;
@@ -50,6 +54,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void InRangeEqual() {
 			int minValue = 1;
 			int maxValue = 10;
@@ -66,6 +71,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void InRange() {
 			int minValue = 1;
 			int maxValue = 10;
@@ -82,6 +88,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void NotInRangeEqual() {
 			int minValue = 1;
 			int maxValue = 10;
@@ -98,6 +105,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void NotInRange() {
 			int minValue = 1;
 			int maxValue = 10;
@@ -114,6 +122,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Equal() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Equal(null as object, null as object, null as IEqualityComparer<object>));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Equal(null as object, null as object, null as IEqualityComparer));
@@ -155,6 +164,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void NotEqual() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.NotEqual(null as object, null as object, null as IEqualityComparer<object>));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.NotEqual(null as object, null as object, null as IEqualityComparer));

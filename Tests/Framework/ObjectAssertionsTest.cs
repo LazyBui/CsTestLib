@@ -4,18 +4,21 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Test {
 	public partial class AssertTest {
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Null() {
 			Assert.DoesNotThrow(() => Assert.Null(null));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Null(new object()));
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void NotNull() {
 			Assert.DoesNotThrow(() => Assert.NotNull(new object()));
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotNull(null));
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Same() {
 			Assert.DoesNotThrow(() => Assert.Same<object>(null, null));
 			Assert.DoesNotThrow(() => {
@@ -28,6 +31,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void NotSame() {
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotSame<object>(null, null));
 			Assert.ThrowsExact<AssertionException>(() => {

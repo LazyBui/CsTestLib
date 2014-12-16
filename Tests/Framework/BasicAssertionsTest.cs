@@ -13,12 +13,14 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Fail() {
 			Assert.ThrowsExact<AssertionException>(Assert.Failure);
 			Assert.ThrowsExact<AssertionException>(() => Assert.Fail());
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void True() {
 			Assert.DoesNotThrow(() => Assert.True(true));
 			Assert.ThrowsExact<AssertionException>(() => Assert.True(false));
@@ -28,6 +30,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void False() {
 			Assert.DoesNotThrow(() => Assert.False(false));
 			Assert.ThrowsExact<AssertionException>(() => Assert.False(true));
@@ -37,6 +40,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Throws() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Throws<AssertionException>(null));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Throws(typeof(AssertionException), null));
@@ -71,6 +75,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void ThrowsExact() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsExact<AssertionException>(null));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsExact(typeof(AssertionException), null));
@@ -105,6 +110,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void ThrowsInnerException() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerException<AssertionException>(null));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerException(typeof(AssertionException), null));
@@ -144,6 +150,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void ThrowsInnerExceptionExact() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerExceptionExact<AssertionException>(null));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.ThrowsInnerExceptionExact(typeof(AssertionException), null));
@@ -183,6 +190,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void DoesNotThrow() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.DoesNotThrow(null));
 			Assert.ThrowsExact<AssertionException>(() => Assert.DoesNotThrow(() => { throw new ArgumentException("Testing"); }));
@@ -190,6 +198,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void ExceptionAttachments() {
 			var exception = new AssertionException("Testing {0}", 123);
 
