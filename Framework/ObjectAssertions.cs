@@ -27,7 +27,7 @@ namespace Test {
 		/// Asserts that a specified object reference is not the same as another specified object reference.
 		/// </summary>
 		public static void NotSame<TValue>(TValue pLeft, TValue pRight, AssertionException pException = null) where TValue : class {
-			if (object.ReferenceEquals(pLeft, pRight)) throw pException ?? new AssertionException("Expected equal references");
+			if (object.ReferenceEquals(pLeft, pRight)) throw pException ?? new AssertionException("Expected different references");
 		}
 	}
 }
