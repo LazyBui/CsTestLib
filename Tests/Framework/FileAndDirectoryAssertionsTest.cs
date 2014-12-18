@@ -8,20 +8,20 @@ namespace Test {
 		private const string NonExistingFile = "abc.txt";
 		private const string ExistingDirectory = "../../Framework/";
 		private const string NonExistingDirectory = "NotAValidDirectory";
-		private static FileInfo ExistingFileInfo = new FileInfo(ExistingFile);
-		private static FileInfo NonExistingFileInfo = new FileInfo(NonExistingFile);
-		private static DirectoryInfo ExistingDirectoryInfo = new DirectoryInfo(ExistingDirectory);
-		private static DirectoryInfo NonExistingDirectoryInfo = new DirectoryInfo(NonExistingDirectory);
+		private static readonly FileInfo ExistingFileInfo = new FileInfo(ExistingFile);
+		private static readonly FileInfo NonExistingFileInfo = new FileInfo(NonExistingFile);
+		private static readonly DirectoryInfo ExistingDirectoryInfo = new DirectoryInfo(ExistingDirectory);
+		private static readonly DirectoryInfo NonExistingDirectoryInfo = new DirectoryInfo(NonExistingDirectory);
 
 		private const string TestDirectory = "../../Tests/Framework/";
 		private const string EqualCompareFile1 = TestDirectory + "_eq1.bin";
 		private const string EqualCompareFile2 = TestDirectory + "_eq2.bin";
 		private const string NotEqualCompareFileLength = TestDirectory + "_difflength.bin";
 		private const string NotEqualCompareFileData = TestDirectory + "_diffcontent.bin";
-		private static FileInfo EqualCompareFileInfo1 = new FileInfo(EqualCompareFile1);
-		private static FileInfo EqualCompareFileInfo2 = new FileInfo(EqualCompareFile2);
-		private static FileInfo NotEqualCompareFileLengthInfo = new FileInfo(NotEqualCompareFileLength);
-		private static FileInfo NotEqualCompareFileDataInfo = new FileInfo(NotEqualCompareFileData);
+		private static readonly FileInfo EqualCompareFileInfo1 = new FileInfo(EqualCompareFile1);
+		private static readonly FileInfo EqualCompareFileInfo2 = new FileInfo(EqualCompareFile2);
+		private static readonly FileInfo NotEqualCompareFileLengthInfo = new FileInfo(NotEqualCompareFileLength);
+		private static readonly FileInfo NotEqualCompareFileDataInfo = new FileInfo(NotEqualCompareFileData);
 
 		[TestMethod]
 		[TestCategory("Framework")]

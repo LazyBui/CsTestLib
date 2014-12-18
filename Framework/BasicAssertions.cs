@@ -2,7 +2,7 @@
 
 namespace Test {
 	internal partial class Assert {
-		public static Action Failure = () => Fail(null);
+		public static readonly Action Failure = () => Fail(null);
 
 		/// <summary>
 		/// Asserts that the test has failed.

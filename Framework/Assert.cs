@@ -14,8 +14,8 @@ namespace Test {
 			if (pString.Length == 0) throw new ArgumentException("String is blank", pArgName);
 		}
 
-		private static Type sCollectionType = typeof(ICollection);
-		private static Type sCollectionGenericType = typeof(ICollection<>);
+		private static readonly Type sCollectionType = typeof(ICollection);
+		private static readonly Type sCollectionGenericType = typeof(ICollection<>);
 		private static bool IsCollectionType(Type pType) { return sCollectionType.IsAssignableFrom(pType) || sCollectionGenericType.IsAssignableFrom(pType); }
 		private static bool IsEqual<TValue>(TValue pLeft, TValue pRight, IEqualityComparer<TValue> pComparer) {
 			if (pComparer != null) return pComparer.Equals(pLeft, pRight);
