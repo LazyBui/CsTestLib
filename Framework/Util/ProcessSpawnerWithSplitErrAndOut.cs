@@ -5,6 +5,11 @@ using System.Linq;
 using System.Text;
 
 namespace Test {
+	/// <summary>
+	/// Executes an <see cref="System.Diagnostics.Process" /> object in order to get distinct output for assertion purposes. 
+	/// <see cref="System.Diagnostics.Process" /> has a limitation where sequentially consistent output (as you would see in a regular console execution) and distinct output cannot be obtained at the same time and it may be a limitation of Windows itself.
+	/// If both outputs are required, please use <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" />.
+	/// </summary>
 	internal sealed class ProcessSpawnerWithSplitErrAndOut : IProcessSpawner {
 		private Process m_process = null;
 		private StringBuilder m_output = new StringBuilder(1024);
@@ -13,14 +18,50 @@ namespace Test {
 		private long m_procPeakVirtualMemorySize;
 		private long m_procPeakWorkingSet;
 
+		/// <summary>
+		/// Indicates that the process has started.
+		/// </summary>
 		public bool Started { get; private set; }
+		/// <summary>
+		/// Indicates that the process has completed.
+		/// </summary>
 		public bool Exited { get; private set; }
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file.
+		/// </summary>
+		/// <param name="pFileName">The name of the file to execute.</param>
 		public ProcessSpawnerWithSplitErrAndOut(string pFileName) { Initialize(pFileName, null, null); }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file and command line arguments.
+		/// </summary>
+		/// <param name="pFileName">The name of the file to execute.</param>
+		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
 		public ProcessSpawnerWithSplitErrAndOut(string pFileName, params object[] pArguments) { Initialize(pFileName, new WindowsCommandLineArgumentEscaper(), pArguments); }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+		/// </summary>
+		/// <param name="pFileName">The name of the file to execute.</param>
+		/// <param name="pEscaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
 		public ProcessSpawnerWithSplitErrAndOut(string pFileName, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) { Initialize(pFileName, pEscaper, pArguments); }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file.
+		/// </summary>
+		/// <param name="pFile">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
 		public ProcessSpawnerWithSplitErrAndOut(FileInfo pFile) { Initialize(pFile, null, null); }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file and command line arguments.
+		/// </summary>
+		/// <param name="pFile">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
+		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
 		public ProcessSpawnerWithSplitErrAndOut(FileInfo pFile, params object[] pArguments) { Initialize(pFile, new WindowsCommandLineArgumentEscaper(), pArguments); }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+		/// </summary>
+		/// <param name="pFile">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
+		/// <param name="pEscaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
 		public ProcessSpawnerWithSplitErrAndOut(FileInfo pFile, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) { Initialize(pFile, pEscaper, pArguments); }
 
 		private void Initialize(string pFileName, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) {
@@ -83,11 +124,15 @@ namespace Test {
 			);
 		}
 
+		/// <summary>
+		/// Executes the specified process.
+		/// </summary>
+		/// <returns>A <see cref="Test.ProcessResult" /> object representing the execution.</returns>
 		public ProcessResult Run() {
 			return WaitForExit();
 		}
 
-		public void Start() {
+		private void Start() {
 			if (Exited) throw new InvalidOperationException("Must not execute the process twice");
 			if (Started) throw new InvalidOperationException("Must not execute the process twice");
 			Started = true;
@@ -96,7 +141,7 @@ namespace Test {
 			m_process.BeginErrorReadLine();
 		}
 
-		public ProcessResult WaitForExit() {
+		private ProcessResult WaitForExit() {
 			if (Exited) throw new InvalidOperationException("Must not execute the process twice");
 			if (!Started) Start();
 
@@ -116,6 +161,9 @@ namespace Test {
 			return ProduceResult();
 		}
 
+		/// <summary>
+		/// Releases all resources used by the current instance of the Test.ProcessSpawnerWithSplitErrAndOut class.
+		/// </summary>
 		public void Dispose() {
 			Dispose(true);
 			GC.SuppressFinalize(this);
