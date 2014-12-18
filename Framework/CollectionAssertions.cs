@@ -154,7 +154,7 @@ namespace Test {
 		/// <summary>
 		/// Asserts that an entire sequence with two or more elements has no duplicates that match the predicate.
 		/// </summary>
-		public static void Unique<TValue, TCompare>(IEnumerable<TValue> pSequence, Func<TValue, TCompare> pPredicate, AssertionException pException = null) {
+		public static void Unique<TValue, TCompare>(IEnumerable<TValue> pSequence, Func<TValue, TCompare> pPredicate, AssertionException pException = null) where TCompare : IEquatable<TCompare> {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
 			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
 			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
@@ -197,7 +197,7 @@ namespace Test {
 		/// <summary>
 		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair that matches the predicate.
 		/// </summary>
-		public static void NotUnique<TValue, TCompare>(IEnumerable<TValue> pSequence, Func<TValue, TCompare> pPredicate, AssertionException pException = null) {
+		public static void NotUnique<TValue, TCompare>(IEnumerable<TValue> pSequence, Func<TValue, TCompare> pPredicate, AssertionException pException = null) where TCompare : IEquatable<TCompare> {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
 			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
 			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");

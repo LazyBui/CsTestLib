@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 
 namespace Test {
+	/// <summary>
+	/// Allows arbitrary equality comparison between two instances of the same class.
+	/// </summary>
+	/// <typeparam name="TValue">The type comparison will be done on.</typeparam>
 	internal sealed class EqualityComparerStateful<TValue> : IEqualityComparer<TValue> {
 		private Func<TValue, TValue, bool> mComparer = null;
 		private Func<TValue, int> mHasher = null;

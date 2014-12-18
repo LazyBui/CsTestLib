@@ -58,6 +58,13 @@
     <Compile Include="Framework\FloatingPointAssertions.cs" />
     <Compile Include="Framework\LogicalComparisonAssertions.cs" />
     <Compile Include="Framework\Util\EqualityComparerStateful.cs" />
+    <Compile Include="Framework\Util\IProcessSpawner.cs" />
+    <Compile Include="Framework\Util\ProcessSpawnerWithCombinedAndSplitErrAndOut.cs" />
+    <Compile Include="Framework\Util\ProcessSpawnerWithCombinedErrAndOut.cs" />
+    <Compile Include="Framework\Util\WindowsCommandLineArgumentEscaper.cs" />
+    <Compile Include="Framework\Util\ProcessResult.cs" />
+    <Compile Include="Framework\Util\ICommandLineArgumentEscaper.cs" />
+    <Compile Include="Framework\Util\ProcessSpawnerWithSplitErrAndOut.cs" />
     <Compile Include="Framework\Util\EqualityComparerStateless.cs" />
     <Compile Include="Framework\Util\AssertionException.cs" />
     <Compile Include="Framework\Assert.cs" />
@@ -71,6 +78,10 @@
     <Compile Include="Tests\Framework\ReflectionAssertions.cs" />
     <Compile Include="Tests\Framework\ObjectAssertionsTest.cs" />
     <Compile Include="Tests\Framework\LogicalComparisonAssertionsTest.cs" />
+    <Compile Include="Tests\Framework\Util\ProcessSpawnerWithCombinedAndSplitErrAndOutTest.cs" />
+    <Compile Include="Tests\Framework\Util\ProcessSpawnerWithCombinedErrAndOutTest.cs" />
+    <Compile Include="Tests\Framework\Util\TestApplications.cs" />
+    <Compile Include="Tests\Framework\Util\ProcessSpawnerWithSplitErrAndOutTest.cs" />
     <Compile Include="Tests\Framework\StringAssertionsTest.cs" />
     <Compile Include="Tests\Framework\CollectionAssertionsTest.cs" />
     <Compile Include="Tests\Framework\BasicAssertionsTest.cs" />
@@ -80,6 +91,11 @@
     <None Include="Tests\Framework\difflength.bin" />
     <None Include="Tests\Framework\eq1.bin" />
     <None Include="Tests\Framework\eq2.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tests\Framework\Util\BlankLinesInterspersed.exe" />
+    <Content Include="Tests\Framework\Util\NoOutput.exe" />
+    <Content Include="Tests\Framework\Util\SimpleInterspersed.exe" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
