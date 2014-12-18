@@ -9,7 +9,7 @@ namespace Test {
 		public const string InvalidBinary = "WillNeverExist.exe";
 		public static readonly FileInfo InvalidBinaryInfo = new FileInfo(InvalidBinary);
 
-		public const string SimpleInterspersed = BinaryDirectory + "SimpleInterspersed.exe";
+		public const string SimpleInterspersed = BinaryDirectory + "_SimpleInterspersed.exe";
 		public static readonly FileInfo SimpleInterspersedInfo = new FileInfo(SimpleInterspersed);
 		public static readonly string SimpleInterspersedSource = @"
 using System;
@@ -37,7 +37,7 @@ namespace CsTestConsole {
 }
 ";
 
-		public const string BlankLinesInterspersed = BinaryDirectory + "BlankLinesInterspersed.exe";
+		public const string BlankLinesInterspersed = BinaryDirectory + "_BlankLinesInterspersed.exe";
 		public static readonly FileInfo BlankLinesInterspersedInfo = new FileInfo(BlankLinesInterspersed);
 		public static readonly string BlankLinesInterspersedSource = @"
 using System;
@@ -62,7 +62,7 @@ namespace CsTestConsole {
 }
 ";
 
-		public const string NoOutput = BinaryDirectory + "NoOutput.exe";
+		public const string NoOutput = BinaryDirectory + "_NoOutput.exe";
 		public static readonly FileInfo NoOutputInfo = new FileInfo(NoOutput);
 		public static readonly string NoOutputSource = @"
 using System;

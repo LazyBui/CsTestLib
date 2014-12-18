@@ -14,10 +14,10 @@ namespace Test {
 		private static DirectoryInfo NonExistingDirectoryInfo = new DirectoryInfo(NonExistingDirectory);
 
 		private const string TestDirectory = "../../Tests/Framework/";
-		private const string EqualCompareFile1 = TestDirectory + "eq1.bin";
-		private const string EqualCompareFile2 = TestDirectory + "eq2.bin";
-		private const string NotEqualCompareFileLength = TestDirectory + "difflength.bin";
-		private const string NotEqualCompareFileData = TestDirectory + "diffcontent.bin";
+		private const string EqualCompareFile1 = TestDirectory + "_eq1.bin";
+		private const string EqualCompareFile2 = TestDirectory + "_eq2.bin";
+		private const string NotEqualCompareFileLength = TestDirectory + "_difflength.bin";
+		private const string NotEqualCompareFileData = TestDirectory + "_diffcontent.bin";
 		private static FileInfo EqualCompareFileInfo1 = new FileInfo(EqualCompareFile1);
 		private static FileInfo EqualCompareFileInfo2 = new FileInfo(EqualCompareFile2);
 		private static FileInfo NotEqualCompareFileLengthInfo = new FileInfo(NotEqualCompareFileLength);

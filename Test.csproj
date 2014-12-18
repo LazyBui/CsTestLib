@@ -87,15 +87,15 @@
     <Compile Include="Tests\Framework\BasicAssertionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tests\Framework\diffcontent.bin" />
-    <None Include="Tests\Framework\difflength.bin" />
-    <None Include="Tests\Framework\eq1.bin" />
-    <None Include="Tests\Framework\eq2.bin" />
+    <None Include="Tests\Framework\_diffcontent.bin" />
+    <None Include="Tests\Framework\_difflength.bin" />
+    <None Include="Tests\Framework\_eq1.bin" />
+    <None Include="Tests\Framework\_eq2.bin" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Tests\Framework\Util\BlankLinesInterspersed.exe" />
-    <Content Include="Tests\Framework\Util\NoOutput.exe" />
-    <Content Include="Tests\Framework\Util\SimpleInterspersed.exe" />
+    <Content Include="Tests\Framework\Util\_BlankLinesInterspersed.exe" />
+    <Content Include="Tests\Framework\Util\_NoOutput.exe" />
+    <Content Include="Tests\Framework\Util\_SimpleInterspersed.exe" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
