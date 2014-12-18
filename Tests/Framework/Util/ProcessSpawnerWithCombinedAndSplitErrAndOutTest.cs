@@ -71,12 +71,18 @@ namespace Test {
 			ProcessResult result = null;
 
 			Assert.DoesNotThrow(() => {
-				process = new ProcessSpawnerWithCombinedAndSplitErrAndOut(TestApplications.SimpleInterspersed);
+				process = new ProcessSpawnerWithCombinedAndSplitErrAndOut(TestApplications.SimpleInterspersedInfo);
 				result = process.Run();
 			});
 			Assert.NotNull(process);
 			Assert.NotNull(result);
 			Assert.Equal(result.ExitCode, 3);
+			Assert.GreaterThan(result.PeakPagedMemorySize, 0);
+			Assert.GreaterThan(result.PeakVirtualMemorySize, 0);
+			Assert.GreaterThan(result.PeakWorkingSet, 0);
+			Assert.NotEqual(result.StartTime, DateTime.MinValue);
+			Assert.NotEqual(result.ExitTime, DateTime.MinValue);
+			Assert.GreaterThan(result.ExitTime - result.StartTime, TimeSpan.Zero);
 			Assert.NotNull(result.FullBuffer);
 			Assert.NotNull(result.FullOutput);
 			Assert.NotNull(result.FullError);
@@ -108,12 +114,18 @@ abcdef");
 			ProcessResult result = null;
 
 			Assert.DoesNotThrow(() => {
-				process = new ProcessSpawnerWithCombinedAndSplitErrAndOut(TestApplications.BlankLinesInterspersed);
+				process = new ProcessSpawnerWithCombinedAndSplitErrAndOut(TestApplications.BlankLinesInterspersedInfo);
 				result = process.Run();
 			});
 			Assert.NotNull(process);
 			Assert.NotNull(result);
 			Assert.Equal(result.ExitCode, 0);
+			Assert.GreaterThan(result.PeakPagedMemorySize, 0);
+			Assert.GreaterThan(result.PeakVirtualMemorySize, 0);
+			Assert.GreaterThan(result.PeakWorkingSet, 0);
+			Assert.NotEqual(result.StartTime, DateTime.MinValue);
+			Assert.NotEqual(result.ExitTime, DateTime.MinValue);
+			Assert.GreaterThan(result.ExitTime - result.StartTime, TimeSpan.Zero);
 			Assert.NotNull(result.FullBuffer);
 			Assert.NotNull(result.FullOutput);
 			Assert.NotNull(result.FullError);
@@ -150,12 +162,18 @@ abc");
 			ProcessResult result = null;
 
 			Assert.DoesNotThrow(() => {
-				process = new ProcessSpawnerWithCombinedAndSplitErrAndOut(TestApplications.NoOutput);
+				process = new ProcessSpawnerWithCombinedAndSplitErrAndOut(TestApplications.NoOutputInfo);
 				result = process.Run();
 			});
 			Assert.NotNull(process);
 			Assert.NotNull(result);
 			Assert.Equal(result.ExitCode, 0);
+			Assert.GreaterThan(result.PeakPagedMemorySize, 0);
+			Assert.GreaterThan(result.PeakVirtualMemorySize, 0);
+			Assert.GreaterThan(result.PeakWorkingSet, 0);
+			Assert.NotEqual(result.StartTime, DateTime.MinValue);
+			Assert.NotEqual(result.ExitTime, DateTime.MinValue);
+			Assert.GreaterThan(result.ExitTime - result.StartTime, TimeSpan.Zero);
 			Assert.NotNull(result.FullBuffer);
 			Assert.NotNull(result.FullOutput);
 			Assert.NotNull(result.FullError);
