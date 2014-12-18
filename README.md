@@ -1,7 +1,7 @@
 CsTestProj
 ==========
 
-A vanilla C# test suite project that includes an Assert class that provides assertions very similar to popular testing frameworks.
+A vanilla C# test suite project that includes an Assert class that provides assertions very similar to popular testing frameworks. The reason why this may be necessary is that the Express editions of Visual Studio do not allow for extensions. Most unit testing frameworks work on a plugin/extension basis. This project has no such requirement and can be used witih Express.
 
 Usage
 ==========
