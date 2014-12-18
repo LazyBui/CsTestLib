@@ -15,6 +15,7 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.GreaterThan(value, minValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.GreaterThan(minValue, minValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.GreaterThan(minValue - 5, minValue));
+			Assert.DoesNotThrow(() => Assert.GreaterThan(minValue + 5, minValue));
 		}
 
 		[TestMethod]
@@ -27,6 +28,7 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.GreaterThanEqual(value, minValue));
 			Assert.DoesNotThrow(() => Assert.GreaterThanEqual(minValue, minValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.GreaterThanEqual(minValue - 5, minValue));
+			Assert.DoesNotThrow(() => Assert.GreaterThanEqual(minValue + 5, minValue));
 		}
 
 		[TestMethod]
@@ -39,6 +41,7 @@ namespace Test {
 			Assert.ThrowsExact<AssertionException>(() => Assert.LessThan(value, minValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.LessThan(minValue, minValue));
 			Assert.DoesNotThrow(() => Assert.LessThan(minValue - 5, minValue));
+			Assert.ThrowsExact<AssertionException>(() => Assert.LessThan(minValue + 5, minValue));
 		}
 
 		[TestMethod]
@@ -51,6 +54,7 @@ namespace Test {
 			Assert.ThrowsExact<AssertionException>(() => Assert.LessThanEqual(value, minValue));
 			Assert.DoesNotThrow(() => Assert.LessThanEqual(minValue, minValue));
 			Assert.DoesNotThrow(() => Assert.LessThanEqual(minValue - 5, minValue));
+			Assert.ThrowsExact<AssertionException>(() => Assert.LessThanEqual(minValue + 5, minValue));
 		}
 
 		[TestMethod]
@@ -65,8 +69,8 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.InRangeEqual(minValue, minValue, maxValue));
 			Assert.DoesNotThrow(() => Assert.InRangeEqual(maxValue, minValue, maxValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.InRangeEqual(minValue - 5, minValue, maxValue));
-			Assert.ThrowsExact<AssertionException>(() => Assert.InRangeEqual(maxValue + 5, minValue, maxValue));
-			Assert.ThrowsExact<AssertionException>(() => Assert.InRangeEqual(minValue - 5, minValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.InRangeEqual(minValue + 5, minValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.InRangeEqual(maxValue - 5, minValue, maxValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.InRangeEqual(maxValue + 5, minValue, maxValue));
 		}
 
@@ -82,8 +86,8 @@ namespace Test {
 			Assert.ThrowsExact<AssertionException>(() => Assert.InRange(minValue, minValue, maxValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.InRange(maxValue, minValue, maxValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.InRange(minValue - 5, minValue, maxValue));
-			Assert.ThrowsExact<AssertionException>(() => Assert.InRange(maxValue + 5, minValue, maxValue));
-			Assert.ThrowsExact<AssertionException>(() => Assert.InRange(minValue - 5, minValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.InRange(minValue + 5, minValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.InRange(maxValue - 5, minValue, maxValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.InRange(maxValue + 5, minValue, maxValue));
 		}
 
@@ -99,8 +103,8 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue, minValue, maxValue));
 			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(maxValue, minValue, maxValue));
 			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue - 5, minValue, maxValue));
-			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(maxValue + 5, minValue, maxValue));
-			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue - 5, minValue, maxValue));
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotInRangeEqual(minValue + 5, minValue, maxValue));
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotInRangeEqual(maxValue - 5, minValue, maxValue));
 			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(maxValue + 5, minValue, maxValue));
 		}
 
@@ -115,10 +119,10 @@ namespace Test {
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotInRange(2, minValue, maxValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotInRange(minValue, minValue, maxValue));
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotInRange(maxValue, minValue, maxValue));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue - 5, minValue, maxValue));
-			Assert.DoesNotThrow(() => Assert.NotInRange(maxValue + 5, minValue, maxValue));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue - 5, minValue, maxValue));
-			Assert.DoesNotThrow(() => Assert.NotInRange(maxValue + 5, minValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue - 5, minValue, maxValue));
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotInRangeEqual(minValue + 5, minValue, maxValue));
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotInRangeEqual(maxValue - 5, minValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(maxValue + 5, minValue, maxValue));
 		}
 
 		[TestMethod]
