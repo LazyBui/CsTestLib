@@ -6,12 +6,12 @@ namespace Test {
 	/// </summary>
 	internal sealed class AssertionException : Exception {
 		/// <summary>
-		/// Initializes a new instance of the Test.AssertionException class with a specified error message.
+		/// Initializes a new instance of the <see cref="Test.AssertionException" /> class with a specified error message.
 		/// </summary>
 		/// <param name="pMessage">The message that describes the error.</param>
 		public AssertionException(string pMessage) : base(pMessage) { }
 		/// <summary>
-		/// Initializes a new instance of the Test.AssertionException class with a specified formatted error message.
+		/// Initializes a new instance of the <see cref="Test.AssertionException" /> class with a specified formatted error message.
 		/// </summary>
 		/// <param name="pFormat">The format string that describes the error.</param>
 		/// <param name="pArgs">The objects to pass to the format string.</param>

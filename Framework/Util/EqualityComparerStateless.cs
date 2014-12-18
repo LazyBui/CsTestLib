@@ -11,7 +11,7 @@ namespace Test {
 		private Func<TKey, TValue> mSelector = null;
 
 		/// <summary>
-		/// Initializes a new instance of the Test.EqualityComparerStateless&lt;TKey, TValue&gt; class with a specified selector delegate.
+		/// Initializes a new instance of the <see cref="Test.EqualityComparerStateless&lt;TKey, TValue&gt;" /> class with a specified selector delegate.
 		/// </summary>
 		/// <param name="pSelector">The selector that determines which property to obtain from an object.</param>
 		public EqualityComparerStateless(Func<TKey, TValue> pSelector) {

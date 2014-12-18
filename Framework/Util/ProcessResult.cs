@@ -57,7 +57,7 @@ namespace Test {
 		public long PeakWorkingSet { get; private set; }
 
 		/// <summary>
-		/// Initializes a new instance of the Test.ProcessResult class with the specified information.
+		/// Initializes a new instance of the <see cref="Test.ProcessResult" /> class with the specified information.
 		/// </summary>
 		/// <param name="pFullOutput">The full stdout stream.</param>
 		/// <param name="pFullError">The full stderr stream.</param>
