@@ -151,5 +151,84 @@ abc");
 			Assert.Null(result.FullError);
 			Assert.Equal(result.FullBuffer, @"");
 		}
+
+		[TestMethod]
+		[TestCategory("Framework.Util")]
+		public void NakedInput() {
+			ProcessResult result = null;
+			Assert.DoesNotThrow(() => {
+				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.NakedInput)) {
+					process.OnInputRequested += (buf, writer) => {
+						if (!string.IsNullOrEmpty(buf) && buf != "acb876") {
+							Assert.Fail();
+						}
+						writer.WriteLine("acb876");
+						return ProcessInputHandleResult.Handled;
+					};
+
+					result = process.Run();
+				}
+			});
+			Assert.NotNull(result);
+			Assert.NotNull(result.FullBuffer);
+			Assert.Null(result.FullOutput);
+			Assert.Null(result.FullError);
+			Assert.Equal(result.FullBuffer, @"acb876");
+		}
+
+		[TestMethod]
+		[TestCategory("Framework.Util")]
+		public void PlusTwoNumber() {
+			ProcessResult result = null;
+			Assert.DoesNotThrow(() => {
+				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.PlusTwoNumberInfo)) {
+					process.OnInputRequested += (buf, writer) => {
+						if (string.IsNullOrEmpty(buf)) {
+							return ProcessInputHandleResult.Ignored;
+						}
+						if (buf == "878") {
+							return ProcessInputHandleResult.Ignored;
+						}
+						if (buf != "Please enter a number...") {
+							Assert.Fail();
+							return ProcessInputHandleResult.Ignored;
+						}
+						writer.WriteLine("876");
+						return ProcessInputHandleResult.Handled;
+					};
+
+					result = process.Run();
+				}
+			});
+			Assert.NotNull(result);
+			Assert.NotNull(result.FullBuffer);
+			Assert.Equal(result.FullBuffer, @"Please enter a number...
+878");
+
+			Assert.DoesNotThrow(() => {
+				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.PlusTwoNumberInfo)) {
+					process.OnInputRequested += (buf, writer) => {
+						if (string.IsNullOrEmpty(buf)) {
+							return ProcessInputHandleResult.Ignored;
+						}
+						if (buf == "Bad number") {
+							return ProcessInputHandleResult.Ignored;
+						}
+						if (buf != "Please enter a number...") {
+							Assert.Fail();
+							return ProcessInputHandleResult.Ignored;
+						}
+						writer.WriteLine("abc");
+						return ProcessInputHandleResult.Handled;
+					};
+
+					result = process.Run();
+				}
+			});
+			Assert.NotNull(result);
+			Assert.NotNull(result.FullBuffer);
+			Assert.Equal(result.FullBuffer, @"Please enter a number...
+Bad number");
+		}
 	}
 }

@@ -20,6 +20,12 @@ namespace Test {
 		/// Indicates that the process has completed.
 		/// </summary>
 		public bool Exited { get; private set; }
+		/// <summary>
+		/// Is called when the process is asking for input.
+		/// Frequently, this will be called with a buffer of string.Empty, output from the program, or output based on user input.
+		/// All of these states should be accounted for.
+		/// </summary>
+		public event ProcessInputDelegate OnInputRequested;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file.
@@ -122,6 +128,13 @@ namespace Test {
 			);
 		}
 
+		private void AssociateEvents() {
+			if (OnInputRequested != null) {
+				m_combined.OnInputRequested += OnInputRequested;
+				m_split.OnInputRequested += OnInputRequested;
+			}
+		}
+
 		/// <summary>
 		/// Executes the specified process.
 		/// </summary>
@@ -129,6 +142,9 @@ namespace Test {
 		public ProcessResult Run() {
 			if (Exited) throw new InvalidOperationException("Must not execute the process twice");
 			if (Started) throw new InvalidOperationException("Must not execute the process twice");
+
+			AssociateEvents();
+
 			Started = true;
 			var splitResult = m_split.Run();
 			var combinedResult = m_combined.Run();

@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Management" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
@@ -58,6 +59,8 @@
     <Compile Include="Framework\FloatingPointAssertions.cs" />
     <Compile Include="Framework\LogicalComparisonAssertions.cs" />
     <Compile Include="Framework\Util\EqualityComparerStateful.cs" />
+    <Compile Include="Framework\Util\ProcessInputHandleResult.cs" />
+    <Compile Include="Framework\Util\ProcessInputRequestDelegate.cs" />
     <Compile Include="Framework\Util\IProcessSpawner.cs" />
     <Compile Include="Framework\Util\ProcessSpawnerWithCombinedAndSplitErrAndOut.cs" />
     <Compile Include="Framework\Util\ProcessSpawnerWithCombinedErrAndOut.cs" />
@@ -93,6 +96,8 @@
     <None Include="Tests\Framework\_eq2.bin" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Tests\Framework\Util\_PlusTwoNumber.exe" />
+    <Content Include="Tests\Framework\Util\_NakedInput.exe" />
     <Content Include="Tests\Framework\Util\_BlankLinesInterspersed.exe" />
     <Content Include="Tests\Framework\Util\_NoOutput.exe" />
     <Content Include="Tests\Framework\Util\_SimpleInterspersed.exe" />

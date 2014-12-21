@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Text;
 
 namespace Test {
@@ -12,7 +14,9 @@ namespace Test {
 	/// </summary>
 	internal sealed class ProcessSpawnerWithCombinedErrAndOut : IProcessSpawner {
 		private Process m_process = null;
+		private Process m_child = null;
 		private StringBuilder m_combinedOutput = new StringBuilder(2048);
+		private StringBuilder m_outputSinceLastInput = null;
 		private long m_procPeakPagedMemorySize;
 		private long m_procPeakVirtualMemorySize;
 		private long m_procPeakWorkingSet;
@@ -25,6 +29,12 @@ namespace Test {
 		/// Indicates that the process has completed.
 		/// </summary>
 		public bool Exited { get; private set; }
+		/// <summary>
+		/// Is called when the process is asking for input.
+		/// Frequently, this will be called with a buffer of string.Empty, output from the program, or output based on user input.
+		/// All of these states should be accounted for.
+		/// </summary>
+		public event ProcessInputDelegate OnInputRequested;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file.
@@ -100,6 +110,10 @@ namespace Test {
 
 			m_process.OutputDataReceived += (sender, args) => {
 				if (args.Data == null) return;
+				if (m_outputSinceLastInput != null) {
+					if (m_outputSinceLastInput.Length != 0) m_outputSinceLastInput.AppendLine();
+					m_outputSinceLastInput.Append(args.Data);
+				}
 				if (m_combinedOutput.Length != 0) m_combinedOutput.AppendLine();
 				m_combinedOutput.Append(args.Data);
 			};
@@ -133,6 +147,10 @@ namespace Test {
 		private void Start() {
 			if (Exited) throw new InvalidOperationException("Must not execute the process twice");
 			if (Started) throw new InvalidOperationException("Must not execute the process twice");
+			if (OnInputRequested != null) {
+				m_outputSinceLastInput = new StringBuilder(1024);
+			}
+
 			Started = true;
 			m_process.Start();
 			m_process.BeginOutputReadLine();
@@ -144,9 +162,47 @@ namespace Test {
 
 			while (true) {
 				if (!m_process.HasExited) {
-					m_procPeakPagedMemorySize = m_process.PeakPagedMemorySize64;
-					m_procPeakVirtualMemorySize = m_process.PeakVirtualMemorySize64;
-					m_procPeakWorkingSet = m_process.PeakWorkingSet64;
+					try {
+						m_procPeakPagedMemorySize = m_process.PeakPagedMemorySize64;
+						m_procPeakVirtualMemorySize = m_process.PeakVirtualMemorySize64;
+						m_procPeakWorkingSet = m_process.PeakWorkingSet64;
+
+						if (m_child == null) {
+							try {
+								var children = new List<Process>();
+								ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + m_process.Id);
+
+								foreach (ManagementObject mo in mos.Get()) {
+									children.Add(Process.GetProcessById(Convert.ToInt32(mo["ProcessID"])));
+								}
+
+								if (children.Count != 1) {
+									throw new InvalidOperationException("Unexpected number of child processes");
+								}
+
+								m_child = children[0];
+							}
+							catch (ArgumentException) {
+								// Process not running
+								// This is okay because it means there is no input to capture and it was a short program
+							}
+						}
+
+						if (m_child != null && OnInputRequested != null) {
+							foreach (ProcessThread thread in m_child.Threads) {
+								if (thread.ThreadState == ThreadState.Wait && thread.WaitReason == ThreadWaitReason.UserRequest) {
+									ProcessInputHandleResult result = OnInputRequested(m_outputSinceLastInput.ToString(), m_process.StandardInput);
+									if (result == ProcessInputHandleResult.Handled) {
+										m_outputSinceLastInput.Clear();
+									}
+									break;
+								}
+							}
+						}
+
+						m_process.Refresh();
+					}
+					catch (InvalidOperationException) { break; }
 				}
 				else break;
 			}

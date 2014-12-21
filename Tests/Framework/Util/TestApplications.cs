@@ -73,5 +73,40 @@ namespace CsTestConsole {
 	}
 }
 ";
+
+		public const string NakedInput = BinaryDirectory + "_NakedInput.exe";
+		public static readonly FileInfo NakedInputInfo = new FileInfo(NakedInput);
+		public static readonly string NakedInputSource = @"
+using System;
+
+namespace CsTestConsole {
+	class Program {
+		static void Main(string[] args) {
+			Console.WriteLine(Console.ReadLine());
+		}
+	}
+}
+";
+
+		public const string PlusTwoNumber = BinaryDirectory + "_PlusTwoNumber.exe";
+		public static readonly FileInfo PlusTwoNumberInfo = new FileInfo(PlusTwoNumber);
+		public static readonly string PlusTwoNumberSource = @"
+using System;
+
+namespace CsTestConsole {
+	class Program {
+		static void Main(string[] args) {
+			int value;
+			Console.WriteLine(""Please enter a number..."");
+			if (!int.TryParse(Console.ReadLine(), out value)) {
+				Console.Error.WriteLine(""Bad number"");
+			}
+			else {
+				Console.WriteLine(""{0}"", value + 2);
+			}
+		}
+	}
+}
+";
 	}
 }

@@ -13,6 +13,7 @@ namespace Test {
 	internal sealed class ProcessSpawnerWithSplitErrAndOut : IProcessSpawner {
 		private Process m_process = null;
 		private StringBuilder m_output = new StringBuilder(1024);
+		private StringBuilder m_outputSinceLastInput = null;
 		private StringBuilder m_error = new StringBuilder(1024);
 		private long m_procPeakPagedMemorySize;
 		private long m_procPeakVirtualMemorySize;
@@ -26,8 +27,14 @@ namespace Test {
 		/// Indicates that the process has completed.
 		/// </summary>
 		public bool Exited { get; private set; }
-
 		/// <summary>
+		/// Is called when the process is asking for input.
+		/// Frequently, this will be called with a buffer of string.Empty, output from the program, or output based on user input.
+		/// All of these states should be accounted for.
+		/// </summary>
+		public event ProcessInputDelegate OnInputRequested;
+
+		/// <summary>z
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file.
 		/// </summary>
 		/// <param name="pFileName">The name of the file to execute.</param>
@@ -96,6 +103,10 @@ namespace Test {
 
 			m_process.OutputDataReceived += (sender, args) => {
 				if (args.Data == null) return;
+				if (m_outputSinceLastInput != null) {
+					if (m_outputSinceLastInput.Length != 0) m_outputSinceLastInput.AppendLine();
+					m_outputSinceLastInput.Append(args.Data);
+				}
 				if (m_output.Length != 0) m_output.AppendLine();
 				m_output.Append(args.Data);
 			};
@@ -135,6 +146,10 @@ namespace Test {
 		private void Start() {
 			if (Exited) throw new InvalidOperationException("Must not execute the process twice");
 			if (Started) throw new InvalidOperationException("Must not execute the process twice");
+			if (OnInputRequested != null) {
+				m_outputSinceLastInput = new StringBuilder(1024);
+			}
+
 			Started = true;
 			m_process.Start();
 			m_process.BeginOutputReadLine();
@@ -147,9 +162,26 @@ namespace Test {
 
 			while (true) {
 				if (!m_process.HasExited) {
-					m_procPeakPagedMemorySize = m_process.PeakPagedMemorySize64;
-					m_procPeakVirtualMemorySize = m_process.PeakVirtualMemorySize64;
-					m_procPeakWorkingSet = m_process.PeakWorkingSet64;
+					try {
+						m_procPeakPagedMemorySize = m_process.PeakPagedMemorySize64;
+						m_procPeakVirtualMemorySize = m_process.PeakVirtualMemorySize64;
+						m_procPeakWorkingSet = m_process.PeakWorkingSet64;
+
+						if (OnInputRequested != null) {
+							foreach (ProcessThread thread in m_process.Threads) {
+								if (thread.ThreadState == ThreadState.Wait && thread.WaitReason == ThreadWaitReason.UserRequest) {
+									ProcessInputHandleResult result = OnInputRequested(m_outputSinceLastInput.ToString(), m_process.StandardInput);
+									if (result == ProcessInputHandleResult.Handled) {
+										m_outputSinceLastInput.Clear();
+									}
+									break;
+								}
+							}
+						}
+
+						m_process.Refresh();
+					}
+					catch (InvalidOperationException) { break; }
 				}
 				else break;
 			}
