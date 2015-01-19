@@ -170,13 +170,14 @@ namespace Test {
 						if (OnInputRequested != null) {
 							if (m_child == null) {
 								try {
-									using (ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + m_process.Id)) {
-										using (var collection = mos.Get()) {
+									using (var mos = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + m_process.Id)) {
+										using (ManagementObjectCollection collection = mos.Get()) {
 											foreach (ManagementObject mo in collection) {
 												if (m_child != null) {
 													throw new InvalidOperationException("Unexpected number of child processes");
 												}
 												m_child = Process.GetProcessById(Convert.ToInt32(mo["ProcessID"]));
+												mo.Dispose();
 											}
 										}
 									}
