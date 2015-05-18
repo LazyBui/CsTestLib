@@ -15,7 +15,7 @@ namespace Test {
 		/// </summary>
 		/// <param name="pSelector">The selector that determines which property to obtain from an object.</param>
 		public EqualityComparerStateless(Func<TKey, TValue> pSelector) {
-			if (pSelector == null) throw new ArgumentNullException("pSelector");
+			if (pSelector == null) throw new ArgumentNullException(nameof(pSelector));
 			mSelector = pSelector;
 		}
 

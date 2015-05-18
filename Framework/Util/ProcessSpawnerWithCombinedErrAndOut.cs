@@ -74,16 +74,16 @@ namespace Test {
 		public ProcessSpawnerWithCombinedErrAndOut(FileInfo pFile, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) { Initialize(pFile, pEscaper, pArguments); }
 
 		private void Initialize(string pFileName, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) {
-			if (pFileName == null) throw new ArgumentNullException("pFileName");
-			if (pFileName.Length == 0) throw new ArgumentException("String is blank", "pFileName");
+			if (pFileName == null) throw new ArgumentNullException(nameof(pFileName));
+			if (pFileName.Length == 0) throw new ArgumentException("String is blank", nameof(pFileName));
 			Initialize(new FileInfo(pFileName), pEscaper, pArguments);
 		}
 
 		private void Initialize(FileInfo pFile, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) {
-			if (pFile == null) throw new ArgumentNullException("pFile");
+			if (pFile == null) throw new ArgumentNullException(nameof(pFile));
 			if (!pFile.Exists) throw new FileNotFoundException("File not found", pFile.FullName);
 			if (pArguments != null && pArguments.Any()) {
-				if (pEscaper == null) throw new ArgumentNullException("pEscaper");
+				if (pEscaper == null) throw new ArgumentNullException(nameof(pEscaper));
 			}
 
 			var startInfo = new ProcessStartInfo() {

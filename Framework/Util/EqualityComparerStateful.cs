@@ -17,7 +17,7 @@ namespace Test {
 		/// <param name="pComparer">The comparer that determines whether two objects are equal.</param>
 		/// <param name="pHasher">The hash function for a particular object.</param>
 		public EqualityComparerStateful(Func<TValue, TValue, bool> pComparer, Func<TValue, int> pHasher = null) {
-			if (pComparer == null) throw new ArgumentNullException("pComparer");
+			if (pComparer == null) throw new ArgumentNullException(nameof(pComparer));
 			if (pHasher == null) pHasher = v => 0;
 
 			mComparer = pComparer;

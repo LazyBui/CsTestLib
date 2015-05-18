@@ -22,7 +22,7 @@ namespace Test {
 		/// Asserts that a condition is true.
 		/// </summary>
 		public static void True(Func<bool> pCondition, AssertionException pException = null) {
-			if (pCondition == null) throw new ArgumentNullException("pCondition");
+			if (pCondition == null) throw new ArgumentNullException(nameof(pCondition));
 			if (!pCondition()) throw pException ?? new AssertionException("Condition was false");
 		}
 
@@ -37,7 +37,7 @@ namespace Test {
 		/// Asserts that a condition is false.
 		/// </summary>
 		public static void False(Func<bool> pCondition, AssertionException pException = null) {
-			if (pCondition == null) throw new ArgumentNullException("pCondition");
+			if (pCondition == null) throw new ArgumentNullException(nameof(pCondition));
 			if (pCondition()) throw pException ?? new AssertionException("Condition was true");
 		}
 
@@ -45,7 +45,7 @@ namespace Test {
 		/// Asserts that a specific exception or a more derived type is thrown by the action.
 		/// </summary>
 		public static void Throws<TException>(Action pAction, AssertionException pException = null) where TException : Exception {
-			if (pAction == null) throw new ArgumentNullException("pAction");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
 			Throws(typeof(TException), pAction, pException: pException);
 		}
 
@@ -53,9 +53,9 @@ namespace Test {
 		/// Asserts that a specific exception or a more derived type is thrown by the action.
 		/// </summary>
 		public static void Throws(Type pType, Action pAction, AssertionException pException = null) {
-			if (pAction == null) throw new ArgumentNullException("pAction");
-			if (pType == null) throw new ArgumentNullException("pType");
-			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("pType must derive from Exception", "pType");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
+			if (pType == null) throw new ArgumentNullException(nameof(pType));
+			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(pType));
 
 			bool thrown = false;
 			try {
@@ -76,7 +76,7 @@ namespace Test {
 		/// Asserts that a specific exception is thrown by the action.
 		/// </summary>
 		public static void ThrowsExact<TException>(Action pAction, AssertionException pException = null) where TException : Exception {
-			if (pAction == null) throw new ArgumentNullException("pAction");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
 			ThrowsExact(typeof(TException), pAction, pException: pException);
 		}
 
@@ -84,9 +84,9 @@ namespace Test {
 		/// Asserts that a specific exception is thrown by the action.
 		/// </summary>
 		public static void ThrowsExact(Type pType, Action pAction, AssertionException pException = null) {
-			if (pAction == null) throw new ArgumentNullException("pAction");
-			if (pType == null) throw new ArgumentNullException("pType");
-			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("pType must derive from Exception", "pType");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
+			if (pType == null) throw new ArgumentNullException(nameof(pType));
+			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(pType));
 
 			bool thrown = false;
 			try {
@@ -106,7 +106,7 @@ namespace Test {
 		/// Asserts that an exception thrown by the action will have a specific InnerException or a more derived type.
 		/// </summary>
 		public static void ThrowsInnerException<TException>(Action pAction, AssertionException pException = null) where TException : Exception {
-			if (pAction == null) throw new ArgumentNullException("pAction");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
 			ThrowsInnerException(typeof(TException), pAction, pException: pException);
 		}
 
@@ -114,9 +114,9 @@ namespace Test {
 		/// Asserts that an exception thrown by the action will have a specific InnerException or a more derived type.
 		/// </summary>
 		public static void ThrowsInnerException(Type pType, Action pAction, AssertionException pException = null) {
-			if (pAction == null) throw new ArgumentNullException("pAction");
-			if (pType == null) throw new ArgumentNullException("pType");
-			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("pType must derive from Exception", "pType");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
+			if (pType == null) throw new ArgumentNullException(nameof(pType));
+			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(pType));
 
 			bool thrown = false;
 			try {
@@ -141,7 +141,7 @@ namespace Test {
 		/// Asserts that an exception thrown by the action will have a specific InnerException.
 		/// </summary>
 		public static void ThrowsInnerExceptionExact<TException>(Action pAction, AssertionException pException = null) where TException : Exception {
-			if (pAction == null) throw new ArgumentNullException("pAction");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
 			ThrowsInnerExceptionExact(typeof(TException), pAction, pException: pException);
 		}
 
@@ -149,9 +149,9 @@ namespace Test {
 		/// Asserts that an exception thrown by the action will have a specific InnerException.
 		/// </summary>
 		public static void ThrowsInnerExceptionExact(Type pType, Action pAction, AssertionException pException = null) {
-			if (pAction == null) throw new ArgumentNullException("pAction");
-			if (pType == null) throw new ArgumentNullException("pType");
-			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("pType must derive from Exception", "pType");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
+			if (pType == null) throw new ArgumentNullException(nameof(pType));
+			if (pType != typeof(Exception) && !pType.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(pType));
 
 			bool thrown = false;
 			try {
@@ -175,7 +175,7 @@ namespace Test {
 		/// Asserts that an action does not throw at all.
 		/// </summary>
 		public static void DoesNotThrow(Action pAction, AssertionException pException = null) {
-			if (pAction == null) throw new ArgumentNullException("pAction");
+			if (pAction == null) throw new ArgumentNullException(nameof(pAction));
 
 			try {
 				pAction();
