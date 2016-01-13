@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Represents a request from a process for input.
 	/// </summary>

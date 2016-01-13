@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using Test.Framework.Util;
 
-namespace Test {
+namespace Test.Framework {
 	internal partial class Assert {
 		/// <summary>
 		/// Asserts that the type of a specified object matches the specified type.

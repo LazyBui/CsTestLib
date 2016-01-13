@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Test {
+namespace Test.Framework {
 	/// <summary>
 	/// A collection of functions that establish fundamental properties about code.
 	/// </summary>

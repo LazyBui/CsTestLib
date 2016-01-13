@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Allows equality comparison based on an arbitrary property of class.
 	/// </summary>
@@ -11,7 +11,7 @@ namespace Test {
 		private Func<TKey, TValue> mSelector = null;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.EqualityComparerStateless&lt;TKey, TValue&gt;" /> class with a specified selector delegate.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.EqualityComparerStateless&lt;TKey, TValue&gt;" /> class with a specified selector delegate.
 		/// </summary>
 		/// <param name="selector">The selector that determines which property to obtain from an object.</param>
 		public EqualityComparerStateless(Func<TKey, TValue> selector) {

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Test.Framework.Util;
 
-namespace Test {
+namespace Test.Framework {
 	internal partial class Assert {
 		/// <summary>
 		/// Asserts that the specified value compares either greater or equal to a specified lower bound.

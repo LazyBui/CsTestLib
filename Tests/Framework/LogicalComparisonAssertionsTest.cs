@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Test.Framework;
+using Test.Framework.Util;
+using TestCategoryAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute;
+using TestClassAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using TestMethodAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 
-namespace Test {
+namespace Test.Tests.Framework {
 	public partial class AssertTest {
 		private class EnumerableImpl : IEnumerable<int>, IEnumerable {
 			private List<int> mValues = null;

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Executes 2 <see cref="System.Diagnostics.Process" /> objects in order to get sequentially consistent output (as you would see in a regular console execution) and distinct output for assertion purposes. 
 	/// <see cref="System.Diagnostics.Process" /> has a limitation where these two things cannot be obtained at the same time and it may be a limitation of Windows itself.
 	/// The fact that it executes 2 processes means that it is slower than the alternatives.
-	/// If you do not need both outputs, it is recommended to use <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> or <see cref="Test.ProcessSpawnerWithSplitErrAndOut" />.
+	/// If you do not need both outputs, it is recommended to use <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> or <see cref="Test.Framework.Util.ProcessSpawnerWithSplitErrAndOut" />.
 	/// </summary>
 	internal sealed class ProcessSpawnerWithCombinedAndSplitErrAndOut : IProcessSpawner {
 		private ProcessSpawnerWithSplitErrAndOut m_split = null;
@@ -28,7 +28,7 @@ namespace Test {
 		public event ProcessInputDelegate OnInputRequested;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file.
 		/// </summary>
 		/// <param name="file">The name of the file to execute.</param>
 		public ProcessSpawnerWithCombinedAndSplitErrAndOut(string file) {
@@ -37,7 +37,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file and command line arguments.
 		/// </summary>
 		/// <param name="file">The name of the file to execute.</param>
 		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
@@ -47,7 +47,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
 		/// </summary>
 		/// <param name="file">The name of the file to execute.</param>
 		/// <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
@@ -58,7 +58,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file.
 		/// </summary>
 		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
 		public ProcessSpawnerWithCombinedAndSplitErrAndOut(FileInfo file) {
@@ -67,7 +67,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file and command line arguments.
 		/// </summary>
 		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
 		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
@@ -77,7 +77,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
 		/// </summary>
 		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
 		/// <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
@@ -138,7 +138,7 @@ namespace Test {
 		/// <summary>
 		/// Executes the specified process.
 		/// </summary>
-		/// <returns>A <see cref="Test.ProcessResult" /> object representing the execution.</returns>
+		/// <returns>A <see cref="Test.Framework.Util.ProcessResult" /> object representing the execution.</returns>
 		public ProcessResult Run() {
 			if (Exited) throw new InvalidOperationException("Must not execute the process twice");
 			if (Started) throw new InvalidOperationException("Must not execute the process twice");
@@ -153,7 +153,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Releases all resources used by the current instance of the <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class.
+		/// Releases all resources used by the current instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class.
 		/// </summary>
 		public void Dispose() {
 			Dispose(true);

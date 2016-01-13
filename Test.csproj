@@ -81,6 +81,7 @@
     <Compile Include="Tests\Framework\ReflectionAssertions.cs" />
     <Compile Include="Tests\Framework\ObjectAssertionsTest.cs" />
     <Compile Include="Tests\Framework\LogicalComparisonAssertionsTest.cs" />
+    <Compile Include="Tests\Framework\Util\ProcessSpawnerTest.cs" />
     <Compile Include="Tests\Framework\Util\ProcessSpawnerWithCombinedAndSplitErrAndOutTest.cs" />
     <Compile Include="Tests\Framework\Util\ProcessSpawnerWithCombinedErrAndOutTest.cs" />
     <Compile Include="Tests\Framework\Util\TestApplications.cs" />

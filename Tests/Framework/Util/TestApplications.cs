@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Test {
+namespace Test.Tests.Framework.Util {
 	internal static class TestApplications {
 		private const string BinaryDirectory = "../../Tests/Framework/Util/";
 		public const string InvalidBinary = "WillNeverExist.exe";

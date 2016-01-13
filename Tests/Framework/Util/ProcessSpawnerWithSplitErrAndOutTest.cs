@@ -1,13 +1,16 @@
 ﻿using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Test.Framework;
+using Test.Framework.Util;
+using TestCategoryAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute;
+using TestClassAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using TestMethodAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 
-namespace Test {
-	[TestClass]
-	public class ProcessSpawnerWithSplitErrAndOutTest {
+namespace Test.Tests.Framework.Util {
+	public partial class ProcessSpawnerTest {
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void Constructor() {
+		public void SplitErrAndOutConstructor() {
 			// File only
 			Assert.ThrowsExact<ArgumentNullException>(() => { using (new ProcessSpawnerWithSplitErrAndOut(null as string)) { } });
 			Assert.ThrowsExact<ArgumentNullException>(() => { using (new ProcessSpawnerWithSplitErrAndOut(null as FileInfo)) { } });
@@ -66,7 +69,7 @@ namespace Test {
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void SimpleInterspersed() {
+		public void SplitErrAndOutSimpleInterspersed() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithSplitErrAndOut(TestApplications.SimpleInterspersedInfo)) {
@@ -98,7 +101,7 @@ abcdef");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void BlankLinesInterspersed() {
+		public void SplitErrAndOutBlankLinesInterspersed() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithSplitErrAndOut(TestApplications.BlankLinesInterspersedInfo)) {
@@ -132,7 +135,7 @@ abc");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void NoOutput() {
+		public void SplitErrAndOutNoOutput() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithSplitErrAndOut(TestApplications.NoOutputInfo)) {
@@ -156,7 +159,7 @@ abc");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void NakedInput() {
+		public void SplitErrAndOutNakedInput() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithSplitErrAndOut(TestApplications.NakedInputInfo)) {
@@ -180,7 +183,7 @@ abc");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void PlusTwoNumber() {
+		public void SplitErrAndOutPlusTwoNumber() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithSplitErrAndOut(TestApplications.PlusTwoNumberInfo)) {

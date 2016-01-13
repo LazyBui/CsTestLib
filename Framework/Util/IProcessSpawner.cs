@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Represents an execution of a <see cref="System.Diagnostics.Process" /> object and obtains meaningful information from it to allow assertions on execution properties.
 	/// </summary>
@@ -23,7 +23,7 @@ namespace Test {
 		/// <summary>
 		/// Executes the specified process.
 		/// </summary>
-		/// <returns>A <see cref="Test.ProcessResult" /> object representing the execution.</returns>
+		/// <returns>A <see cref="Test.Framework.Util.ProcessResult" /> object representing the execution.</returns>
 		ProcessResult Run();
 	}
 }

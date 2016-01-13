@@ -1,6 +1,7 @@
 ﻿using System;
+using Test.Framework.Util;
 
-namespace Test {
+namespace Test.Framework {
 	internal partial class Assert {
 		/// <summary>
 		/// Asserts that a floating-point value is the Not a Number value.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Represents a conversion from a collection of objects to a Windows command line argument string.
 	/// </summary>

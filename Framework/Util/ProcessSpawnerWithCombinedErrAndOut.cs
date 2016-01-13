@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
 using System.Text;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Executes an <see cref="System.Diagnostics.Process" /> object in order to get sequentially consistent output for assertion purposes. 
 	/// <see cref="System.Diagnostics.Process" /> has a limitation where sequentially consistent output (as you would see in a regular console execution) and distinct output cannot be obtained at the same time and it may be a limitation of Windows itself.
-	/// If both outputs are required, please use <see cref="Test.ProcessSpawnerWithCombinedAndSplitErrAndOut" />.
+	/// If both outputs are required, please use <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" />.
 	/// </summary>
 	internal sealed class ProcessSpawnerWithCombinedErrAndOut : IProcessSpawner {
 		private Process m_process = null;
@@ -37,36 +36,36 @@ namespace Test {
 		public event ProcessInputDelegate OnInputRequested;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file.
 		/// </summary>
 		/// <param name="file">The name of the file to execute.</param>
 		public ProcessSpawnerWithCombinedErrAndOut(string file) { Initialize(file, null, null); }
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file and command line arguments.
 		/// </summary>
 		/// <param name="file">The name of the file to execute.</param>
 		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
 		public ProcessSpawnerWithCombinedErrAndOut(string file, params object[] args) { Initialize(file, new WindowsCommandLineArgumentEscaper(), args); }
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
 		/// </summary>
 		/// <param name="file">The name of the file to execute.</param>
 		/// <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
 		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
 		public ProcessSpawnerWithCombinedErrAndOut(string file, ICommandLineArgumentEscaper escaper, params object[] args) { Initialize(file, escaper, args); }
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file.
 		/// </summary>
 		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
 		public ProcessSpawnerWithCombinedErrAndOut(FileInfo file) { Initialize(file, null, null); }
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file and command line arguments.
 		/// </summary>
 		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
 		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
 		public ProcessSpawnerWithCombinedErrAndOut(FileInfo file, params object[] args) { Initialize(file, new WindowsCommandLineArgumentEscaper(), args); }
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
 		/// </summary>
 		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
 		/// <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
@@ -140,7 +139,7 @@ namespace Test {
 		/// <summary>
 		/// Executes the specified process.
 		/// </summary>
-		/// <returns>A <see cref="Test.ProcessResult" /> object representing the execution.</returns>
+		/// <returns>A <see cref="Test.Framework.Util.ProcessResult" /> object representing the execution.</returns>
 		public ProcessResult Run() {
 			return WaitForExit();
 		}
@@ -217,7 +216,7 @@ namespace Test {
 		}
 
 		/// <summary>
-		/// Releases all resources used by the current instance of the Test.ProcessSpawnerWithCombinedErrAndOut class.
+		/// Releases all resources used by the current instance of the <see cref="Test.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class.
 		/// </summary>
 		public void Dispose() {
 			Dispose(true);

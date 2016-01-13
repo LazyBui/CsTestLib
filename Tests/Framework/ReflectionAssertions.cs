@@ -1,8 +1,11 @@
 ﻿using System;
-using System.Text.RegularExpressions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Test.Framework;
+using Test.Framework.Util;
+using TestCategoryAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute;
+using TestClassAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using TestMethodAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 
-namespace Test {
+namespace Test.Tests.Framework {
 	public partial class AssertTest {
 		[TestMethod]
 		[TestCategory("Framework")]

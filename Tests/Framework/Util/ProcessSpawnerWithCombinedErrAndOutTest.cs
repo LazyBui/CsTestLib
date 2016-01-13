@@ -1,13 +1,16 @@
 ﻿using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Test.Framework;
+using Test.Framework.Util;
+using TestCategoryAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute;
+using TestClassAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using TestMethodAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 
-namespace Test {
-	[TestClass]
-	public class ProcessSpawnerWithCombinedErrAndOutTest {
+namespace Test.Tests.Framework.Util {
+	public partial class ProcessSpawnerTest {
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void Constructor() {
+		public void CombinedErrAndOutConstructor() {
 			// File only
 			Assert.ThrowsExact<ArgumentNullException>(() => { using (new ProcessSpawnerWithCombinedErrAndOut(null as string)) { } });
 			Assert.ThrowsExact<ArgumentNullException>(() => { using (new ProcessSpawnerWithCombinedErrAndOut(null as FileInfo)) { } });
@@ -66,7 +69,7 @@ namespace Test {
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void SimpleInterspersed() {
+		public void CombinedErrAndOutSimpleInterspersed() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.SimpleInterspersedInfo)) {
@@ -97,7 +100,7 @@ aabbccddeeff");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void BlankLinesInterspersed() {
+		public void CombinedErrAndOutBlankLinesInterspersed() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.BlankLinesInterspersedInfo)) {
@@ -131,7 +134,7 @@ abc");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void NoOutput() {
+		public void CombinedErrAndOutNoOutput() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.NoOutputInfo)) {
@@ -154,7 +157,7 @@ abc");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void NakedInput() {
+		public void CombinedErrAndOutNakedInput() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.NakedInput)) {
@@ -178,7 +181,7 @@ abc");
 
 		[TestMethod]
 		[TestCategory("Framework.Util")]
-		public void PlusTwoNumber() {
+		public void CombinedErrAndOutPlusTwoNumber() {
 			ProcessResult result = null;
 			Assert.DoesNotThrow(() => {
 				using (var process = new ProcessSpawnerWithCombinedErrAndOut(TestApplications.PlusTwoNumberInfo)) {

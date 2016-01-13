@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// The result of a <see cref="System.Diagnostics.Process" /> execution.
 	/// </summary>
@@ -57,7 +55,7 @@ namespace Test {
 		public long PeakWorkingSet { get; private set; }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.ProcessResult" /> class with the specified information.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.ProcessResult" /> class with the specified information.
 		/// </summary>
 		/// <param name="stdOutput">The full stdout stream.</param>
 		/// <param name="errorOutput">The full stderr stream.</param>

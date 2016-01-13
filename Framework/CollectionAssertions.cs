@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Test.Framework.Util;
 
-namespace Test {
+namespace Test.Framework {
 	internal partial class Assert {
 		/// <summary>
 		/// Asserts that sequence has no elements.

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Represents whether input was handled.
 	/// </summary>

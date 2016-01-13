@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Represents a conversion from a collection of objects to a fully-fledged command line argument string.
 	/// </summary>

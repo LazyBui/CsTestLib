@@ -1,6 +1,7 @@
 ﻿using System;
+using Test.Framework.Util;
 
-namespace Test {
+namespace Test.Framework {
 	internal partial class Assert {
 		public static readonly Action Failure = () => Fail(null);
 

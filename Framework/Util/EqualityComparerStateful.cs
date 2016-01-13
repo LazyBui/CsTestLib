@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Test {
+namespace Test.Framework.Util {
 	/// <summary>
 	/// Allows arbitrary equality comparison between two instances of the same class.
 	/// </summary>
@@ -11,7 +11,7 @@ namespace Test {
 		private Func<TValue, int> mHasher = null;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Test.EqualityComparerStateful&lt;TValue&gt;" /> class with a specified comparer delegate and optional hasher delegate.
+		/// Initializes a new instance of the <see cref="Test.Framework.Util.EqualityComparerStateful&lt;TValue&gt;" /> class with a specified comparer delegate and optional hasher delegate.
 		/// If the hasher is not specified, the hash of all objects is assumed to be 0.
 		/// </summary>
 		/// <param name="comparer">The comparer that determines whether two objects are equal.</param>
