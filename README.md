@@ -1,18 +1,26 @@
 CsTestProj
 ==========
 
-A vanilla C# test suite project that includes an Assert class that provides assertions very similar to popular testing frameworks. The reason why this may be necessary is that the Express editions of Visual Studio do not allow for extensions. Most unit testing frameworks work on a plugin/extension basis. This project has no such requirement and can be used with Express.
+A vanilla C# test suite project that includes an `Assert` class that provides assertions very similar to popular testing frameworks. The reason why this may be necessary is that the Express editions of Visual Studio do not allow for extensions. Most unit testing frameworks work on a plugin/extension basis. This project has no such requirement and can be used with Express.
 
-Usage
+Usage as Project
 ==========
 
-It's pretty much what you'd expect for a project.
+1. Drop `TestLib` folder into solution folder.
+2. Add the `TestLib` project through Visual Studio.
+3. Optionally: Add `TestLib.Tests` project through Visual Studio. This is a self-test of the assertion framework and can be used as a template.
+4. Create new project from the test C# template or copy/paste `TestLib.Tests` project and modify appropriately.
+5. Optionally: Add `[assembly: InternalsVisibleTo("TestLib.Tests")]` (replacing project name as appropriate) to `AssemblyInfo.cs` in your project(s).
+6. Start creating tests by affixing the vanilla .NET testing attributes of `TestClass` and `TestMethod`.
 
-1. Drop CsTestProj folder into solution folder (I would just prefer to call it "Test" though).
-2. Add existing project through Visual Studio.
-3. Add project reference(s) to your code project(s) in the Test project.
-4. Optionally: Add `[assembly: InternalsVisibleTo("Test")]` to AssemblyInfo.cs in your project(s).
-5. Start creating tests by affixing the vanilla .NET testing attributes of TestClass and TestMethod. Included is a self-test of the assertion framework that can be used as a model.
+Usage as Binary
+==========
+
+1. Open `Test.sln`.
+2. Switch build to `Release` and compile the `TestLib` project.
+3. Optionally: Run the self-test of the assertion framework.
+4. Place binary in your solution somewhere and reference from your test project(s).
+5. Start creating tests by affixing the vanilla .NET testing attributes of `TestClass` and `TestMethod`.
 
 Known Issues
 ==========
