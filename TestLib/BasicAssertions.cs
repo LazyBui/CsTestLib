@@ -22,9 +22,25 @@ namespace TestLib.Framework {
 		/// <summary>
 		/// Asserts that a condition is true.
 		/// </summary>
+		public static void True(bool? condition, AssertionException exception = null) {
+			if (condition == null || !condition.Value) throw exception ?? new AssertionException("Condition was null or false");
+		}
+
+		/// <summary>
+		/// Asserts that a condition is true.
+		/// </summary>
 		public static void True(Func<bool> condition, AssertionException exception = null) {
 			if (condition == null) throw new ArgumentNullException(nameof(condition));
 			if (!condition()) throw exception ?? new AssertionException("Condition was false");
+		}
+
+		/// <summary>
+		/// Asserts that a condition is true.
+		/// </summary>
+		public static void True(Func<bool?> condition, AssertionException exception = null) {
+			if (condition == null) throw new ArgumentNullException(nameof(condition));
+			bool? result = condition();
+			if (result == null || !result.Value) throw exception ?? new AssertionException("Condition was null or false");
 		}
 
 		/// <summary>
@@ -37,9 +53,25 @@ namespace TestLib.Framework {
 		/// <summary>
 		/// Asserts that a condition is false.
 		/// </summary>
+		public static void False(bool? condition, AssertionException exception = null) {
+			if (condition == null || condition.Value) throw exception ?? new AssertionException("Condition was null or true");
+		}
+
+		/// <summary>
+		/// Asserts that a condition is false.
+		/// </summary>
 		public static void False(Func<bool> condition, AssertionException exception = null) {
 			if (condition == null) throw new ArgumentNullException(nameof(condition));
 			if (condition()) throw exception ?? new AssertionException("Condition was true");
+		}
+
+		/// <summary>
+		/// Asserts that a condition is false.
+		/// </summary>
+		public static void False(Func<bool?> condition, AssertionException exception = null) {
+			if (condition == null) throw new ArgumentNullException(nameof(condition));
+			bool? result = condition();
+			if (result == null || result.Value) throw exception ?? new AssertionException("Condition was null or true");
 		}
 
 		/// <summary>

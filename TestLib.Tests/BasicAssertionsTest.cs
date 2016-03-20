@@ -24,21 +24,25 @@ namespace TestLib.Tests {
 		[TestMethod]
 		[TestCategory("TestLib")]
 		public void True() {
+			Assert.Throws<ArgumentNullException>(() => Assert.True(null as Func<bool>));
 			Assert.DoesNotThrow(() => Assert.True(true));
-			Assert.ThrowsExact<AssertionException>(() => Assert.True(false));
-			Assert.Throws<ArgumentNullException>(() => Assert.True(null));
 			Assert.DoesNotThrow(() => Assert.True(() => true));
+			Assert.ThrowsExact<AssertionException>(() => Assert.True(false));
+			Assert.ThrowsExact<AssertionException>(() => Assert.True(null as bool?));
 			Assert.ThrowsExact<AssertionException>(() => Assert.True(() => false));
+			Assert.ThrowsExact<AssertionException>(() => Assert.True(() => null as bool?));
 		}
 
 		[TestMethod]
 		[TestCategory("TestLib")]
 		public void False() {
+			Assert.Throws<ArgumentNullException>(() => Assert.False(null as Func<bool>));
 			Assert.DoesNotThrow(() => Assert.False(false));
-			Assert.ThrowsExact<AssertionException>(() => Assert.False(true));
-			Assert.Throws<ArgumentNullException>(() => Assert.False(null));
 			Assert.DoesNotThrow(() => Assert.False(() => false));
+			Assert.ThrowsExact<AssertionException>(() => Assert.False(true));
+			Assert.ThrowsExact<AssertionException>(() => Assert.False(null as bool?));
 			Assert.ThrowsExact<AssertionException>(() => Assert.False(() => true));
+			Assert.ThrowsExact<AssertionException>(() => Assert.False(() => null as bool?));
 		}
 
 		[TestMethod]
