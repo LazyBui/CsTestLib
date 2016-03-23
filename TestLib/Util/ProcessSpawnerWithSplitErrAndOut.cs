@@ -173,7 +173,7 @@ namespace TestLib.Framework.Util {
 								if (thread.ThreadState == ThreadState.Wait && thread.WaitReason == ThreadWaitReason.UserRequest) {
 									ProcessInputHandleResult result = OnInputRequested(m_outputSinceLastInput.ToString(), m_process.StandardInput);
 									if (result == ProcessInputHandleResult.Handled) {
-										m_outputSinceLastInput.Clear();
+										m_outputSinceLastInput.Remove(0, m_outputSinceLastInput.Length);
 									}
 									break;
 								}

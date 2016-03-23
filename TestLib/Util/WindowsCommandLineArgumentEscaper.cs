@@ -17,7 +17,7 @@ namespace TestLib.Framework.Util {
 		/// <returns>A usable Windows command line argument string.</returns>
 		public string Escape(IEnumerable<object> rawArguments) {
 			return string.Join(" ",
-				rawArguments.Select(a => EscapeArgument(a.ToString())));
+				rawArguments.Select(a => EscapeArgument(a.ToString())).ToArray());
 		}
 
 		private string EscapeArgument(string rawArgument) {
