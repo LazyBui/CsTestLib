@@ -8,15 +8,19 @@ namespace TestLib.Tests {
 		[TestMethod]
 		[TestCategory("TestLib")]
 		public void Null() {
-			Assert.DoesNotThrow(() => Assert.Null(null));
+			Assert.DoesNotThrow(() => Assert.Null(null as string));
+			Assert.DoesNotThrow(() => Assert.Null(null as int?));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Null(new object()));
+			Assert.ThrowsExact<AssertionException>(() => Assert.Null((1 as int?)));
 		}
 
 		[TestMethod]
 		[TestCategory("TestLib")]
 		public void NotNull() {
 			Assert.DoesNotThrow(() => Assert.NotNull(new object()));
-			Assert.ThrowsExact<AssertionException>(() => Assert.NotNull(null));
+			Assert.DoesNotThrow(() => Assert.NotNull((1 as int?)));
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotNull(null as string));
+			Assert.ThrowsExact<AssertionException>(() => Assert.NotNull(null as int?));
 		}
 
 		[TestMethod]

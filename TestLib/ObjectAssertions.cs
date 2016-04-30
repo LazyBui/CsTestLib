@@ -1,20 +1,33 @@
 ﻿using System;
-using TestLib.Framework.Util;
 
 namespace TestLib.Framework {
 	public partial class Assert {
 		/// <summary>
 		/// Asserts that an object is null.
 		/// </summary>
-		public static void Null(object value, AssertionException exception = null) {
-			if (value != null) throw exception ?? new AssertionException("Object was not null");
+		public static void Null<TValue>(TValue value, AssertionException exception = null) where TValue : class {
+			if (!object.ReferenceEquals(value, null)) throw exception ?? new AssertionException("Object was not null");
+		}
+
+		/// <summary>
+		/// Asserts that an object is null.
+		/// </summary>
+		public static void Null<TValue>(TValue? value, AssertionException exception = null) where TValue : struct {
+			if (value.HasValue) throw exception ?? new AssertionException("Object was not null");
 		}
 
 		/// <summary>
 		/// Asserts that an object is not null.
 		/// </summary>
-		public static void NotNull(object value, AssertionException exception = null) {
-			if (value == null) throw exception ?? new AssertionException("Object was null");
+		public static void NotNull<TValue>(TValue value, AssertionException exception = null) where TValue : class {
+			if (object.ReferenceEquals(value, null)) throw exception ?? new AssertionException("Object was null");
+		}
+
+		/// <summary>
+		/// Asserts that an object is not null.
+		/// </summary>
+		public static void NotNull<TValue>(TValue? value, AssertionException exception = null) where TValue : struct {
+			if (!value.HasValue) throw exception ?? new AssertionException("Object was null");
 		}
 
 		/// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using TestLib.Framework.Util;
 
 namespace TestLib.Framework {
 	public partial class Assert {

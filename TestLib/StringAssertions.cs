@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using TestLib.Framework.Util;
 
 namespace TestLib.Framework {
 	public partial class Assert {
