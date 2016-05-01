@@ -97,7 +97,7 @@ namespace TestLib.Framework {
 				thrown = true;
 				Type thrownType = e.GetType();
 				if (thrownType != type && !thrownType.IsSubclassOf(type)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, "Exception type was unexpected");
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name} or a subclass");
 				}
 			}
 
@@ -127,7 +127,7 @@ namespace TestLib.Framework {
 			catch (Exception e) {
 				thrown = true;
 				if (e.GetType() != type) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, "Exception type was unexpected");
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name}");
 				}
 			}
 
@@ -162,7 +162,7 @@ namespace TestLib.Framework {
 
 				Type thrownType = e.InnerException.GetType();
 				if (thrownType != type && !thrownType.IsSubclassOf(type)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, "InnerException type was unexpected");
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"InnerException type was unexpected, expected {type.Name} or a subclass");
 				}
 			}
 
@@ -196,7 +196,7 @@ namespace TestLib.Framework {
 				}
 
 				if (e.InnerException.GetType() != type) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, "InnerException type was unexpected");
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"InnerException type was unexpected, expected {type.Name}");
 				}
 			}
 
