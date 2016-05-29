@@ -85,11 +85,16 @@ namespace TestLib.Framework {
 
 					var leftIter = leftCollection.GetEnumerator();
 					var rightIter = rightCollection.GetEnumerator();
-					while (leftIter.MoveNext() && rightIter.MoveNext()) {
+					do {
+						bool hasLeft = leftIter.MoveNext();
+						bool hasRight = rightIter.MoveNext();
+						if (hasLeft != hasRight) return false;
+						if (!hasLeft) break;
+
 						if (!IsEqual(leftIter.Current, rightIter.Current)) {
 							return false;
 						}
-					}
+					} while (true);
 				}
 				else {
 					throw new NotImplementedException();

@@ -154,6 +154,7 @@ namespace TestLib.Tests {
 			Assert.ThrowsExact<AssertionException>(() => Assert.Equal(null as string, "hello"));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Equal(null as string, 0));
 
+			Assert.ThrowsExact<AssertionException>(() => Assert.Equal("000", "0000"));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Equal(new[] { 1, 2 }, new[] { 1, 2, 3 }));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Equal(new[] { 1, 2, 4 }, new[] { 1, 2, 3 }));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Equal(new[] { 1, 2 }, null));
