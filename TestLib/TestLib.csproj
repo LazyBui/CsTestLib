@@ -69,6 +69,7 @@
     <Compile Include="ReflectionAssertions.cs" />
     <Compile Include="StringAssertions.cs" />
     <Compile Include="AssertionException.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Util\EqualityComparerStateful.cs" />
     <Compile Include="Util\EqualityComparerStateless.cs" />
     <Compile Include="Util\ICommandLineArgumentEscaper.cs" />

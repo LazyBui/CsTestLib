@@ -5,7 +5,7 @@ using System.Linq;
 namespace TestLib.Framework {
 	public partial class Assert {
 		/// <summary>
-		/// Asserts that a file exists.
+		/// Asserts that <paramref name="file" /> exists.
 		/// </summary>
 		public static void FileExists(string file, AssertionException exception = null) {
 			if (file == null) throw new ArgumentNullException(nameof(file));
@@ -13,7 +13,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a file exists.
+		/// Asserts that <paramref name="file" /> exists.
 		/// </summary>
 		public static void FileExists(FileInfo file, AssertionException exception = null) {
 			if (file == null) throw new ArgumentNullException(nameof(file));
@@ -21,7 +21,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a file does not exist.
+		/// Asserts that <paramref name="file" /> does not exist.
 		/// </summary>
 		public static void FileNotExists(string file, AssertionException exception = null) {
 			if (file == null) throw new ArgumentNullException(nameof(file));
@@ -29,7 +29,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a file does not exist.
+		/// Asserts that <paramref name="file" /> does not exist.
 		/// </summary>
 		public static void FileNotExists(FileInfo file, AssertionException exception = null) {
 			if (file == null) throw new ArgumentNullException(nameof(file));
@@ -217,7 +217,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a directory exists.
+		/// Asserts that <paramref name="dir" /> exists.
 		/// </summary>
 		public static void DirectoryExists(string dir, AssertionException exception = null) {
 			if (dir == null) throw new ArgumentNullException(nameof(dir));
@@ -225,7 +225,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a directory exists.
+		/// Asserts that <paramref name="dir" /> exists.
 		/// </summary>
 		public static void DirectoryExists(DirectoryInfo dir, AssertionException exception = null) {
 			if (dir == null) throw new ArgumentNullException(nameof(dir));
@@ -233,7 +233,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a directory does not exist.
+		/// Asserts that <paramref name="dir" /> does not exist.
 		/// </summary>
 		public static void DirectoryNotExists(string dir, AssertionException exception = null) {
 			if (dir == null) throw new ArgumentNullException(nameof(dir));
@@ -241,7 +241,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a directory does not exist.
+		/// Asserts that <paramref name="dir" /> does not exist.
 		/// </summary>
 		public static void DirectoryNotExists(DirectoryInfo dir, AssertionException exception = null) {
 			if (dir == null) throw new ArgumentNullException(nameof(dir));

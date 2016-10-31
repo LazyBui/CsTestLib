@@ -74,20 +74,46 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a specific exception or a more derived type is thrown by the action.
+		/// Asserts that a specific exception or a more derived type is thrown by <paramref name="action" />.
 		/// </summary>
 		public static void Throws<TException>(Action action, AssertionException exception = null) where TException : Exception {
 			if (action == null) throw new ArgumentNullException(nameof(action));
 			Throws(typeof(TException), action, exception: exception);
 		}
+		
+		/// <summary>
+		/// Asserts that a specific exception or a more derived type is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+		/// </summary>
+		public static void Throws<TException>(Action action, Func<TException, bool> isValidException, AssertionException exception = null) where TException : Exception {
+			if (action == null) throw new ArgumentNullException(nameof(action));
+			if (isValidException == null) throw new ArgumentNullException(nameof(isValidException));
+
+			Type type = typeof(TException);
+			bool thrown = false;
+			try {
+				action();
+			}
+			catch (Exception e) {
+				thrown = true;
+				Type thrownType = e.GetType();
+				if (!thrownType.EqualsOrInherits(type)) {
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name} or a subclass");
+				}
+				if (!isValidException((TException)e)) {
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
+				}
+			}
+
+			if (!thrown) throw exception ?? new AssertionException("Expected exception was not thrown");
+		}
 
 		/// <summary>
-		/// Asserts that a specific exception or a more derived type is thrown by the action.
+		/// Asserts that a specific exception or a more derived type is thrown by <paramref name="action" />.
 		/// </summary>
 		public static void Throws(Type type, Action action, AssertionException exception = null) {
 			if (action == null) throw new ArgumentNullException(nameof(action));
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type != typeof(Exception) && !type.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(type));
+			if (!type.EqualsOrInherits(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
 
 			bool thrown = false;
 			try {
@@ -96,7 +122,7 @@ namespace TestLib.Framework {
 			catch (Exception e) {
 				thrown = true;
 				Type thrownType = e.GetType();
-				if (thrownType != type && !thrownType.IsSubclassOf(type)) {
+				if (!thrownType.EqualsOrInherits(type)) {
 					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name} or a subclass");
 				}
 			}
@@ -105,7 +131,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a specific exception is thrown by the action.
+		/// Asserts that a specific exception is thrown by <paramref name="action" />.
 		/// </summary>
 		public static void ThrowsExact<TException>(Action action, AssertionException exception = null) where TException : Exception {
 			if (action == null) throw new ArgumentNullException(nameof(action));
@@ -113,12 +139,37 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a specific exception is thrown by the action.
+		/// Asserts that a specific exception is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+		/// </summary>
+		public static void ThrowsExact<TException>(Action action, Func<TException, bool> isValidException, AssertionException exception = null) where TException : Exception {
+			if (action == null) throw new ArgumentNullException(nameof(action));
+			if (isValidException == null) throw new ArgumentNullException(nameof(isValidException));
+
+			Type type = typeof(TException);
+			bool thrown = false;
+			try {
+				action();
+			}
+			catch (Exception e) {
+				thrown = true;
+				if (e.GetType() != type) {
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name}");
+				}
+				if (!isValidException((TException)e)) {
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
+				}
+			}
+
+			if (!thrown) throw exception ?? new AssertionException("Expected exception was not thrown");
+		}
+
+		/// <summary>
+		/// Asserts that a specific exception is thrown by <paramref name="action" />.
 		/// </summary>
 		public static void ThrowsExact(Type type, Action action, AssertionException exception = null) {
 			if (action == null) throw new ArgumentNullException(nameof(action));
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type != typeof(Exception) && !type.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(type));
+			if (!type.Equals(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
 
 			bool thrown = false;
 			try {
@@ -132,75 +183,6 @@ namespace TestLib.Framework {
 			}
 
 			if (!thrown) throw exception ?? new AssertionException("Expected exception was not thrown");
-		}
-
-		/// <summary>
-		/// Asserts that an exception thrown by the action will have a specific InnerException or a more derived type.
-		/// </summary>
-		public static void ThrowsInnerException<TException>(Action action, AssertionException exception = null) where TException : Exception {
-			if (action == null) throw new ArgumentNullException(nameof(action));
-			ThrowsInnerException(typeof(TException), action, exception: exception);
-		}
-
-		/// <summary>
-		/// Asserts that an exception thrown by the action will have a specific InnerException or a more derived type.
-		/// </summary>
-		public static void ThrowsInnerException(Type type, Action action, AssertionException exception = null) {
-			if (action == null) throw new ArgumentNullException(nameof(action));
-			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type != typeof(Exception) && !type.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(type));
-
-			bool thrown = false;
-			try {
-				action();
-			}
-			catch (Exception e) {
-				thrown = true;
-				if (e.InnerException == null) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, "Exception did not have an InnerException");
-				}
-
-				Type thrownType = e.InnerException.GetType();
-				if (thrownType != type && !thrownType.IsSubclassOf(type)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"InnerException type was unexpected, expected {type.Name} or a subclass");
-				}
-			}
-
-			if (!thrown) throw exception ?? new AssertionException("No exception was thrown");
-		}
-
-		/// <summary>
-		/// Asserts that an exception thrown by the action will have a specific InnerException.
-		/// </summary>
-		public static void ThrowsInnerExceptionExact<TException>(Action action, AssertionException exception = null) where TException : Exception {
-			if (action == null) throw new ArgumentNullException(nameof(action));
-			ThrowsInnerExceptionExact(typeof(TException), action, exception: exception);
-		}
-
-		/// <summary>
-		/// Asserts that an exception thrown by the action will have a specific InnerException.
-		/// </summary>
-		public static void ThrowsInnerExceptionExact(Type type, Action action, AssertionException exception = null) {
-			if (action == null) throw new ArgumentNullException(nameof(action));
-			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type != typeof(Exception) && !type.IsSubclassOf(typeof(Exception))) throw new ArgumentException("Type must derive from Exception", nameof(type));
-
-			bool thrown = false;
-			try {
-				action();
-			}
-			catch (Exception e) {
-				thrown = true;
-				if (e.InnerException == null) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, "Exception did not have an InnerException");
-				}
-
-				if (e.InnerException.GetType() != type) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"InnerException type was unexpected, expected {type.Name}");
-				}
-			}
-
-			if (!thrown) throw exception ?? new AssertionException("No exception was thrown");
 		}
 
 		/// <summary>

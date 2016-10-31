@@ -6,7 +6,7 @@ using TestLib.Framework.Util;
 namespace TestLib.Framework {
 	public partial class Assert {
 		/// <summary>
-		/// Asserts that sequence has no elements.
+		/// Asserts that <paramref name="sequence" /> has no elements.
 		/// </summary>
 		public static void Empty<TValue>(IEnumerable<TValue> sequence, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -14,7 +14,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that sequence has one or more elements.
+		/// Asserts that <paramref name="sequence" /> has one or more elements.
 		/// </summary>
 		public static void NotEmpty<TValue>(IEnumerable<TValue> sequence, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -22,7 +22,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with one or more elements matches the predicate.
+		/// Asserts that <paramref name="sequence" /> has elements and that all elements match <paramref name="predicate" />.
 		/// </summary>
 		public static void All<TValue>(IEnumerable<TValue> sequence, Func<TValue, bool> predicate, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -32,7 +32,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that one or more elements of a sequence with one or more elements matches the predicate.
+		/// Asserts that <paramref name="sequence" /> has elements and that any of them matches <paramref name="predicate" />.
 		/// </summary>
 		public static void Any<TValue>(IEnumerable<TValue> sequence, Func<TValue, bool> predicate, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -42,7 +42,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that exactly one element of a sequence with one or more elements matches the predicate.
+		/// Asserts that <paramref name="sequence" /> has elements and exactly one element matches <paramref name="predicate" />.
 		/// </summary>
 		public static void Only<TValue>(IEnumerable<TValue> sequence, Func<TValue, bool> predicate, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -52,7 +52,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that exactly a specified number of elements of a sequence with one or more elements matches the predicate.
+		/// Asserts that <paramref name="sequence" /> has elements and exactly <paramref name="count" /> elements match <paramref name="predicate" />.
 		/// </summary>
 		public static void Exactly<TValue>(IEnumerable<TValue> sequence, int count, Func<TValue, bool> predicate, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -63,7 +63,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that no elements of a sequence with one or more elements matches the predicate.
+		/// Asserts that <paramref name="sequence" /> has elements and none match <paramref name="predicate" />.
 		/// </summary>
 		public static void None<TValue>(IEnumerable<TValue> sequence, Func<TValue, bool> predicate, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -73,7 +73,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a sequence has a specified number of elements.
+		/// Asserts that <paramref name="sequence" /> has a specified number of elements.
 		/// </summary>
 		public static void Count<TValue>(IEnumerable<TValue> sequence, int count, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -83,7 +83,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a sequence has a specified number of a specific element.
+		/// Asserts that <paramref name="sequence" /> has a specified number of a specific element.
 		/// </summary>
 		public static void Count<TValue>(IEnumerable<TValue> sequence, int count, TValue value, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -93,7 +93,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a sequence has a specified number of a specific element with a specific comparer.
+		/// Asserts that <paramref name="sequence" /> has a specified number of a specific element with a specific comparer.
 		/// </summary>
 		public static void Count<TValue>(IEnumerable<TValue> sequence, int count, TValue value, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -104,7 +104,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a sequence contains a specific value.
+		/// Asserts that <paramref name="sequence" /> contains a specific value.
 		/// </summary>
 		public static void Contains<TValue>(IEnumerable<TValue> sequence, TValue value, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -113,7 +113,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a sequence contains a specific value with a specific comparer.
+		/// Asserts that <paramref name="sequence" /> contains a specific value with a specific comparer.
 		/// </summary>
 		public static void Contains<TValue>(IEnumerable<TValue> sequence, TValue value, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -123,7 +123,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a sequence does not contain a specific value.
+		/// Asserts that <paramref name="sequence" /> does not contain a specific value.
 		/// </summary>
 		public static void DoesNotContain<TValue>(IEnumerable<TValue> sequence, TValue value, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -132,7 +132,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a sequence does not contain a specific value with a specific comparer.
+		/// Asserts that <paramref name="sequence" /> does not contain a specific value with a specific comparer.
 		/// </summary>
 		public static void DoesNotContain<TValue>(IEnumerable<TValue> sequence, TValue value, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -142,7 +142,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has no duplicates that match the predicate.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has no duplicates that match <paramref name="predicate" />.
 		/// </summary>
 		public static void Unique<TValue>(IEnumerable<TValue> sequence, Func<TValue, TValue, bool> predicate, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -153,7 +153,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has no duplicates that match the predicate.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has no duplicates that match <paramref name="predicate" />.
 		/// </summary>
 		public static void Unique<TValue, TCompare>(IEnumerable<TValue> sequence, Func<TValue, TCompare> predicate, AssertionException exception = null) where TCompare : IEquatable<TCompare> {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -164,7 +164,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has no duplicates.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has no duplicates.
 		/// </summary>
 		public static void Unique<TValue>(IEnumerable<TValue> sequence, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -174,7 +174,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has no duplicates based on a specific comparer.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has no duplicates based on a specific comparer.
 		/// </summary>
 		public static void Unique<TValue>(IEnumerable<TValue> sequence, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -185,7 +185,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair that matches the predicate.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair that matches <paramref name="predicate" />.
 		/// </summary>
 		public static void NotUnique<TValue>(IEnumerable<TValue> sequence, Func<TValue, TValue, bool> predicate, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -196,7 +196,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair that matches the predicate.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair that matches <paramref name="predicate" />.
 		/// </summary>
 		public static void NotUnique<TValue, TCompare>(IEnumerable<TValue> sequence, Func<TValue, TCompare> predicate, AssertionException exception = null) where TCompare : IEquatable<TCompare> {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -207,7 +207,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair.
 		/// </summary>
 		public static void NotUnique<TValue>(IEnumerable<TValue> sequence, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -217,7 +217,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that an entire sequence with two or more elements has at least one duplicate pair based on a specific comparer.
+		/// Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair based on a specific comparer.
 		/// </summary>
 		public static void NotUnique<TValue>(IEnumerable<TValue> sequence, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -228,7 +228,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence starts with a particular set of values.
+		/// Ensures that <paramref name="sequence" /> starts with a particular set of values.
 		/// </summary>
 		public static void StartsWith<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> start, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -247,7 +247,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence starts with a particular set of values based on a specific comparer.
+		/// Ensures that <paramref name="sequence" /> starts with a particular set of values based on a specific comparer.
 		/// </summary>
 		public static void StartsWith<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> start, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -267,7 +267,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence ends with a particular set of values.
+		/// Ensures that <paramref name="sequence" /> ends with a particular set of values.
 		/// </summary>
 		public static void EndsWith<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> end, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -289,7 +289,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence ends with a particular set of values based on a specific comparer.
+		/// Ensures that <paramref name="sequence" /> ends with a particular set of values based on a specific comparer.
 		/// </summary>
 		public static void EndsWith<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> end, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -312,7 +312,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence contains a particular set of values.
+		/// Ensures that <paramref name="sequence" /> contains a particular set of values.
 		/// </summary>
 		public static void IsSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -327,7 +327,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence contains a particular set of values with a specific comparer.
+		/// Ensures that <paramref name="sequence" /> contains a particular set of values with a specific comparer.
 		/// </summary>
 		public static void IsSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -343,7 +343,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence does not contain a specific full set of values.
+		/// Ensures that <paramref name="sequence" /> does not contain a specific full set of values.
 		/// </summary>
 		public static void IsNotSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -358,7 +358,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence does not contain a specific full set of values based on a specific comparer.
+		/// Ensures that <paramref name="sequence" /> does not contain a specific full set of values based on a specific comparer.
 		/// </summary>
 		public static void IsNotSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -374,7 +374,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence strictly contains a particular set of values.
+		/// Ensures that <paramref name="sequence" /> strictly contains a particular set of values.
 		/// </summary>
 		public static void IsStrictSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -389,7 +389,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence strictly contains a particular set of values based on a specific comparer.
+		/// Ensures that <paramref name="sequence" /> strictly contains a particular set of values based on a specific comparer.
 		/// </summary>
 		public static void IsStrictSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -405,7 +405,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence does not strictly contain a specific full set of values.
+		/// Ensures that <paramref name="sequence" /> does not strictly contain a specific full set of values.
 		/// </summary>
 		public static void IsNotStrictSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -420,7 +420,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that a sequence does not strictly contain a specific full set of values based on a specific comparer.
+		/// Ensures that <paramref name="sequence" /> does not strictly contain a specific full set of values based on a specific comparer.
 		/// </summary>
 		public static void IsNotStrictSubsetOf<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));

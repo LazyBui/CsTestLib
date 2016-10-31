@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace TestLib.Framework {
 	public partial class Assert {
 		/// <summary>
-		/// Asserts that the specified value compares either greater or equal to a specified lower bound.
+		/// Asserts that <paramref name="value" /> compares either greater or equal to <paramref name="lowerBound" />.
 		/// </summary>
 		public static void GreaterThanEqual<TValue>(TValue value, TValue lowerBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
@@ -14,7 +14,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that the specified value compares strictly greater to a specified lower bound.
+		/// Asserts that <paramref name="value" /> compares strictly greater to <paramref name="lowerBound" />.
 		/// </summary>
 		public static void GreaterThan<TValue>(TValue value, TValue lowerBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
@@ -23,7 +23,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that the specified value compares either less or equal to a specified upper bound.
+		/// Asserts that <paramref name="value" /> compares either less or equal to <paramref name="upperBound" />.
 		/// </summary>
 		public static void LessThanEqual<TValue>(TValue value, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
@@ -32,7 +32,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that the specified value compares strictly less to a specified upper bound.
+		/// Asserts that <paramref name="value" /> compares strictly less to <paramref name="upperBound" />.
 		/// </summary>
 		public static void LessThan<TValue>(TValue value, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
@@ -41,7 +41,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that the specified value compares either greater or equal to a specified lower bound AND less or equal to a specified upper bound.
+		/// Asserts that <paramref name="value" /> compares either greater or equal to <paramref name="lowerBound" /> AND less or equal to <paramref name="upperBound" />.
 		/// </summary>
 		public static void InRangeEqual<TValue>(TValue value, TValue lowerBound, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
@@ -52,7 +52,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that the specified value compares strictly greater to a specified lower bound AND strictly less to a specified upper bound.
+		/// Asserts that <paramref name="value" /> compares strictly greater to <paramref name="lowerBound" /> AND strictly less to <paramref name="upperBound" />.
 		/// </summary>
 		public static void InRange<TValue>(TValue value, TValue lowerBound, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
@@ -63,7 +63,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that the specified value compares either greater or equal to a specified upper bound AND less or equal to a specified lower bound.
+		/// Asserts that <paramref name="value" /> compares either greater or equal to <paramref name="upperBound" /> AND less or equal to <paramref name="lowerBound" />.
 		/// </summary>
 		public static void NotInRangeEqual<TValue>(TValue value, TValue lowerBound, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
@@ -73,7 +73,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that the specified value compares strictly greater to a specified upper bound AND strictly less to a specified lower bound.
+		/// Asserts that <paramref name="value" /> compares strictly greater to <paramref name="upperBound" /> AND strictly less to <paramref name="lowerBound" />.
 		/// </summary>
 		public static void NotInRange<TValue>(TValue value, TValue lowerBound, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));

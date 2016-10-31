@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace TestLib.Framework {
 	public partial class Assert {
 		/// <summary>
-		/// Asserts that a string matches the regex pattern.
+		/// Asserts that <paramref name="input" /> matches the regex pattern.
 		/// </summary>
 		public static void IsMatch(Regex regex, string input, AssertionException exception = null) {
 			if (regex == null) throw new ArgumentNullException(nameof(regex));
@@ -13,7 +13,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a string matches the regex pattern.
+		/// Asserts that <paramref name="input" /> matches the regex pattern.
 		/// </summary>
 		public static void IsMatch(string regexPattern, string input, AssertionException exception = null) {
 			if (regexPattern == null) throw new ArgumentNullException(nameof(regexPattern));
@@ -22,7 +22,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a string produces the specified count of matches to the regex pattern.
+		/// Asserts that <paramref name="input" /> produces the specified count of matches to the regex pattern.
 		/// </summary>
 		public static void MatchCount(Regex regex, string input, int count, AssertionException exception = null) {
 			if (regex == null) throw new ArgumentNullException(nameof(regex));
@@ -32,7 +32,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a string produces the specified count of matches to the regex pattern.
+		/// Asserts that <paramref name="input" /> produces the specified count of matches to the regex pattern.
 		/// </summary>
 		public static void MatchCount(string regexPattern, string input, int count, AssertionException exception = null) {
 			if (regexPattern == null) throw new ArgumentNullException(nameof(regexPattern));
@@ -42,7 +42,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a string does not match the regex pattern.
+		/// Asserts that <paramref name="input" /> does not match the regex pattern.
 		/// </summary>
 		public static void IsNotMatch(Regex regex, string input, AssertionException exception = null) {
 			if (regex == null) throw new ArgumentNullException(nameof(regex));
@@ -51,7 +51,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that a string does not match the regex pattern.
+		/// Asserts that <paramref name="input" /> does not match the regex pattern.
 		/// </summary>
 		public static void IsNotMatch(string regexPattern, string input, AssertionException exception = null) {
 			if (regexPattern == null) throw new ArgumentNullException(nameof(regexPattern));
