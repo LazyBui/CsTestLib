@@ -169,7 +169,7 @@ namespace TestLib.Framework {
 		public static void ThrowsExact(Type type, Action action, AssertionException exception = null) {
 			if (action == null) throw new ArgumentNullException(nameof(action));
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.Equals(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
+			if (!type.EqualsOrInherits(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
 
 			bool thrown = false;
 			try {
