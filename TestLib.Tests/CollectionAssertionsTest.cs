@@ -352,5 +352,29 @@ namespace TestLib.Tests {
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotStrictSubsetOf("Musky", "musk", new CharCaseInvariantComparer()));
 			Assert.DoesNotThrow(() => Assert.IsNotStrictSubsetOf("Musky", "abc", new CharCaseInvariantComparer()));
 		}
+
+		[TestMethod]
+		[TestCategory("TestLib")]
+		public void OverlapCount() {
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.OverlapCount(null, new int[0], 0));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.OverlapCount(new int[0], null, 0));
+			Assert.ThrowsExact<ArgumentNullException>(() => Assert.OverlapCount("abcd", "abc", 0, null as IEqualityComparer<char>));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.OverlapCount(new int[0], new int[1], 0));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.OverlapCount(new int[1], new int[0], 0));
+			Assert.ThrowsExact<ArgumentException>(() => Assert.OverlapCount(new int[1], new int[2], -1));
+			Assert.DoesNotThrow(() => Assert.OverlapCount(new[] { 1 }, new[] { 1 }, 1));
+
+			Assert.DoesNotThrow(() => Assert.OverlapCount("Musky", "usk", 3));
+			Assert.DoesNotThrow(() => Assert.OverlapCount("Musky", "Musky", 5));
+			Assert.ThrowsExact<AssertionException>(() => Assert.OverlapCount("Musky", "Husky", 5));
+			Assert.ThrowsExact<AssertionException>(() => Assert.OverlapCount("Musky", "elk", 3));
+			Assert.DoesNotThrow(() => Assert.OverlapCount(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3 }, 3));
+			Assert.DoesNotThrow(() => Assert.OverlapCount(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 }, 5));
+			Assert.ThrowsExact<AssertionException>(() => Assert.OverlapCount(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 6 }, 4));
+			Assert.DoesNotThrow(() => Assert.OverlapCount("Musky", "musky", 5, new CharCaseInvariantComparer()));
+			Assert.ThrowsExact<AssertionException>(() => Assert.OverlapCount("Musky", "abc", 3, new CharCaseInvariantComparer()));
+
+			Assert.DoesNotThrow(() => Assert.OverlapCount(new[] { 1, 1, 2, 2, 3 }, new[] { 1, 2, 3 }, 3));
+		}
 	}
 }

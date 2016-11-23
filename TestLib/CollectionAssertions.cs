@@ -434,5 +434,36 @@ namespace TestLib.Framework {
 				throw exception ?? new AssertionException("Specified values were a strict subset of sequence");
 			}
 		}
+
+		/// <summary>
+		/// Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <param name="overlapCount" /> values.
+		/// </summary>
+		public static void OverlapCount<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, int overlapCount, AssertionException exception = null) {
+			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
+			if (values == null) throw new ArgumentNullException(nameof(values));
+			if (overlapCount < 0) throw new ArgumentException("Must not be negative", nameof(overlapCount));
+			if (!sequence.Any()) throw new ArgumentException("Expected elements", nameof(sequence));
+			if (!values.Any()) throw new ArgumentException("Expected elements", nameof(values));
+
+			if (values.Intersect(sequence).Count() != overlapCount) {
+				throw exception ?? new AssertionException("Overlap count did not match");
+			}
+		}
+
+		/// <summary>
+		/// Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <param name="overlapCount" /> values based on a specific comparer.
+		/// </summary>
+		public static void OverlapCount<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, int overlapCount, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
+			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
+			if (values == null) throw new ArgumentNullException(nameof(values));
+			if (overlapCount < 0) throw new ArgumentException("Must not be negative", nameof(overlapCount));
+			if (comparer == null) throw new ArgumentNullException(nameof(comparer));
+			if (!sequence.Any()) throw new ArgumentException("Expected elements", nameof(sequence));
+			if (!values.Any()) throw new ArgumentException("Expected elements", nameof(values));
+
+			if (values.Intersect(sequence, comparer).Count() != overlapCount) {
+				throw exception ?? new AssertionException("Overlap count did not match");
+			}
+		}
 	}
 }
