@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TestLib.Framework {
+	/// <summary>
+	/// Provides access to extension methods.
+	/// </summary>
 	public static class Extensions {
 		/// <summary>
 		/// Determines whether the class represented by the current <see cref="Type" /> equals or derives from the class represented by the specified <see cref="Type" />.

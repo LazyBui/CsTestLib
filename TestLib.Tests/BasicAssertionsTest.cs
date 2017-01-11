@@ -69,10 +69,17 @@ namespace TestLib.Tests {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Throws(null, EmptyNoThrow));
 			Assert.ThrowsExact<ArgumentException>(() => Assert.Throws(typeof(AssertTest), EmptyNoThrow));
 			Assert.DoesNotThrow(() => Assert.Throws(typeof(Exception), ThrowsPlain));
+			Assert.DoesNotThrow(() => Assert.Throws(typeof(SystemException), () => { throw new SystemException(""); }));
+			Assert.DoesNotThrow(() => Assert.Throws(typeof(ArgumentException), () => { throw new ArgumentException(""); }));
+			Assert.DoesNotThrow(() => Assert.Throws(typeof(ArgumentNullException), () => { throw new ArgumentNullException(""); }));
 			Assert.DoesNotThrow(() => Assert.Throws(typeof(DerivedExceptionTest), ThrowsDerived));
 			Assert.DoesNotThrow(() => Assert.Throws(typeof(ExceptionTest), ThrowsDerived));
 
 			Assert.ThrowsExact<AssertionException>(() => Assert.Throws(typeof(DerivedExceptionTest), ThrowsBase));
+			Assert.DoesNotThrow(() => Assert.Throws<Exception>(ThrowsPlain));
+			Assert.DoesNotThrow(() => Assert.Throws<SystemException>(() => { throw new SystemException(""); }));
+			Assert.DoesNotThrow(() => Assert.Throws<ArgumentException>(() => { throw new ArgumentException(""); }));
+			Assert.DoesNotThrow(() => Assert.Throws<ArgumentNullException>(() => { throw new ArgumentNullException(""); }));
 			Assert.DoesNotThrow(() => Assert.Throws<DerivedExceptionTest>(ThrowsDerived));
 			Assert.DoesNotThrow(() => Assert.Throws<ExceptionTest>(ThrowsDerived));
 			Assert.ThrowsExact<AssertionException>(() => Assert.Throws<ArgumentException>(EmptyNoThrow));
@@ -143,8 +150,15 @@ namespace TestLib.Tests {
 			Assert.ThrowsExact<ArgumentException>(() => Assert.ThrowsExact(typeof(AssertTest), EmptyNoThrow));
 			Assert.DoesNotThrow(() => Assert.ThrowsExact(typeof(Exception), ThrowsPlain));
 			Assert.DoesNotThrow(() => Assert.ThrowsExact(typeof(DerivedExceptionTest), ThrowsDerived));
+			Assert.DoesNotThrow(() => Assert.ThrowsExact(typeof(SystemException), () => { throw new SystemException(""); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsExact(typeof(ArgumentException), () => { throw new ArgumentException(""); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsExact(typeof(ArgumentNullException), () => { throw new ArgumentNullException(""); }));
 
 			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsExact(typeof(DerivedExceptionTest), ThrowsBase));
+			Assert.DoesNotThrow(() => Assert.ThrowsExact<Exception>(ThrowsPlain));
+			Assert.DoesNotThrow(() => Assert.ThrowsExact<SystemException>(() => { throw new SystemException(""); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsExact<ArgumentException>(() => { throw new ArgumentException(""); }));
+			Assert.DoesNotThrow(() => Assert.ThrowsExact<ArgumentNullException>(() => { throw new ArgumentNullException(""); }));
 			Assert.DoesNotThrow(() => Assert.ThrowsExact<DerivedExceptionTest>(ThrowsDerived));
 			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsExact<ExceptionTest>(ThrowsDerived));
 			Assert.ThrowsExact<AssertionException>(() => Assert.ThrowsExact<ArgumentException>(EmptyNoThrow));

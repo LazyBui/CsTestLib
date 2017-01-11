@@ -436,7 +436,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <param name="overlapCount" /> values.
+		/// Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <paramref name="overlapCount" /> values.
 		/// </summary>
 		public static void OverlapCount<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, int overlapCount, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
@@ -451,7 +451,7 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <param name="overlapCount" /> values based on a specific comparer.
+		/// Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <paramref name="overlapCount" /> values based on a specific comparer.
 		/// </summary>
 		public static void OverlapCount<TValue>(IEnumerable<TValue> sequence, IEnumerable<TValue> values, int overlapCount, IEqualityComparer<TValue> comparer, AssertionException exception = null) {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));

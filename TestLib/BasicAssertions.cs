@@ -2,13 +2,16 @@
 
 namespace TestLib.Framework {
 	public partial class Assert {
+		/// <summary>
+		/// Allows a user to invoke a test failure.
+		/// </summary>
 		public static readonly Action Failure = () => Fail(null);
 
 		/// <summary>
 		/// Asserts that the test has failed.
 		/// </summary>
-		public static void Fail(AssertionException exception = null) {
-			throw exception ?? new AssertionException("Test has failed");
+		public static void Fail(Exception exception = null) {
+			throw AssertionException.GenerateWithInnerException(exception, "Test has failed");
 		}
 
 		/// <summary>

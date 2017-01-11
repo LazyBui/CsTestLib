@@ -6,12 +6,12 @@ namespace TestLib.Framework {
 	/// </summary>
 	public sealed class AssertionException : Exception {
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TestLib.Framework.Util.AssertionException" /> class with a specified error message.
+		/// Initializes a new instance of the <see cref="AssertionException" /> class with a specified error message.
 		/// </summary>
 		/// <param name="message">The message that describes the error.</param>
 		public AssertionException(string message) : base(message) { }
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TestLib.Framework.Util.AssertionException" /> class with a specified formatted error message.
+		/// Initializes a new instance of the <see cref="AssertionException" /> class with a specified formatted error message.
 		/// </summary>
 		/// <param name="format">The format string that describes the error.</param>
 		/// <param name="args">The objects to pass to the format string.</param>
