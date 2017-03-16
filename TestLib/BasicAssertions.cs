@@ -114,8 +114,16 @@ namespace TestLib.Framework {
 		/// Asserts that a specific exception or a more derived type is thrown by <paramref name="action" />.
 		/// </summary>
 		public static void Throws(Type type, Action action, AssertionException exception = null) {
-			if (action == null) throw new ArgumentNullException(nameof(action));
+			Throws(type, action, ex => true, exception: exception);
+		}
+
+		/// <summary>
+		/// Asserts that a specific exception or a more derived type is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+		/// </summary>
+		public static void Throws(Type type, Action action, Func<Exception, bool> isValidException, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
+			if (action == null) throw new ArgumentNullException(nameof(action));
+			if (isValidException == null) throw new ArgumentNullException(nameof(isValidException));
 			if (!type.EqualsOrInherits(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
 
 			bool thrown = false;
@@ -127,6 +135,9 @@ namespace TestLib.Framework {
 				Type thrownType = e.GetType();
 				if (!thrownType.EqualsOrInherits(type)) {
 					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name} or a subclass");
+				}
+				if (!isValidException(e)) {
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
 				}
 			}
 
@@ -170,8 +181,16 @@ namespace TestLib.Framework {
 		/// Asserts that a specific exception is thrown by <paramref name="action" />.
 		/// </summary>
 		public static void ThrowsExact(Type type, Action action, AssertionException exception = null) {
-			if (action == null) throw new ArgumentNullException(nameof(action));
+			ThrowsExact(type, action, ex => true, exception: exception);
+		}
+
+		/// <summary>
+		/// Asserts that a specific exception is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+		/// </summary>
+		public static void ThrowsExact(Type type, Action action, Func<Exception, bool> isValidException, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
+			if (action == null) throw new ArgumentNullException(nameof(action));
+			if (isValidException == null) throw new ArgumentNullException(nameof(isValidException));
 			if (!type.EqualsOrInherits(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
 
 			bool thrown = false;
@@ -182,6 +201,9 @@ namespace TestLib.Framework {
 				thrown = true;
 				if (e.GetType() != type) {
 					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name}");
+				}
+				if (!isValidException(e)) {
+					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
 				}
 			}
 
