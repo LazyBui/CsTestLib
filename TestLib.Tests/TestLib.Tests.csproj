@@ -60,6 +60,8 @@
     <Compile Include="ReflectionAssertionsTest.cs" />
     <Compile Include="ObjectAssertionsTest.cs" />
     <Compile Include="LogicalComparisonAssertionsTest.cs" />
+    <Compile Include="Util\EqualityComparerStatefulTest.cs" />
+    <Compile Include="Util\EqualityComparerStatelessTest.cs" />
     <Compile Include="Util\ProcessSpawnerTest.cs" />
     <Compile Include="Util\ProcessSpawnerWithCombinedAndSplitErrAndOutTest.cs" />
     <Compile Include="Util\ProcessSpawnerWithCombinedErrAndOutTest.cs" />

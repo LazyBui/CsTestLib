@@ -18,7 +18,7 @@ namespace TestLib.Framework.Util {
 		/// <param name="hasher">The hash function for a particular object.</param>
 		public EqualityComparerStateful(Func<TValue, TValue, bool> comparer, Func<TValue, int> hasher = null) {
 			if (comparer == null) throw new ArgumentNullException(nameof(comparer));
-			if (hasher == null) hasher = v => 0;
+			if (hasher == null) hasher = v => v?.GetHashCode() ?? 0;
 
 			mComparer = comparer;
 			mHasher = hasher;

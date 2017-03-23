@@ -26,7 +26,11 @@ namespace TestLib.Framework.Util {
 		/// <param name="y">The second object of type TKey to compare.</param>
 		/// <returns>true if the selected property of the specified objects are equal; otherwise, false.</returns>
 		public bool Equals(TKey x, TKey y) {
-			return mSelector(x).Equals(mSelector(y));
+			var left = mSelector(x);
+			var right = mSelector(y);
+			if (object.ReferenceEquals(left, right)) return true;
+			if (object.ReferenceEquals(left, null)) return false;
+			return left.Equals(right);
 		}
 
 		/// <summary>
@@ -35,7 +39,7 @@ namespace TestLib.Framework.Util {
 		/// <param name="obj">The TKey for which a hash code is to be returned.</param>
 		/// <returns>A hash code for the selected property of the specified object.</returns>
 		public int GetHashCode(TKey obj) {
-			return mSelector(obj).GetHashCode();
+			return mSelector(obj)?.GetHashCode() ?? 0;
 		}
 	}
 }

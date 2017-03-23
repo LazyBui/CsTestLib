@@ -112,27 +112,27 @@ namespace TestLib.Tests {
 		[TestMethod]
 		[TestCategory("TestLib")]
 		public void IsFloatValue() {
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(float.NaN));
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(double.NaN));
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(float.PositiveInfinity));
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(float.NegativeInfinity));
-			Assert.DoesNotThrow(() => Assert.IsFloatValue(1.34f));
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(double.PositiveInfinity));
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(double.NegativeInfinity));
-			Assert.DoesNotThrow(() => Assert.IsFloatValue(1.34d));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsSpecialFloatValue(float.NaN));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsSpecialFloatValue(double.NaN));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsSpecialFloatValue(float.PositiveInfinity));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsSpecialFloatValue(float.NegativeInfinity));
+			Assert.DoesNotThrow(() => Assert.IsSpecialFloatValue(1.34f));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsSpecialFloatValue(double.PositiveInfinity));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsSpecialFloatValue(double.NegativeInfinity));
+			Assert.DoesNotThrow(() => Assert.IsSpecialFloatValue(1.34d));
 		}
 
 		[TestMethod]
 		[TestCategory("TestLib")]
 		public void IsNotFloatValue() {
-			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(float.NaN));
-			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(double.NaN));
-			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(float.PositiveInfinity));
-			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(float.NegativeInfinity));
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotFloatValue(1.34f));
-			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(double.PositiveInfinity));
-			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(double.NegativeInfinity));
-			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotFloatValue(1.34d));
+			Assert.DoesNotThrow(() => Assert.IsNotSpecialFloatValue(float.NaN));
+			Assert.DoesNotThrow(() => Assert.IsNotSpecialFloatValue(double.NaN));
+			Assert.DoesNotThrow(() => Assert.IsNotSpecialFloatValue(float.PositiveInfinity));
+			Assert.DoesNotThrow(() => Assert.IsNotSpecialFloatValue(float.NegativeInfinity));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotSpecialFloatValue(1.34f));
+			Assert.DoesNotThrow(() => Assert.IsNotSpecialFloatValue(double.PositiveInfinity));
+			Assert.DoesNotThrow(() => Assert.IsNotSpecialFloatValue(double.NegativeInfinity));
+			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotSpecialFloatValue(1.34d));
 		}
 
 		[TestMethod]

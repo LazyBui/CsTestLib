@@ -8,7 +8,12 @@ namespace TestLib.Tests {
 	public partial class AssertTest {
 		private class UniqueTestClass {
 			public int Property { get; set; }
+
+			public override int GetHashCode() {
+				return Property.GetHashCode();
+			}
 		}
+
 		private class CharCaseInvariantComparer : IEqualityComparer<char> {
 			public bool Equals(char x, char y) {
 				return char.ToUpperInvariant(x) == char.ToUpperInvariant(y);
