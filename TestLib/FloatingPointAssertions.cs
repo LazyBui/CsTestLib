@@ -163,43 +163,43 @@ namespace TestLib.Framework {
 		}
 
 		/// <summary>
-		/// Asserts that <paramref name="value" /> is not an infinity value or a Not a Number value.
+		/// Asserts that <paramref name="value" /> is an infinity value or a Not a Number value.
 		/// </summary>
 		/// <param name="value">The value to test.</param>
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsSpecialFloatValue(float value, AssertionException exception = null) {
-			if (float.IsInfinity(value) || float.IsNaN(value)) throw exception ?? new AssertionException("value was not a floating point value");
+			if (!float.IsInfinity(value) && !float.IsNaN(value)) throw exception ?? new AssertionException("value was not a floating point value");
 		}
 
 		/// <summary>
-		/// Asserts that <paramref name="value" /> is not an infinity value or a Not a Number value.
+		/// Asserts that <paramref name="value" /> is an infinity value or a Not a Number value.
 		/// </summary>
 		/// <param name="value">The value to test.</param>
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsSpecialFloatValue(double value, AssertionException exception = null) {
-			if (double.IsInfinity(value) || double.IsNaN(value)) throw exception ?? new AssertionException("value was not a floating point value");
+			if (!double.IsInfinity(value) && !double.IsNaN(value)) throw exception ?? new AssertionException("value was not a floating point value");
 		}
 
 		/// <summary>
-		/// Asserts that <paramref name="value" /> is either an infinity value or a Not a Number value.
+		/// Asserts that <paramref name="value" /> is not either an infinity value or a Not a Number value.
 		/// </summary>
 		/// <param name="value">The value to test.</param>
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotSpecialFloatValue(float value, AssertionException exception = null) {
-			if (!float.IsInfinity(value) && !float.IsNaN(value)) throw exception ?? new AssertionException("value was a floating point value");
+			if (float.IsInfinity(value) || float.IsNaN(value)) throw exception ?? new AssertionException("value was a floating point value");
 		}
 
 		/// <summary>
-		/// Asserts that <paramref name="value" /> is either an infinity value or a Not a Number value.
+		/// Asserts that <paramref name="value" /> is not either an infinity value or a Not a Number value.
 		/// </summary>
 		/// <param name="value">The value to test.</param>
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotSpecialFloatValue(double value, AssertionException exception = null) {
-			if (!double.IsInfinity(value) && !double.IsNaN(value)) throw exception ?? new AssertionException("value was a floating point value");
+			if (double.IsInfinity(value) || double.IsNaN(value)) throw exception ?? new AssertionException("value was a floating point value");
 		}
 
 		/// <summary>
