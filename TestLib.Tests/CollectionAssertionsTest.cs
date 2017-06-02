@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestLib.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestLib.Framework;
 using Assert = TestLib.Framework.Assert;
 
 namespace TestLib.Tests {

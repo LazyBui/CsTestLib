@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestLib.Framework;
 using TestLib.Framework.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Assert = TestLib.Framework.Assert;
 
 namespace TestLib.Tests.Util {
