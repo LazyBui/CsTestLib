@@ -17,7 +17,7 @@ namespace TestLib.Framework {
 		public static void GreaterThanEqual<TValue>(TValue value, TValue lowerBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (lowerBound.CompareTo(value) > 0) throw exception ?? new AssertionException("Value fell below expected range: {0}", value);
+			if (lowerBound.CompareTo(value) > 0) throw exception ?? new AssertionException($"Value ({value}) fell below expected range: {lowerBound} or more");
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace TestLib.Framework {
 		public static void GreaterThan<TValue>(TValue value, TValue lowerBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (lowerBound.CompareTo(value) >= 0) throw exception ?? new AssertionException("Value fell below expected range: {0}", value);
+			if (lowerBound.CompareTo(value) >= 0) throw exception ?? new AssertionException($"Value ({value}) fell below expected range: more than {lowerBound}");
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace TestLib.Framework {
 		public static void LessThanEqual<TValue>(TValue value, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (upperBound.CompareTo(value) < 0) throw exception ?? new AssertionException("Value fell above expected range: {0}", value);
+			if (upperBound.CompareTo(value) < 0) throw exception ?? new AssertionException($"Value ({value}) fell above expected range: {upperBound} or less");
 		}
 
 		/// <summary>
@@ -65,7 +65,7 @@ namespace TestLib.Framework {
 		public static void LessThan<TValue>(TValue value, TValue upperBound, AssertionException exception = null) where TValue : IComparable<TValue> {
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (upperBound.CompareTo(value) <= 0) throw exception ?? new AssertionException("Value fell above expected range: {0}", value);
+			if (upperBound.CompareTo(value) <= 0) throw exception ?? new AssertionException($"Value ({value}) fell above expected range: less than {upperBound}");
 		}
 
 		/// <summary>
@@ -84,8 +84,8 @@ namespace TestLib.Framework {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (lowerBound.CompareTo(value) > 0) throw exception ?? new AssertionException("Value fell below expected range: {0}", value);
-			if (upperBound.CompareTo(value) < 0) throw exception ?? new AssertionException("Value fell above expected range: {0}", value);
+			if (lowerBound.CompareTo(value) > 0) throw exception ?? new AssertionException($"Value ({value}) fell below expected range: {lowerBound}-{upperBound} inclusive");
+			if (upperBound.CompareTo(value) < 0) throw exception ?? new AssertionException($"Value ({value}) fell above expected range: {lowerBound}-{upperBound} inclusive");
 		}
 
 		/// <summary>
@@ -104,8 +104,8 @@ namespace TestLib.Framework {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (lowerBound.CompareTo(value) >= 0) throw exception ?? new AssertionException("Value fell below expected range: {0}", value);
-			if (upperBound.CompareTo(value) <= 0) throw exception ?? new AssertionException("Value fell above expected range: {0}", value);
+			if (lowerBound.CompareTo(value) >= 0) throw exception ?? new AssertionException($"Value ({value}) fell below expected range: {lowerBound}-{upperBound} exclusive");
+			if (upperBound.CompareTo(value) <= 0) throw exception ?? new AssertionException($"Value ({value}) fell above expected range: {lowerBound}-{upperBound} exclusive");
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace TestLib.Framework {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (lowerBound.CompareTo(value) < 0 && upperBound.CompareTo(value) > 0) throw exception ?? new AssertionException("Value fell into range");
+			if (lowerBound.CompareTo(value) < 0 && upperBound.CompareTo(value) > 0) throw exception ?? new AssertionException($"Value ({value}) fell into range {lowerBound}-{upperBound} inclusive");
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace TestLib.Framework {
 			if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
 			if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (lowerBound.CompareTo(value) <= 0 && upperBound.CompareTo(value) >= 0) throw exception ?? new AssertionException("Value fell into range");
+			if (lowerBound.CompareTo(value) <= 0 && upperBound.CompareTo(value) >= 0) throw exception ?? new AssertionException($"Value ({value}) fell into range {lowerBound}-{upperBound} exclusive");
 		}
 
 		/// <summary>

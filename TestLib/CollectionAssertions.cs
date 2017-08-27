@@ -102,7 +102,8 @@ namespace TestLib.Framework {
 			if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 			if (!sequence.Any()) throw new ArgumentException("Expected elements", nameof(sequence));
 			if (count < 0) throw new ArgumentException("Must be non-negative", nameof(count));
-			if (sequence.Count(predicate) != count) throw exception ?? new AssertionException("Expected {0} elements to match predicate", count);
+			int actualCount = sequence.Count(predicate);
+			if (actualCount != count) throw exception ?? new AssertionException($"Expected {count} elements to match predicate, {actualCount} did match");
 		}
 
 		/// <summary>
@@ -138,7 +139,8 @@ namespace TestLib.Framework {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
 			if (!sequence.Any()) throw new ArgumentException("Expected elements", nameof(sequence));
 			if (count < 0) throw new ArgumentException("Must be non-negative", nameof(count));
-			if (sequence.Count() != count) throw exception ?? new AssertionException("Expected {0} elements in sequence", count);
+			int actualCount = sequence.Count();
+			if (actualCount != count) throw exception ?? new AssertionException($"Expected {count} elements in sequence, found {actualCount}");
 		}
 
 		/// <summary>
@@ -157,7 +159,8 @@ namespace TestLib.Framework {
 			if (sequence == null) throw new ArgumentNullException(nameof(sequence));
 			if (!sequence.Any()) throw new ArgumentException("Expected elements", nameof(sequence));
 			if (count < 0) throw new ArgumentException("Must be non-negative", nameof(count));
-			if (sequence.Count(e => IsEqual(e, value)) != count) throw exception ?? new AssertionException("Expected {0} elements in sequence", count);
+			int actualCount = sequence.Count(e => IsEqual(e, value));
+			if (actualCount != count) throw exception ?? new AssertionException($"Expected {count} elements in sequence, found {actualCount}");
 		}
 
 		/// <summary>
@@ -179,7 +182,8 @@ namespace TestLib.Framework {
 			if (comparer == null) throw new ArgumentNullException(nameof(comparer));
 			if (!sequence.Any()) throw new ArgumentException("Expected elements", nameof(sequence));
 			if (count < 0) throw new ArgumentException("Must be non-negative", nameof(count));
-			if (sequence.Count(e => IsEqual(e, value, comparer)) != count) throw exception ?? new AssertionException("Expected {0} elements in sequence", count);
+			int actualCount = sequence.Count(e => IsEqual(e, value, comparer));
+			if (actualCount != count) throw exception ?? new AssertionException($"Expected {count} elements in sequence, found {actualCount}");
 		}
 
 		/// <summary>

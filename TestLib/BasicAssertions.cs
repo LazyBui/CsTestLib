@@ -141,14 +141,14 @@ namespace TestLib.Framework {
 				thrown = true;
 				Type thrownType = e.GetType();
 				if (!thrownType.EqualsOrInherits(type)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name} or a subclass");
+					throw exception ?? GetUnexpectedExceptionTypeException(e, thrownType, type);
 				}
 				if (!isValidException((TException)e)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
+					throw exception ?? GetDidNotMatchPredicateException(e);
 				}
 			}
 
-			if (!thrown) throw exception ?? new AssertionException("Expected exception was not thrown");
+			if (!thrown) throw exception ?? GetExpectedExceptionWasNotThrownException();
 		}
 
 		/// <summary>
@@ -181,7 +181,7 @@ namespace TestLib.Framework {
 			if (type == null) throw new ArgumentNullException(nameof(type));
 			if (action == null) throw new ArgumentNullException(nameof(action));
 			if (isValidException == null) throw new ArgumentNullException(nameof(isValidException));
-			if (!type.EqualsOrInherits(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
+			ValidateTypeInheritingFromException(type);
 
 			bool thrown = false;
 			try {
@@ -191,14 +191,14 @@ namespace TestLib.Framework {
 				thrown = true;
 				Type thrownType = e.GetType();
 				if (!thrownType.EqualsOrInherits(type)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name} or a subclass");
+					throw exception ?? GetUnexpectedExceptionTypeException(e, thrownType, type);
 				}
 				if (!isValidException(e)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
+					throw exception ?? GetDidNotMatchPredicateException(e);
 				}
 			}
 
-			if (!thrown) throw exception ?? new AssertionException("Expected exception was not thrown");
+			if (!thrown) throw exception ?? GetExpectedExceptionWasNotThrownException();
 		}
 
 		/// <summary>
@@ -234,15 +234,16 @@ namespace TestLib.Framework {
 			}
 			catch (Exception e) {
 				thrown = true;
-				if (e.GetType() != type) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name}");
+				Type thrownType = e.GetType();
+				if (thrownType != type) {
+					throw exception ?? GetUnexpectedExceptionTypeException(e, thrownType, type);
 				}
 				if (!isValidException((TException)e)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
+					throw exception ?? GetDidNotMatchPredicateException(e);
 				}
 			}
 
-			if (!thrown) throw exception ?? new AssertionException("Expected exception was not thrown");
+			if (!thrown) throw exception ?? GetExpectedExceptionWasNotThrownException();
 		}
 
 		/// <summary>
@@ -275,7 +276,7 @@ namespace TestLib.Framework {
 			if (type == null) throw new ArgumentNullException(nameof(type));
 			if (action == null) throw new ArgumentNullException(nameof(action));
 			if (isValidException == null) throw new ArgumentNullException(nameof(isValidException));
-			if (!type.EqualsOrInherits(typeof(Exception))) throw new ArgumentException("Type must derive from System.Exception", nameof(type));
+			ValidateTypeInheritingFromException(type);
 
 			bool thrown = false;
 			try {
@@ -283,15 +284,16 @@ namespace TestLib.Framework {
 			}
 			catch (Exception e) {
 				thrown = true;
-				if (e.GetType() != type) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception type was unexpected, expected {type.Name}");
+				Type thrownType = e.GetType();
+				if (thrownType != type) {
+					throw exception ?? GetUnexpectedExceptionTypeException(e, thrownType, type);
 				}
 				if (!isValidException(e)) {
-					throw exception ?? AssertionException.GenerateWithInnerException(e, $"Exception did not match the predicate");
+					throw exception ?? GetDidNotMatchPredicateException(e);
 				}
 			}
 
-			if (!thrown) throw exception ?? new AssertionException("Expected exception was not thrown");
+			if (!thrown) throw exception ?? GetExpectedExceptionWasNotThrownException();
 		}
 
 		/// <summary>
@@ -311,5 +313,22 @@ namespace TestLib.Framework {
 				throw exception ?? AssertionException.GenerateWithInnerException(e, "Unexpected exception");
 			}
 		}
+
+		private static void ValidateTypeInheritingFromException(Type type) {
+			if (!type.EqualsOrInherits(typeof(Exception))) throw new ArgumentException("Type must be or derive from System.Exception", nameof(type));
+		}
+
+		private static AssertionException GetUnexpectedExceptionTypeException(Exception inner, Type thrownType, Type expectedType) =>
+			AssertionException.GenerateWithInnerException(
+				inner,
+				$"Exception type '{thrownType.FullName}' was unexpected, expected '{expectedType.FullName}'");
+
+		private static AssertionException GetExpectedExceptionWasNotThrownException() =>
+			new AssertionException("Expected exception was not thrown");
+
+		private static AssertionException GetDidNotMatchPredicateException(Exception inner) =>
+			AssertionException.GenerateWithInnerException(
+				inner,
+				"Exception did not match the predicate");
 	}
 }

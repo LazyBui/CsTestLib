@@ -9,7 +9,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNaN(float value, AssertionException exception = null) {
-			if (!float.IsNaN(value)) throw exception ?? new AssertionException("value was not NaN");
+			if (!float.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was not NaN");
 		}
 
 		/// <summary>
@@ -19,7 +19,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNaN(double value, AssertionException exception = null) {
-			if (!double.IsNaN(value)) throw exception ?? new AssertionException("value was not NaN");
+			if (!double.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was not NaN");
 		}
 
 		/// <summary>
@@ -29,7 +29,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotNaN(float value, AssertionException exception = null) {
-			if (float.IsNaN(value)) throw exception ?? new AssertionException("value was NaN");
+			if (float.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was NaN");
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotNaN(double value, AssertionException exception = null) {
-			if (double.IsNaN(value)) throw exception ?? new AssertionException("value was NaN");
+			if (double.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was NaN");
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsInfinity(float value, AssertionException exception = null) {
-			if (!float.IsInfinity(value)) throw exception ?? new AssertionException("value was not infinity");
+			if (!float.IsInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was not infinity");
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsInfinity(double value, AssertionException exception = null) {
-			if (!double.IsInfinity(value)) throw exception ?? new AssertionException("value was not infinity");
+			if (!double.IsInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was not infinity");
 		}
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotInfinity(float value, AssertionException exception = null) {
-			if (float.IsInfinity(value)) throw exception ?? new AssertionException("value was infinity");
+			if (float.IsInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was infinity");
 		}
 
 		/// <summary>
@@ -79,7 +79,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotInfinity(double value, AssertionException exception = null) {
-			if (double.IsInfinity(value)) throw exception ?? new AssertionException("value was infinity");
+			if (double.IsInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was infinity");
 		}
 
 		/// <summary>
@@ -89,7 +89,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsPositiveInfinity(float value, AssertionException exception = null) {
-			if (!float.IsPositiveInfinity(value)) throw exception ?? new AssertionException("value was not +infinity");
+			if (!float.IsPositiveInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was not +infinity");
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsPositiveInfinity(double value, AssertionException exception = null) {
-			if (!double.IsPositiveInfinity(value)) throw exception ?? new AssertionException("value was not +infinity");
+			if (!double.IsPositiveInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was not +infinity");
 		}
 
 		/// <summary>
@@ -109,7 +109,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotPositiveInfinity(float value, AssertionException exception = null) {
-			if (float.IsPositiveInfinity(value)) throw exception ?? new AssertionException("value was +infinity");
+			if (float.IsPositiveInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was +infinity");
 		}
 
 		/// <summary>
@@ -119,7 +119,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotPositiveInfinity(double value, AssertionException exception = null) {
-			if (double.IsPositiveInfinity(value)) throw exception ?? new AssertionException("value was +infinity");
+			if (double.IsPositiveInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was +infinity");
 		}
 
 		/// <summary>
@@ -129,7 +129,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNegativeInfinity(float value, AssertionException exception = null) {
-			if (!float.IsNegativeInfinity(value)) throw exception ?? new AssertionException("value was not -infinity");
+			if (!float.IsNegativeInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was not -infinity");
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNegativeInfinity(double value, AssertionException exception = null) {
-			if (!double.IsNegativeInfinity(value)) throw exception ?? new AssertionException("value was not -infinity");
+			if (!double.IsNegativeInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was not -infinity");
 		}
 
 		/// <summary>
@@ -149,7 +149,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotNegativeInfinity(float value, AssertionException exception = null) {
-			if (float.IsNegativeInfinity(value)) throw exception ?? new AssertionException("value was -infinity");
+			if (float.IsNegativeInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was -infinity");
 		}
 
 		/// <summary>
@@ -159,7 +159,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotNegativeInfinity(double value, AssertionException exception = null) {
-			if (double.IsNegativeInfinity(value)) throw exception ?? new AssertionException("value was -infinity");
+			if (double.IsNegativeInfinity(value)) throw exception ?? new AssertionException($"{nameof(value)} was -infinity");
 		}
 
 		/// <summary>
@@ -169,7 +169,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsSpecialFloatValue(float value, AssertionException exception = null) {
-			if (!float.IsInfinity(value) && !float.IsNaN(value)) throw exception ?? new AssertionException("value was not a floating point value");
+			if (!float.IsInfinity(value) && !float.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was not a special floating point value");
 		}
 
 		/// <summary>
@@ -179,7 +179,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsSpecialFloatValue(double value, AssertionException exception = null) {
-			if (!double.IsInfinity(value) && !double.IsNaN(value)) throw exception ?? new AssertionException("value was not a floating point value");
+			if (!double.IsInfinity(value) && !double.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was not a special floating point value");
 		}
 
 		/// <summary>
@@ -189,7 +189,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotSpecialFloatValue(float value, AssertionException exception = null) {
-			if (float.IsInfinity(value) || float.IsNaN(value)) throw exception ?? new AssertionException("value was a floating point value");
+			if (float.IsInfinity(value) || float.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was a special floating point value");
 		}
 
 		/// <summary>
@@ -199,7 +199,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotSpecialFloatValue(double value, AssertionException exception = null) {
-			if (double.IsInfinity(value) || double.IsNaN(value)) throw exception ?? new AssertionException("value was a floating point value");
+			if (double.IsInfinity(value) || double.IsNaN(value)) throw exception ?? new AssertionException($"{nameof(value)} was a special floating point value");
 		}
 
 		/// <summary>
@@ -211,7 +211,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsWithinDelta(float value1, float value2, float delta, AssertionException exception = null) {
-			if (Math.Abs(value1 - value2) > delta) throw exception ?? new AssertionException("value was a floating point value");
+			if (Math.Abs(value1 - value2) > delta) throw exception ?? new AssertionException($"{nameof(value1)} and {nameof(value2)} were not within {nameof(delta)}");
 		}
 
 		/// <summary>
@@ -223,7 +223,7 @@ namespace TestLib.Framework {
 		/// <param name="exception">Optional exception to throw instead of the default.</param>
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsWithinDelta(double value1, double value2, double delta, AssertionException exception = null) {
-			if (Math.Abs(value1 - value2) > delta) throw exception ?? new AssertionException("value was a floating point value");
+			if (Math.Abs(value1 - value2) > delta) throw exception ?? new AssertionException($"{nameof(value1)} and {nameof(value2)} were not within {nameof(delta)}");
 		}
 	}
 }

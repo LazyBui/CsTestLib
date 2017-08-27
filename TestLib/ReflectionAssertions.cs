@@ -12,7 +12,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsType<TType>(object value, AssertionException exception = null) {
 			if (value == null) throw new ArgumentNullException(nameof(value));
-			if (value.GetType() != typeof(TType)) throw exception ?? new AssertionException("Given type: {0}\nExpected type: {1}", value.GetType(), typeof(TType));
+			if (value.GetType() != typeof(TType)) throw exception ?? new AssertionException($"Type '{value.GetType().FullName}' was unexpected, expected type '{typeof(TType).FullName}'");
 		}
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace TestLib.Framework {
 		public static void IsType(object value, Type type, AssertionException exception = null) {
 			if (value == null) throw new ArgumentNullException(nameof(value));
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (value.GetType() != type) throw exception ?? new AssertionException("Given type: {0}\nExpected type: {1}", value.GetType(), type);
+			if (value.GetType() != type) throw exception ?? new AssertionException($"Type '{value.GetType().FullName}' was unexpected, expected type '{type.FullName}'");
 		}
 
 		/// <summary>
@@ -145,7 +145,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsArrayType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.IsArray) throw exception ?? new AssertionException("Expected type to be an array type: {0}", type);
+			if (!type.IsArray) throw exception ?? new AssertionException($"Expected type to be an array type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -179,7 +179,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotArrayType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type.IsArray) throw exception ?? new AssertionException("Expected type to be a non-array type: {0}", type);
+			if (type.IsArray) throw exception ?? new AssertionException($"Expected type to be a non-array type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -213,7 +213,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsEnumType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.IsEnum) throw exception ?? new AssertionException("Expected type to be an enum type: {0}", type);
+			if (!type.IsEnum) throw exception ?? new AssertionException($"Expected type to be an enum type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -247,7 +247,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotEnumType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type.IsEnum) throw exception ?? new AssertionException("Expected type to be a non-enum type: {0}", type);
+			if (type.IsEnum) throw exception ?? new AssertionException($"Expected type to be a non-enum type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -281,7 +281,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsStructType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.IsValueType) throw exception ?? new AssertionException("Expected type to be a struct type: {0}", type);
+			if (!type.IsValueType) throw exception ?? new AssertionException($"Expected type to be a struct type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -315,7 +315,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotStructType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type.IsValueType) throw exception ?? new AssertionException("Expected type to be a non-struct type: {0}", type);
+			if (type.IsValueType) throw exception ?? new AssertionException($"Expected type to be a non-struct type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -349,7 +349,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsClassType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.IsClass) throw exception ?? new AssertionException("Expected type to be a class type: {0}", type);
+			if (!type.IsClass) throw exception ?? new AssertionException($"Expected type to be a class type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -383,7 +383,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotClassType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type.IsClass) throw exception ?? new AssertionException("Expected type to be a non-class type: {0}", type);
+			if (type.IsClass) throw exception ?? new AssertionException($"Expected type to be a non-class type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -417,7 +417,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsSealedType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.IsSealed) throw exception ?? new AssertionException("Expected type to be a sealed type: {0}", type);
+			if (!type.IsSealed) throw exception ?? new AssertionException($"Expected type to be a sealed type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -451,7 +451,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotSealedType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type.IsSealed) throw exception ?? new AssertionException("Expected type to be a non-sealed type: {0}", type);
+			if (type.IsSealed) throw exception ?? new AssertionException($"Expected type to be a non-sealed type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -485,7 +485,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsGenericType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.IsGenericType) throw exception ?? new AssertionException("Expected type to be a generic type: {0}", type);
+			if (!type.IsGenericType) throw exception ?? new AssertionException($"Expected type to be a generic type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -519,7 +519,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotGenericType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type.IsGenericType) throw exception ?? new AssertionException("Expected type to be a non-generic type: {0}", type);
+			if (type.IsGenericType) throw exception ?? new AssertionException($"Expected type to be a non-generic type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -541,7 +541,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsInterfaceType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (!type.IsInterface) throw exception ?? new AssertionException("Expected type to be an interface type: {0}", type);
+			if (!type.IsInterface) throw exception ?? new AssertionException($"Expected type to be an interface type: {type.FullName}");
 		}
 
 		/// <summary>
@@ -563,7 +563,7 @@ namespace TestLib.Framework {
 		/// <exception cref="AssertionException">The condition implied by the function is not satisfied.</exception>
 		public static void IsNotInterfaceType(Type type, AssertionException exception = null) {
 			if (type == null) throw new ArgumentNullException(nameof(type));
-			if (type.IsInterface) throw exception ?? new AssertionException("Expected type to be a non-interface type: {0}", type);
+			if (type.IsInterface) throw exception ?? new AssertionException($"Expected type to be a non-interface type: {type.FullName}");
 		}
 	}
 }
